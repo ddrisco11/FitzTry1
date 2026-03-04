@@ -1,0 +1,19 @@
+12:05:11 [INFO] src.utils.io — Loaded config from config.yaml
+12:05:11 [INFO] pipeline — Loaded config from config.yaml
+12:05:11 [INFO] pipeline — ━━━ Phase 3: Geographic Grounding ━━━
+12:05:11 [INFO] src.phase3_grounding — === Phase 3: Geographic Grounding ===
+12:05:11 [INFO] src.phase3_grounding — Loaded 125 entities for grounding
+12:05:33 [INFO] src.phase3_grounding — Could not geocode 'Georgian Colonial' → classifying as fictional
+12:05:46 [WARNING] urllib3.connectionpool — Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='nominatim.openstreetmap.org', port=443): Read timed out. (read timeout=1)")': /search?q=Main+Street&format=json&limit=5&addressdetails=1
+12:05:59 [INFO] src.phase3_grounding — Could not geocode 'the Gasoline Pump' → classifying as fictional
+12:06:22 [INFO] src.phase3_grounding — Could not geocode 'the Pennsylvania Station' → classifying as fictional
+12:06:23 [INFO] src.phase3_grounding — Could not geocode 'the enchanted metropolitan twilight' → classifying as fictional
+12:06:33 [INFO] src.phase3_grounding — Could not geocode 'Eckhaust' → classifying as fictional
+12:06:35 [INFO] src.phase3_grounding — Could not geocode 'the De Jongs' → classifying as fictional
+12:07:02 [INFO] src.phase3_grounding — Could not geocode 'Katspaugh' → classifying as fictional
+12:07:12 [INFO] src.phase3_grounding — Could not geocode 'the Muhlbach Hotel' → classifying as fictional
+12:07:52 [INFO] src.phase3_grounding — Could not geocode 'the fresher sea' → classifying as fictional
+12:08:21 [INFO] src.phase3_grounding — Grounding complete: 114 real, 11 fictional
+12:08:21 [INFO] src.utils.io — Wrote 125 records to data/grounded_entities.jsonl
+12:08:21 [INFO] src.phase3_grounding — Phase 3 complete. Written to data/grounded_entities.jsonl
+12:08:21 [INFO] pipeline — Pipeline complete.

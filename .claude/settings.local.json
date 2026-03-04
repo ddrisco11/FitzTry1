@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m venv .venv 2>&1)",
+      "Bash(source .venv/bin/activate && pip install --upgrade pip -q && pip install -r requirements.txt 2>&1 | tail -30)",
+      "Bash(source .venv/bin/activate && pip install \"spacy\" --only-binary :all: -q 2>&1 | tail -10)",
+      "Bash(source .venv/bin/activate && pip install geopy pydantic pyyaml click requests tqdm -q 2>&1 | tail -5 && pip install numpy scipy -q 2>&1 | tail -5 && pip install emcee -q 2>&1 | tail -5)",
+      "Bash(source .venv/bin/activate && pip install folium networkx pyvis matplotlib seaborn -q 2>&1 | tail -5 && pip install pytest pytest-cov -q 2>&1 | tail -5)",
+      "Bash(source .venv/bin/activate && pip install scikit-learn -q 2>&1 | tail -5)",
+      "Bash(source .venv/bin/activate && pip install transformers -q 2>&1 | tail -5)",
+      "Bash(source .venv/bin/activate && python -m spacy download en_core_web_lg 2>&1 | tail -5)",
+      "Bash(source .venv/bin/activate && python -c \"import spacy, pydantic, geopy, emcee, folium, networkx, pyvis, matplotlib, seaborn, numpy, scipy, sklearn, yaml, click, transformers; print\\('All imports OK'\\)\")",
+      "Bash(source .venv/bin/activate && pip install torch --index-url https://download.pytorch.org/whl/cpu -q 2>&1 | tail -5)",
+      "Bash(source .venv/bin/activate && python -c \"import torch; print\\('PyTorch', torch.__version__\\)\")",
+      "Bash(source .venv/bin/activate && python -m pytest tests/ -v --tb=short 2>&1)",
+      "Bash(source .venv/bin/activate && python -c \"from src.utils.io import load_config; from src.pipeline import PHASES, PHASE_NAMES; cfg = load_config\\('config.yaml'\\); print\\('Pipeline check OK'\\); print\\(f'{len\\(PHASES\\)} phases registered: {PHASE_NAMES}'\\)\")",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 1 2>&1)",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 2 > pipeline_phase2.log 2>&1)",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 2 --force > pipeline_phase2.log 2>&1 && tail -8 pipeline_phase2.log)",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 3 > pipeline_phase3.log 2>&1 && tail -5 pipeline_phase3.log)",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 4 > pipeline_phase4.log 2>&1 && tail -10 pipeline_phase4.log)",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 5 > pipeline_phase5.log 2>&1 && tail -5 pipeline_phase5.log)",
+      "Bash(kill 8502 2>/dev/null; sleep 2; echo \"Process killed\")",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 6 2>&1)",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 7 2>&1)",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 7 --force 2>&1)",
+      "Bash(source .venv/bin/activate && python3 -c \"\nimport json\nfrom pathlib import Path\n\n# Find East Egg and West Egg entity IDs\nwith open\\('data/grounded_entities.jsonl'\\) as f:\n    entities = [json.loads\\(l\\) for l in f]\nfict = {e['canonical_name']: e['entity_id'] for e in entities if e['type'] == 'fictional'}\nprint\\('Fictional entity IDs:', fict\\)\n\n# Find constraints involving them\nwith open\\('data/constraints.json'\\) as f:\n    model = json.load\\(f\\)\nlatent_ids = {e['entity_id'] for e in model['latent_entities']}\nfor c in model['constraints']:\n    if any\\(eid in latent_ids for eid in c['entities']\\):\n        if len\\(c['entities']\\) >= 2:\n            names = [next\\(\\(e['name'] for e in model['latent_entities'] + model['fixed_entities'] if e['entity_id'] == eid\\), eid\\) for eid in c['entities']]\n            print\\(f\\\\\"  {c['type']:20s} {names[0]:35s} ↔ {names[1]:35s}  w={c['weight']:.2f}\\\\\"\\)\n\" 2>&1 | head -50)",
+      "Bash(source .venv/bin/activate && python -m src.pipeline --config config.yaml --phase 5 --force 2>&1 | tail -8)",
+      "Bash(/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/.venv/bin/python -m src.pipeline --config config.yaml --phase 5 --force 2>&1 | tail -8)",
+      "Bash(/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/.venv/bin/python -m src.pipeline --config config.yaml --phase 6 2>&1)",
+      "Bash(/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/.venv/bin/python -m src.pipeline --config config.yaml --phase 7 --force 2>&1)",
+      "Bash(/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/.venv/bin/python -m src.pipeline --config config.yaml --phase 8 --force 2>&1)",
+      "Bash(find data/ visualizations/ -type f | sort && echo \"\" && echo \"--- Visualization sizes ---\" && du -sh visualizations/**/* 2>/dev/null | sort -k2)",
+      "Bash(.venv/bin/pip list | grep -i -E \"pymupdf|fitz|pdfminer|pytesseract|pdf2image|ocr\" 2>/dev/null; which tesseract 2>/dev/null; tesseract --version 2>/dev/null | head -3)",
+      "Bash(which pdftoppm && pdftoppm -v 2>&1 | head -2)",
+      "Bash(.venv/bin/pip install -q pdf2image pytesseract pymupdf 2>&1 | tail -5)",
+      "Bash(PDF=\"/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/corpus/raw/service-gdc-gdclccn-02-02-99-50-02029950-02029950.pdf\"\n.venv/bin/python -c \"\nimport fitz\ndoc = fitz.open\\('$PDF'\\)\nprint\\(f'Pages: {len\\(doc\\)}'\\)\n# Check if first few pages have text\nfor i in range\\(min\\(3, len\\(doc\\)\\)\\):\n    text = doc[i].get_text\\(\\)\n    print\\(f'Page {i+1}: {len\\(text\\)} chars, preview: {repr\\(text[:100]\\)}'\\)\n\")",
+      "Bash(\\\\\n.venv/bin/python scripts/ocr_pdf.py \\\\\n  \"corpus/raw/service-gdc-gdclccn-02-02-99-50-02029950-02029950.pdf\" \\\\\n  \"corpus/raw/amazon_madeira_rivers.txt\" 2>&1)",
+      "Bash(\\\\\n.venv/bin/python -m src.pipeline --config config.yaml --force --verbose 2>&1)",
+      "Bash(.venv/bin/python -c \"\nimport json\n# Print summaries for key Amazon/Madeira entities\nwith open\\('data/convergence/posterior_summaries.jsonl'\\) as f:\n    for line in f:\n        e = json.loads\\(line\\)\n        if any\\(k in e['name'].lower\\(\\) for k in ['amazon', 'madeira', 'rio', 'brazil', 'theresop']\\):\n            print\\(f\\\\\"{e['name']}: mean=\\({e['posterior_mean']['x']:.1f}, {e['posterior_mean']['y']:.1f}\\) std=\\({e['posterior_std']['x']:.1f}, {e['posterior_std']['y']:.1f}\\) entropy={e['spatial_entropy']:.2f}\\\\\"\\)\n\")"
+    ]
+  }
+}

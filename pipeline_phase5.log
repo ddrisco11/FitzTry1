@@ -1,0 +1,10 @@
+12:14:34 [INFO] src.utils.io — Loaded config from config.yaml
+12:14:34 [INFO] pipeline — Loaded config from config.yaml
+12:14:34 [INFO] pipeline — ━━━ Phase 5: Formal Constraint Model ━━━
+12:14:34 [INFO] src.phase5_constraints — === Phase 5: Formal Spatial Constraint Model ===
+12:14:34 [INFO] src.phase5_constraints — Loaded 125 grounded entities and 108 relations
+12:14:34 [INFO] src.phase5_constraints — Fixed entities: 114, Latent entities: 11
+12:14:34 [INFO] src.phase5_constraints — Built 108 constraint specs
+12:14:34 [INFO] src.utils.io — Wrote JSON to data/constraints.json
+12:14:34 [INFO] src.phase5_constraints — Phase 5 complete. Written to data/constraints.json
+12:14:34 [INFO] pipeline — Pipeline complete.

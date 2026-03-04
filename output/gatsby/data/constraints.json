@@ -1,0 +1,285 @@
+{
+  "fixed_entities": [
+    {
+      "entity_id": "e_0000",
+      "name": "New Haven",
+      "x": 91.1072,
+      "y": 66.207
+    },
+    {
+      "entity_id": "e_0002",
+      "name": "New York",
+      "x": -0.0013,
+      "y": -0.008
+    },
+    {
+      "entity_id": "e_0003",
+      "name": "Long Island",
+      "x": 76.4098,
+      "y": 15.4224
+    },
+    {
+      "entity_id": "e_0005",
+      "name": "Fifth Avenue",
+      "x": 5.1103,
+      "y": 9.9365
+    },
+    {
+      "entity_id": "e_0006",
+      "name": "Port Roosevelt",
+      "x": -934.244,
+      "y": 34.619
+    },
+    {
+      "entity_id": "e_0007",
+      "name": "the Plaza Hotel",
+      "x": -1171.2475,
+      "y": 259.2512
+    },
+    {
+      "entity_id": "e_0008",
+      "name": "Camp Taylor",
+      "x": -986.9307,
+      "y": -279.897
+    },
+    {
+      "entity_id": "e_0009",
+      "name": "Central Park",
+      "x": 3.4251,
+      "y": 7.7806
+    },
+    {
+      "entity_id": "e_0010",
+      "name": "Coney Island",
+      "x": 1.1006,
+      "y": -15.155
+    },
+    {
+      "entity_id": "e_0011",
+      "name": "Lake Superior",
+      "x": -1197.3148,
+      "y": 778.5462
+    },
+    {
+      "entity_id": "e_0012",
+      "name": "New Jersey",
+      "x": -33.5589,
+      "y": -70.838
+    }
+  ],
+  "latent_entities": [
+    {
+      "entity_id": "e_0001",
+      "name": "West Egg",
+      "init_x": null,
+      "init_y": null
+    },
+    {
+      "entity_id": "e_0004",
+      "name": "East Egg",
+      "init_x": null,
+      "init_y": null
+    }
+  ],
+  "constraints": [
+    {
+      "constraint_id": "c_0001",
+      "type": "co_occurrence",
+      "entities": [
+        "e_0003",
+        "e_0002"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.1,
+      "source_relation_id": "r_0002"
+    },
+    {
+      "constraint_id": "c_0002",
+      "type": "near",
+      "entities": [
+        "e_0003",
+        "e_0002"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.607,
+      "source_relation_id": "r_0003"
+    },
+    {
+      "constraint_id": "c_0003",
+      "type": "co_occurrence",
+      "entities": [
+        "e_0002",
+        "e_0001"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.1,
+      "source_relation_id": "r_0009"
+    },
+    {
+      "constraint_id": "c_0004",
+      "type": "near",
+      "entities": [
+        "e_0002"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.8,
+      "source_relation_id": "r_0010"
+    },
+    {
+      "constraint_id": "c_0005",
+      "type": "co_occurrence",
+      "entities": [
+        "e_0004",
+        "e_0001"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.1,
+      "source_relation_id": "r_0013"
+    },
+    {
+      "constraint_id": "c_0006",
+      "type": "co_occurrence",
+      "entities": [
+        "e_0003",
+        "e_0001"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.1,
+      "source_relation_id": "r_0018"
+    },
+    {
+      "constraint_id": "c_0007",
+      "type": "co_occurrence",
+      "entities": [
+        "e_0011",
+        "e_0001"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.1,
+      "source_relation_id": "r_0019"
+    },
+    {
+      "constraint_id": "c_0008",
+      "type": "co_occurrence",
+      "entities": [
+        "e_0003",
+        "e_0001"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.1,
+      "source_relation_id": "r_0022"
+    },
+    {
+      "constraint_id": "c_0009",
+      "type": "near",
+      "entities": [
+        "e_0001"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.8,
+      "source_relation_id": "r_0023"
+    },
+    {
+      "constraint_id": "c_0010",
+      "type": "co_occurrence",
+      "entities": [
+        "e_0009",
+        "e_0007"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.1,
+      "source_relation_id": "r_0024"
+    },
+    {
+      "constraint_id": "c_0011",
+      "type": "co_occurrence",
+      "entities": [
+        "e_0009",
+        "e_0007"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.1,
+      "source_relation_id": "r_0025"
+    },
+    {
+      "constraint_id": "c_0012",
+      "type": "near",
+      "entities": [
+        "e_0001",
+        "e_0011"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.8,
+      "source_relation_id": "ra_00196"
+    },
+    {
+      "constraint_id": "c_0013",
+      "type": "near",
+      "entities": [
+        "e_0001",
+        "e_0003"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.8,
+      "source_relation_id": "ra_00197"
+    },
+    {
+      "constraint_id": "c_0014",
+      "type": "near",
+      "entities": [
+        "e_0001",
+        "e_0002"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.8,
+      "source_relation_id": "ra_00198"
+    },
+    {
+      "constraint_id": "c_0015",
+      "type": "near",
+      "entities": [
+        "e_0004",
+        "e_0001"
+      ],
+      "params": {
+        "d_near_km": 10.0
+      },
+      "weight": 0.7,
+      "source_relation_id": "ra_00199"
+    }
+  ],
+  "coordinate_system": {
+    "projection": "equirectangular",
+    "origin_lat": 40.7128,
+    "origin_lon": -74.006,
+    "units": "km"
+  }
+}
