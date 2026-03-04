@@ -1,0 +1,2352 @@
+{
+  "east": {
+    "lat": 3.9894393,
+    "lon": 14.178373,
+    "confidence": 0.6
+  },
+  "middle western": {
+    "lat": 40.5857373,
+    "lon": -74.5606705,
+    "confidence": 0.85
+  },
+  "new haven": {
+    "lat": 41.3082138,
+    "lon": -72.9250518,
+    "confidence": 0.85
+  },
+  "the middle west": {
+    "lat": 40.7095934,
+    "lon": -74.0845792,
+    "confidence": 0.85
+  },
+  "washington": {
+    "lat": 38.8950368,
+    "lon": -77.0365427,
+    "confidence": 0.85
+  },
+  "north america": {
+    "lat": 51.0000002,
+    "lon": -109.0,
+    "confidence": 0.6
+  },
+  "new york": {
+    "lat": 40.7127281,
+    "lon": -74.0060152,
+    "confidence": 0.85
+  },
+  "long island": {
+    "lat": 40.8514971,
+    "lon": -73.0994297,
+    "confidence": 0.85
+  },
+  "columbus": {
+    "lat": 34.2814497,
+    "lon": -78.666593,
+    "confidence": 0.85
+  },
+  "normandy": {
+    "lat": 38.7054848,
+    "lon": -90.3014077,
+    "confidence": 0.9
+  },
+  "chicago": {
+    "lat": 41.8755616,
+    "lon": -87.6244212,
+    "confidence": 0.9
+  },
+  "lake forest": {
+    "lat": 35.209232,
+    "lon": -80.7196805,
+    "confidence": 0.85
+  },
+  "france": {
+    "lat": 46.603354,
+    "lon": 1.8883335,
+    "confidence": 0.6
+  },
+  "georgian colonial": null,
+  "west": {
+    "lat": 31.8034812,
+    "lon": -97.0933471,
+    "confidence": 0.9
+  },
+  "westchester": {
+    "lat": 41.1763139,
+    "lon": -73.7907554,
+    "confidence": 0.85
+  },
+  "asheville": {
+    "lat": 35.595363,
+    "lon": -82.5508407,
+    "confidence": 0.9
+  },
+  "hot springs": {
+    "lat": 35.8923253,
+    "lon": -82.8290318,
+    "confidence": 0.85
+  },
+  "palm beach": {
+    "lat": 26.7056172,
+    "lon": -80.0361517,
+    "confidence": 0.85
+  },
+  "louisville": {
+    "lat": 33.0015407,
+    "lon": -82.4112377,
+    "confidence": 0.85
+  },
+  "queens": {
+    "lat": 40.6515585,
+    "lon": -73.7926754,
+    "confidence": 0.85
+  },
+  "main street": {
+    "lat": 42.0334346,
+    "lon": -87.6799666,
+    "confidence": 0.9
+  },
+  "fifth avenue": {
+    "lat": 40.8021613,
+    "lon": -73.9453686,
+    "confidence": 0.9
+  },
+  "park": {
+    "lat": 39.112507,
+    "lon": -100.358747,
+    "confidence": 0.85
+  },
+  "158th street": {
+    "lat": 40.6722189,
+    "lon": -73.7791959,
+    "confidence": 0.85
+  },
+  "versailles": {
+    "lat": 38.052576,
+    "lon": -84.7299464,
+    "confidence": 0.85
+  },
+  "broadway": {
+    "lat": 40.7948365,
+    "lon": -73.9715137,
+    "confidence": 0.85
+  },
+  "myrtle": {
+    "lat": 36.7729274,
+    "lon": -76.6919,
+    "confidence": 0.85
+  },
+  "chester": {
+    "lat": 39.849557,
+    "lon": -75.3557458,
+    "confidence": 0.85
+  },
+  "the gasoline pump": null,
+  "europe": {
+    "lat": 51.0,
+    "lon": 10.0,
+    "confidence": 0.6
+  },
+  "marseilles": {
+    "lat": 40.7014449,
+    "lon": -83.3927003,
+    "confidence": 0.85
+  },
+  "mediterranean": {
+    "lat": 35.0000035,
+    "lon": 19.9999957,
+    "confidence": 0.6
+  },
+  "pennsylvania station": {
+    "lat": 40.7502382,
+    "lon": -73.9928111,
+    "confidence": 0.9
+  },
+  "castile": {
+    "lat": 42.6289515,
+    "lon": -78.0544514,
+    "confidence": 0.85
+  },
+  "frisco": {
+    "lat": 33.1505998,
+    "lon": -96.8238183,
+    "confidence": 0.85
+  },
+  "jordan": {
+    "lat": 31.1667049,
+    "lon": 36.941628,
+    "confidence": 0.55
+  },
+  "germany": {
+    "lat": 51.1638175,
+    "lon": 10.4478313,
+    "confidence": 0.6
+  },
+  "louisiana": {
+    "lat": 30.8703881,
+    "lon": -92.007126,
+    "confidence": 0.9
+  },
+  "philadelphia": {
+    "lat": 40.0114538,
+    "lon": -75.1326504,
+    "confidence": 0.85
+  },
+  "jersey city": {
+    "lat": 40.7215682,
+    "lon": -74.047455,
+    "confidence": 0.9
+  },
+  "madison avenue": {
+    "lat": 40.7740585,
+    "lon": -73.9637844,
+    "confidence": 0.85
+  },
+  "murray hill hotel": {
+    "lat": 40.7492784,
+    "lon": -73.9763151,
+    "confidence": 0.85
+  },
+  "33rd street": {
+    "lat": 40.7780783,
+    "lon": -73.9063069,
+    "confidence": 0.85
+  },
+  "the pennsylvania station": null,
+  "the enchanted metropolitan twilight": null,
+  "warwick": {
+    "lat": 41.6992717,
+    "lon": -71.4586114,
+    "confidence": 0.85
+  },
+  "daisy's": {
+    "lat": 34.2284624,
+    "lon": -118.4666864,
+    "confidence": 0.9
+  },
+  "maine": {
+    "lat": 45.709097,
+    "lon": -68.8590201,
+    "confidence": 0.9
+  },
+  "island": {
+    "lat": 48.2162669,
+    "lon": -122.6842402,
+    "confidence": 0.9
+  },
+  "georgia": {
+    "lat": 32.3293809,
+    "lon": -83.1137366,
+    "confidence": 0.9
+  },
+  "beluga": {
+    "lat": 61.1411111,
+    "lon": -151.0827778,
+    "confidence": 0.85
+  },
+  "eckhaust": null,
+  "the de jongs": null,
+  "kellehers": {
+    "lat": 42.5654223,
+    "lon": -70.8665566,
+    "confidence": 0.9
+  },
+  "times square": {
+    "lat": 40.7555923,
+    "lon": -73.9858388,
+    "confidence": 0.85
+  },
+  "baedeker": {
+    "lat": 51.3930409,
+    "lon": 7.0024573,
+    "confidence": 0.55
+  },
+  "middle west": {
+    "lat": 39.7114038,
+    "lon": -82.5962613,
+    "confidence": 0.85
+  },
+  "america": {
+    "lat": 39.7837304,
+    "lon": -100.445882,
+    "confidence": 0.9
+  },
+  "oxford": {
+    "lat": 44.4694529,
+    "lon": -70.7782375,
+    "confidence": 0.85
+  },
+  "san francisco": {
+    "lat": 37.7879363,
+    "lon": -122.4075201,
+    "confidence": 0.9
+  },
+  "paris": {
+    "lat": 33.6617962,
+    "lon": -95.555513,
+    "confidence": 0.9
+  },
+  "venice": {
+    "lat": 38.6722727,
+    "lon": -90.169832,
+    "confidence": 0.85
+  },
+  "rome": {
+    "lat": 43.2102196,
+    "lon": -75.4583956,
+    "confidence": 0.85
+  },
+  "montenegro": {
+    "lat": 42.7755624,
+    "lon": 19.2022423,
+    "confidence": 0.6
+  },
+  "adriatic sea": {
+    "lat": 43.7021514,
+    "lon": 14.6679465,
+    "confidence": 0.6
+  },
+  "doncaster": {
+    "lat": 38.784283,
+    "lon": -76.1316105,
+    "confidence": 0.85
+  },
+  "the grand canal": {
+    "lat": 33.6071435,
+    "lon": -117.8887871,
+    "confidence": 0.85
+  },
+  "port roosevelt": {
+    "lat": 41.0241357,
+    "lon": -85.0904123,
+    "confidence": 0.85
+  },
+  "astoria": {
+    "lat": 40.7720145,
+    "lon": -73.9302673,
+    "confidence": 0.85
+  },
+  "the queensboro bridge": {
+    "lat": 40.7597183,
+    "lon": -73.9606252,
+    "confidence": 0.9
+  },
+  "katspaugh": null,
+  "metropole": {
+    "lat": 29.7339428,
+    "lon": -95.4318325,
+    "confidence": 0.9
+  },
+  "england": {
+    "lat": 52.5310214,
+    "lon": -1.2649062,
+    "confidence": 0.6
+  },
+  "the plaza hotel": {
+    "lat": 43.0443025,
+    "lon": -87.902359,
+    "confidence": 0.9
+  },
+  "camp taylor": {
+    "lat": 38.1956256,
+    "lon": -85.7155169,
+    "confidence": 0.85
+  },
+  "new orleans": {
+    "lat": 29.9561422,
+    "lon": -90.0733934,
+    "confidence": 0.9
+  },
+  "the muhlbach hotel": null,
+  "the south seas": {
+    "lat": 34.2087491,
+    "lon": -118.5522973,
+    "confidence": 0.9
+  },
+  "santa barbara": {
+    "lat": 34.4221319,
+    "lon": -119.702667,
+    "confidence": 0.85
+  },
+  "santa barbara tom": {
+    "lat": 34.4478115,
+    "lon": -119.6624223,
+    "confidence": 0.85
+  },
+  "ventura": {
+    "lat": 43.1266263,
+    "lon": -93.477897,
+    "confidence": 0.85
+  },
+  "cannes": {
+    "lat": 43.5515198,
+    "lon": 7.0134418,
+    "confidence": 0.6
+  },
+  "plaza": {
+    "lat": 48.0247697,
+    "lon": -101.9604636,
+    "confidence": 0.85
+  },
+  "central park": {
+    "lat": 40.7827725,
+    "lon": -73.9653627,
+    "confidence": 0.85
+  },
+  "coney island": {
+    "lat": 40.5765081,
+    "lon": -73.9929419,
+    "confidence": 0.85
+  },
+  "west egg village": {
+    "lat": 39.5643302,
+    "lon": -74.3708216,
+    "confidence": 0.85
+  },
+  "detroit": {
+    "lat": 44.793044,
+    "lon": -69.296951,
+    "confidence": 0.85
+  },
+  "canada": {
+    "lat": 61.0666922,
+    "lon": -107.991707,
+    "confidence": 0.6
+  },
+  "north dakota": {
+    "lat": 47.6201461,
+    "lon": -100.540737,
+    "confidence": 0.9
+  },
+  "lake superior": {
+    "lat": 47.7144346,
+    "lon": -88.2116356,
+    "confidence": 0.9
+  },
+  "green jersey": {
+    "lat": 40.1061904,
+    "lon": -74.0676924,
+    "confidence": 0.85
+  },
+  "minnesota": {
+    "lat": 45.9896587,
+    "lon": -94.6113288,
+    "confidence": 0.9
+  },
+  "nevada": {
+    "lat": 33.6413476,
+    "lon": -93.3055491,
+    "confidence": 0.85
+  },
+  "montana": {
+    "lat": 47.3752671,
+    "lon": -109.638757,
+    "confidence": 0.9
+  },
+  "little girl bay": {
+    "lat": 45.1352149,
+    "lon": -78.8362949,
+    "confidence": 0.6
+  },
+  "duluth": {
+    "lat": 34.0028569,
+    "lon": -84.1441046,
+    "confidence": 0.85
+  },
+  "the west indies": {
+    "lat": 0.5168849,
+    "lon": 35.2740301,
+    "confidence": 0.6
+  },
+  "barbary coast": {
+    "lat": 41.3537312,
+    "lon": -71.9717335,
+    "confidence": 0.85
+  },
+  "continent": {
+    "lat": 18.4452798,
+    "lon": -73.3071685,
+    "confidence": 0.55
+  },
+  "boston": {
+    "lat": 42.3588336,
+    "lon": -71.0578303,
+    "confidence": 0.85
+  },
+  "new jersey": {
+    "lat": 40.0757384,
+    "lon": -74.4041622,
+    "confidence": 0.9
+  },
+  "earth": {
+    "lat": 44.0109722,
+    "lon": -94.0560643,
+    "confidence": 0.85
+  },
+  "the fresher sea": null,
+  "new mexico": {
+    "lat": 34.5802074,
+    "lon": -105.996047,
+    "confidence": 0.9
+  },
+  "fiftieth street": {
+    "lat": 32.0428,
+    "lon": -81.0876,
+    "confidence": 0.85
+  },
+  "biloxi": {
+    "lat": 30.4007626,
+    "lon": -88.8893818,
+    "confidence": 0.9
+  },
+  "tennessee": {
+    "lat": 35.7730076,
+    "lon": -86.2820081,
+    "confidence": 0.9
+  },
+  "memphis": {
+    "lat": 42.8964179,
+    "lon": -82.7688135,
+    "confidence": 0.85
+  },
+  "kapiolani": {
+    "lat": 21.2709825,
+    "lon": -157.8220158,
+    "confidence": 0.85
+  },
+  "atlantic city": {
+    "lat": 39.3642852,
+    "lon": -74.4229351,
+    "confidence": 0.9
+  },
+  "montreal": {
+    "lat": 45.5031824,
+    "lon": -73.5698065,
+    "confidence": 0.55
+  },
+  "hempstead": {
+    "lat": 40.6736812,
+    "lon": -73.6190736,
+    "confidence": 0.85
+  },
+  "southampton": {
+    "lat": 40.8842482,
+    "lon": -72.3897131,
+    "confidence": 0.85
+  },
+  "greenwich": {
+    "lat": 41.0264862,
+    "lon": -73.6284598,
+    "confidence": 0.85
+  },
+  "albany": {
+    "lat": 42.5986896,
+    "lon": -73.9843997,
+    "confidence": 0.85
+  },
+  "lutheran": {
+    "lat": 53.4567734,
+    "lon": 12.0023982,
+    "confidence": 0.6
+  },
+  "milwaukee": {
+    "lat": 43.0386475,
+    "lon": -87.9090751,
+    "confidence": 0.9
+  },
+  "st. paul": {
+    "lat": 40.769118,
+    "lon": -91.517025,
+    "confidence": 0.85
+  },
+  "wisconsin": {
+    "lat": 44.4308975,
+    "lon": -89.6884637,
+    "confidence": 0.9
+  },
+  "my middle west": {
+    "lat": 36.2736646,
+    "lon": -86.8955558,
+    "confidence": 0.9
+  },
+  "ohio": {
+    "lat": 40.0984771,
+    "lon": -80.6109467,
+    "confidence": 0.85
+  },
+  "el greco": {
+    "lat": 25.4666937,
+    "lon": -97.7748603,
+    "confidence": 0.55
+  },
+  "madeira rivers": {
+    "lat": -6.8064866,
+    "lon": -62.4115491,
+    "confidence": 0.6
+  },
+  "london": {
+    "lat": 42.9836747,
+    "lon": -81.2496068,
+    "confidence": 0.55
+  },
+  "city road": {
+    "lat": -33.8860428,
+    "lon": 151.1942179,
+    "confidence": 0.55
+  },
+  "rio de janeiro": {
+    "lat": -22.2752762,
+    "lon": -42.419415,
+    "confidence": 0.55
+  },
+  "the madeira river": {
+    "lat": 39.2556223,
+    "lon": -84.28036,
+    "confidence": 0.85
+  },
+  "rapids": {
+    "lat": 43.0983912,
+    "lon": -78.6408628,
+    "confidence": 0.85
+  },
+  "madeira": {
+    "lat": 39.1908926,
+    "lon": -84.3635507,
+    "confidence": 0.9
+  },
+  "paraguay": {
+    "lat": -23.3165935,
+    "lon": -58.1693445,
+    "confidence": 0.6
+  },
+  "bolivia": {
+    "lat": -17.0568696,
+    "lon": -64.9912286,
+    "confidence": 0.6
+  },
+  "the amazon river": null,
+  "santo antonio": {
+    "lat": 38.7220648,
+    "lon": -9.1514289,
+    "confidence": 0.55
+  },
+  "south america": {
+    "lat": -21.0002179,
+    "lon": -61.0006565,
+    "confidence": 0.6
+  },
+  "new": {
+    "lat": 38.4278468,
+    "lon": -84.8105037,
+    "confidence": 0.85
+  },
+  "brazil": {
+    "lat": -10.3333333,
+    "lon": -53.2,
+    "confidence": 0.6
+  },
+  "atlantic": {
+    "lat": 37.9029581,
+    "lon": -75.5051441,
+    "confidence": 0.85
+  },
+  "pary": {
+    "lat": 64.7297222,
+    "lon": -155.4622222,
+    "confidence": 0.9
+  },
+  "the wild hog": {
+    "lat": 50.6981832,
+    "lon": 7.1279933,
+    "confidence": 0.6
+  },
+  "india": {
+    "lat": 22.3511148,
+    "lon": 78.6677428,
+    "confidence": 0.6
+  },
+  "javary": {
+    "lat": -4.8729557,
+    "lon": -72.3820166,
+    "confidence": 0.55
+  },
+  "lianas": {
+    "lat": 57.1575088,
+    "lon": 27.2465143,
+    "confidence": 0.55
+  },
+  "corcovado": {
+    "lat": 18.4487079,
+    "lon": -66.7785699,
+    "confidence": 0.9
+  },
+  "theresopolis": null,
+  "rio": {
+    "lat": 38.8795222,
+    "lon": -82.380432,
+    "confidence": 0.85
+  },
+  "fort": {
+    "lat": 25.3851063,
+    "lon": 86.4676991,
+    "confidence": 0.55
+  },
+  "santa cruz": {
+    "lat": 37.050096,
+    "lon": -121.99059,
+    "confidence": 0.85
+  },
+  "breakers": {
+    "lat": 47.2273645,
+    "lon": -88.6347019,
+    "confidence": 0.85
+  },
+  "ceara": {
+    "lat": -5.3264703,
+    "lon": -39.7156073,
+    "confidence": 0.6
+  },
+  "the bay of rio de janeiro": null,
+  "andes": {
+    "lat": 42.1886976,
+    "lon": -74.7857138,
+    "confidence": 0.85
+  },
+  "pacific": {
+    "lat": 38.481809,
+    "lon": -90.7415865,
+    "confidence": 0.85
+  },
+  "colocasie": null,
+  "the amazon basin": {
+    "lat": -34.9766094,
+    "lon": 138.5202686,
+    "confidence": 0.6
+  },
+  "valley": {
+    "lat": 32.8187406,
+    "lon": -85.1793852,
+    "confidence": 0.85
+  },
+  "liverpool": {
+    "lat": 40.3917076,
+    "lon": -90.0009491,
+    "confidence": 0.85
+  },
+  "kintinc an alligator": null,
+  "perxe": {
+    "lat": 41.1597649,
+    "lon": 0.5013803,
+    "confidence": 0.55
+  },
+  "sao paulo": {
+    "lat": -1.2043218,
+    "lon": -47.1583944,
+    "confidence": 0.55
+  },
+  "north": {
+    "lat": 33.6157083,
+    "lon": -81.1020414,
+    "confidence": 0.9
+  },
+  "south": {
+    "lat": 18.2612839,
+    "lon": -73.8444985,
+    "confidence": 0.55
+  },
+  "iviartea": null,
+  "lateran": {
+    "lat": 41.8861522,
+    "lon": 12.5043056,
+    "confidence": 0.55
+  },
+  "victoria": {
+    "lat": 28.8026443,
+    "lon": -96.9766308,
+    "confidence": 0.85
+  },
+  "barx": {
+    "lat": 39.0148124,
+    "lon": -0.302021,
+    "confidence": 0.6
+  },
+  "araras": {
+    "lat": -10.1026479,
+    "lon": -65.1503586,
+    "confidence": 0.55
+  },
+  "trinidad": {
+    "lat": 32.1440417,
+    "lon": -96.0910814,
+    "confidence": 0.85
+  },
+  "indianorum": null,
+  "loyola": {
+    "lat": 42.0011253,
+    "lon": -87.6610381,
+    "confidence": 0.85
+  },
+  "empire": {
+    "lat": 40.5075659,
+    "lon": -80.6239622,
+    "confidence": 0.85
+  },
+  "la plata": {
+    "lat": 37.2889732,
+    "lon": -107.8539029,
+    "confidence": 0.9
+  },
+  "humboldt": {
+    "lat": 42.7756032,
+    "lon": -94.1956133,
+    "confidence": 0.85
+  },
+  "amazonas": {
+    "lat": -0.6207328,
+    "lon": -51.5756469,
+    "confidence": 0.55
+  },
+  "norte": {
+    "lat": 6.986802,
+    "lon": -75.4853327,
+    "confidence": 0.55
+  },
+  "bahia": {
+    "lat": -12.285251,
+    "lon": -41.9294776,
+    "confidence": 0.6
+  },
+  "sul": {
+    "lat": 40.8357637,
+    "lon": -8.0423237,
+    "confidence": 0.55
+  },
+  "peru": {
+    "lat": -6.8699697,
+    "lon": -75.0458515,
+    "confidence": 0.6
+  },
+  "africa": {
+    "lat": 11.5024338,
+    "lon": 17.7578122,
+    "confidence": 0.6
+  },
+  "northern italy": {
+    "lat": 9.578118,
+    "lon": -11.5525703,
+    "confidence": 0.55
+  },
+  "siberia": {
+    "lat": 38.2381127,
+    "lon": -86.7336008,
+    "confidence": 0.85
+  },
+  "rio grande": {
+    "lat": 37.5668223,
+    "lon": -106.3832155,
+    "confidence": 0.85
+  },
+  "santa catharina": {
+    "lat": 12.1420952,
+    "lon": -68.8344872,
+    "confidence": 0.55
+  },
+  "parana": {
+    "lat": -24.4842187,
+    "lon": -51.8148872,
+    "confidence": 0.55
+  },
+  "southern europe": {
+    "lat": 53.8716149,
+    "lon": 27.539615,
+    "confidence": 0.6
+  },
+  "parand": {
+    "lat": 35.477882,
+    "lon": 50.9469189,
+    "confidence": 0.6
+  },
+  "sao francisco": {
+    "lat": 37.7879363,
+    "lon": -122.4075201,
+    "confidence": 0.9
+  },
+  "rio de janciro": null,
+  "enrope": {
+    "lat": 47.7432644,
+    "lon": 11.5607467,
+    "confidence": 0.6
+  },
+  "morro": {
+    "lat": -2.5635369,
+    "lon": -80.3276084,
+    "confidence": 0.55
+  },
+  "s40 paulo": {
+    "lat": -7.2520929,
+    "lon": -37.006649,
+    "confidence": 0.55
+  },
+  "sao leopoldo": {
+    "lat": -4.3818869,
+    "lon": -69.7073249,
+    "confidence": 0.55
+  },
+  "santa c": {
+    "lat": -13.1629348,
+    "lon": -73.8903496,
+    "confidence": 0.6
+  },
+  "pernambuco": {
+    "lat": -8.4116316,
+    "lon": -37.5919699,
+    "confidence": 0.6
+  },
+  "minas": {
+    "lat": 21.4861318,
+    "lon": -77.6109624,
+    "confidence": 0.55
+  },
+  "jn brazil": {
+    "lat": 3.1031533,
+    "lon": -61.0114833,
+    "confidence": 0.55
+  },
+  "united states": {
+    "lat": 39.7837304,
+    "lon": -100.445882,
+    "confidence": 0.9
+  },
+  "the southern states": {
+    "lat": 39.2047185,
+    "lon": -76.0524407,
+    "confidence": 0.9
+  },
+  "the united states": {
+    "lat": 36.1337324,
+    "lon": -80.2782636,
+    "confidence": 0.85
+  },
+  "paradise": {
+    "lat": 33.150118,
+    "lon": -97.6872521,
+    "confidence": 0.85
+  },
+  "the south of the union": {
+    "lat": 43.6456124,
+    "lon": -79.3802173,
+    "confidence": 0.55
+  },
+  "las m1": {
+    "lat": -11.8972111,
+    "lon": -77.0308184,
+    "confidence": 0.55
+  },
+  "martius": {
+    "lat": 42.3315615,
+    "lon": -83.0466224,
+    "confidence": 0.9
+  },
+  "d'orbigny": {
+    "lat": -21.996092,
+    "lon": -62.8238618,
+    "confidence": 0.55
+  },
+  "the south american continent": null,
+  "par\u00e9": {
+    "lat": 46.634114,
+    "lon": -71.9675542,
+    "confidence": 0.55
+  },
+  "chama": {
+    "lat": 37.1618719,
+    "lon": -105.3783126,
+    "confidence": 0.85
+  },
+  "maranhao": {
+    "lat": -5.2085503,
+    "lon": -45.3930262,
+    "confidence": 0.6
+  },
+  "paulo": {
+    "lat": -1.2043218,
+    "lon": -47.1583944,
+    "confidence": 0.55
+  },
+  "la": {
+    "lat": 30.8703881,
+    "lon": -92.007126,
+    "confidence": 0.85
+  },
+  "plata states": {
+    "lat": 37.6388835,
+    "lon": -107.8061604,
+    "confidence": 0.85
+  },
+  "maraj\u00e9": {
+    "lat": 10.90854,
+    "lon": 48.97346,
+    "confidence": 0.6
+  },
+  "dorado": {
+    "lat": 18.4594766,
+    "lon": -66.2618846,
+    "confidence": 0.85
+  },
+  "the south american states": null,
+  "the sao paulo railway": null,
+  "sao francisco valley": {
+    "lat": -22.854323,
+    "lon": -42.6771307,
+    "confidence": 0.6
+  },
+  "the villa nova": {
+    "lat": 41.5112492,
+    "lon": -74.0119365,
+    "confidence": 0.9
+  },
+  "cachocira": null,
+  "the rio das velhas": null,
+  "the river plate": {
+    "lat": 51.5185296,
+    "lon": -0.0868535,
+    "confidence": 0.55
+  },
+  "china": {
+    "lat": 35.000074,
+    "lon": 104.999927,
+    "confidence": 0.6
+  },
+  "northern": {
+    "lat": 9.118454,
+    "lon": -11.4856448,
+    "confidence": 0.55
+  },
+  "portugal": {
+    "lat": 39.6621648,
+    "lon": -8.1353519,
+    "confidence": 0.6
+  },
+  "antwerp": {
+    "lat": 51.2211097,
+    "lon": 4.3997081,
+    "confidence": 0.55
+  },
+  "hamburg": {
+    "lat": 53.550341,
+    "lon": 10.000654,
+    "confidence": 0.6
+  },
+  "bordeaux": {
+    "lat": 44.7938402,
+    "lon": -0.6063086,
+    "confidence": 0.55
+  },
+  "sandy beach": {
+    "lat": 43.0564452,
+    "lon": -78.9597629,
+    "confidence": 0.85
+  },
+  "the sao francisco": {
+    "lat": -25.0636673,
+    "lon": -51.2972413,
+    "confidence": 0.6
+  },
+  "araguaya": {
+    "lat": -0.2179159,
+    "lon": -79.1192455,
+    "confidence": 0.55
+  },
+  "xingi": {
+    "lat": 35.1930837,
+    "lon": 136.947523,
+    "confidence": 0.55
+  },
+  "tapajos": {
+    "lat": -4.8434401,
+    "lon": -56.7056492,
+    "confidence": 0.55
+  },
+  "paulo affonco": null,
+  "sete": {
+    "lat": 43.4014434,
+    "lon": 3.6959771,
+    "confidence": 0.55
+  },
+  "vaca de leite": {
+    "lat": -7.7510082,
+    "lon": -37.6399712,
+    "confidence": 0.6
+  },
+  "lisbon": {
+    "lat": 41.4814196,
+    "lon": -88.482293,
+    "confidence": 0.85
+  },
+  "padres": {
+    "lat": 23.1258725,
+    "lon": -82.3156801,
+    "confidence": 0.55
+  },
+  "porto seguro": {
+    "lat": 40.8274835,
+    "lon": -6.7606594,
+    "confidence": 0.55
+  },
+  "las casas": {
+    "lat": 18.4324159,
+    "lon": -66.038838,
+    "confidence": 0.9
+  },
+  "uruguay": {
+    "lat": -32.8755548,
+    "lon": -56.0201525,
+    "confidence": 0.6
+  },
+  "salvador": {
+    "lat": 13.8000382,
+    "lon": -88.9140683,
+    "confidence": 0.55
+  },
+  "the huguenot villegaignon": null,
+  "cidade de sao sebastiao": {
+    "lat": 14.9144719,
+    "lon": -23.6036896,
+    "confidence": 0.55
+  },
+  "nassau": {
+    "lat": 40.7352994,
+    "lon": -73.5615778,
+    "confidence": 0.85
+  },
+  "reino": {
+    "lat": 54.7023545,
+    "lon": -3.2765753,
+    "confidence": 0.55
+  },
+  "the argentine republic": {
+    "lat": 38.9114155,
+    "lon": -77.0423782,
+    "confidence": 0.9
+  },
+  "pernambuco im 1812": null,
+  "the prince regent": {
+    "lat": 28.086132,
+    "lon": -16.735332,
+    "confidence": 0.55
+  },
+  "ipiranga": {
+    "lat": -23.5892726,
+    "lon": -46.6061621,
+    "confidence": 0.55
+  },
+  "the guerra dos cabanos": null,
+  "para": {
+    "lat": 5.3430413,
+    "lon": -55.581341,
+    "confidence": 0.55
+  },
+  "this guerra dos cabanos": null,
+  "mato grosso": {
+    "lat": -12.2115009,
+    "lon": -55.5716547,
+    "confidence": 0.55
+  },
+  "the pampas indian": null,
+  "kgo": {
+    "lat": 49.0273855,
+    "lon": 2.1979126,
+    "confidence": 0.55
+  },
+  "republics": {
+    "lat": 37.0696077,
+    "lon": 27.4612402,
+    "confidence": 0.6
+  },
+  "bay of rio de janeiro": {
+    "lat": 36.3804416,
+    "lon": -6.1897304,
+    "confidence": 0.6
+  },
+  "sugarloaf": {
+    "lat": 45.049526,
+    "lon": -70.3149571,
+    "confidence": 0.85
+  },
+  "heroica": {
+    "lat": 25.8810158,
+    "lon": -97.5064866,
+    "confidence": 0.55
+  },
+  "macryo": null,
+  "alagoas": {
+    "lat": -9.6611661,
+    "lon": -36.6502426,
+    "confidence": 0.6
+  },
+  "paranypa po norte": null,
+  "cabedello": null,
+  "rro graxpr po norte": null,
+  "fortaleza": {
+    "lat": 28.0989901,
+    "lon": -17.2775671,
+    "confidence": 0.55
+  },
+  "ceara,*": {
+    "lat": -5.3264703,
+    "lon": -39.7156073,
+    "confidence": 0.6
+  },
+  "the para river": {
+    "lat": -34.613155,
+    "lon": 139.0678389,
+    "confidence": 0.55
+  },
+  "the ilha das oncas": null,
+  "cordilleras": {
+    "lat": 4.8937323,
+    "lon": -73.1911582,
+    "confidence": 0.55
+  },
+  "the madeira rivers": null,
+  "episcopal palace": {
+    "lat": 51.5884359,
+    "lon": 4.7789437,
+    "confidence": 0.55
+  },
+  "the palace of the president": null,
+  "regat\u00e9es": null,
+  "tistradas": null,
+  "bacaba": {
+    "lat": -4.5067233,
+    "lon": -66.538385,
+    "confidence": 0.55
+  },
+  "santarem": {
+    "lat": -2.438489,
+    "lon": -54.699611,
+    "confidence": 0.55
+  },
+  "venezuela": {
+    "lat": 8.0018709,
+    "lon": -66.1109318,
+    "confidence": 0.6
+  },
+  "bahia de maraj6": null,
+  "oxipos": null,
+  "caoutchouc": {
+    "lat": 7.1211767,
+    "lon": -3.6267946,
+    "confidence": 0.55
+  },
+  "igap\u00e9": {
+    "lat": -1.16483,
+    "lon": -47.7971543,
+    "confidence": 0.55
+  },
+  "the rio negro": {
+    "lat": 38.0247369,
+    "lon": -1.5263767,
+    "confidence": 0.55
+  },
+  "sao jos\u00e9 da barra": {
+    "lat": -20.7180697,
+    "lon": -46.3125073,
+    "confidence": 0.6
+  },
+  "the amazon valley": null,
+  "vargei": null,
+  "sao jos\u00e9": {
+    "lat": 37.7437441,
+    "lon": -25.6786953,
+    "confidence": 0.55
+  },
+  "palo maria": {
+    "lat": 10.4897542,
+    "lon": -66.8899226,
+    "confidence": 0.55
+  },
+  "mn": {
+    "lat": 45.9896587,
+    "lon": -94.6113288,
+    "confidence": 0.9
+  },
+  "the siphonia elastica": null,
+  "seringa": {
+    "lat": -0.9474,
+    "lon": -48.0342867,
+    "confidence": 0.55
+  },
+  "exaltacion": {
+    "lat": -11.4452607,
+    "lon": -66.6767481,
+    "confidence": 0.55
+  },
+  "pederneira": {
+    "lat": 39.5190082,
+    "lon": -9.1335573,
+    "confidence": 0.55
+  },
+  "the lower madeira": {
+    "lat": 50.7584031,
+    "lon": -1.5401593,
+    "confidence": 0.55
+  },
+  "santo": {
+    "lat": 32.6037293,
+    "lon": -98.2141084,
+    "confidence": 0.9
+  },
+  "antonio": {
+    "lat": 30.4063028,
+    "lon": -91.2248304,
+    "confidence": 0.85
+  },
+  "abelhas": {
+    "lat": -10.9803539,
+    "lon": -43.8313562,
+    "confidence": 0.55
+  },
+  "crato": {
+    "lat": -7.2369112,
+    "lon": -39.4149236,
+    "confidence": 0.55
+  },
+  "estancia": {
+    "lat": 34.7655898,
+    "lon": -106.0509222,
+    "confidence": 0.85
+  },
+  "lower madeira": {
+    "lat": 40.5293564,
+    "lon": -75.566114,
+    "confidence": 0.9
+  },
+  "manos": {
+    "lat": -14.6945241,
+    "lon": -75.1140539,
+    "confidence": 0.55
+  },
+  "lambessa": null,
+  "jammary": {
+    "lat": 44.585761,
+    "lon": 2.0197568,
+    "confidence": 0.6
+  },
+  "holstein": {
+    "lat": 42.4893597,
+    "lon": -95.5446387,
+    "confidence": 0.85
+  },
+  "the la plata states": null,
+  "pac\u00e9va*": {
+    "lat": 53.289336,
+    "lon": 29.3561183,
+    "confidence": 0.55
+  },
+  "russia": {
+    "lat": 64.6863136,
+    "lon": 97.7453061,
+    "confidence": 0.6
+  },
+  "purts, teff\u00e9, &c.": null,
+  "milreis": null,
+  "the praia de tamandud": null,
+  "tuzoronio": null,
+  "switzerland": {
+    "lat": 46.7985624,
+    "lon": 8.2319736,
+    "confidence": 0.6
+  },
+  "destacamento": {
+    "lat": -14.6211257,
+    "lon": -41.6226483,
+    "confidence": 0.55
+  },
+  "theotonio": {
+    "lat": -23.5149523,
+    "lon": -46.6768107,
+    "confidence": 0.55
+  },
+  "bulthos": null,
+  "the upper madeira": null,
+  "the madre de dios": {
+    "lat": -12.0662695,
+    "lon": -69.8179581,
+    "confidence": 0.55
+  },
+  "purds": null,
+  "lake titicaca": {
+    "lat": 47.7262116,
+    "lon": -121.6274481,
+    "confidence": 0.9
+  },
+  "madcira": null,
+  "girao": {
+    "lat": 32.7351665,
+    "lon": -17.1952761,
+    "confidence": 0.55
+  },
+  "south-west": {
+    "lat": 40.5098241,
+    "lon": 44.1777928,
+    "confidence": 0.55
+  },
+  "north-east": {
+    "lat": 41.9167594,
+    "lon": -73.5662363,
+    "confidence": 0.85
+  },
+  "amazon valley": {
+    "lat": 41.6294307,
+    "lon": -72.6850217,
+    "confidence": 0.85
+  },
+  "the madcira river": null,
+  "arfras": null,
+  "malocca": {
+    "lat": 52.5019963,
+    "lon": -6.5675049,
+    "confidence": 0.55
+  },
+  "caldeirao": {
+    "lat": 37.3085839,
+    "lon": -8.1581249,
+    "confidence": 0.55
+  },
+  "tupis": {
+    "lat": -20.8310196,
+    "lon": -44.0066165,
+    "confidence": 0.55
+  },
+  "madeira valley": {
+    "lat": 56.4753021,
+    "lon": -2.9530611,
+    "confidence": 0.55
+  },
+  "the valley of the": {
+    "lat": 52.9836195,
+    "lon": -7.9253453,
+    "confidence": 0.55
+  },
+  "santa cruz de la sierra": {
+    "lat": 39.3358459,
+    "lon": -5.8460427,
+    "confidence": 0.55
+  },
+  "cordillera": {
+    "lat": 8.7083895,
+    "lon": -82.5998559,
+    "confidence": 0.55
+  },
+  "ribeirao": {
+    "lat": 41.3572464,
+    "lon": -8.5589745,
+    "confidence": 0.55
+  },
+  "ivahy": {
+    "lat": -22.916116,
+    "lon": -45.4310175,
+    "confidence": 0.55
+  },
+  "niagara": {
+    "lat": 43.2042439,
+    "lon": -78.7676017,
+    "confidence": 0.85
+  },
+  "colorado": {
+    "lat": 29.6099609,
+    "lon": -96.5478826,
+    "confidence": 0.85
+  },
+  "the madeira railroad": null,
+  "am\u00e9rique du sud": {
+    "lat": -21.0002179,
+    "lon": -61.0006565,
+    "confidence": 0.6
+  },
+  "the serra pa paca nova": null,
+  "us": {
+    "lat": 17.789187,
+    "lon": -64.7080574,
+    "confidence": 0.85
+  },
+  "tn": {
+    "lat": 35.7730076,
+    "lon": -86.2820081,
+    "confidence": 0.9
+  },
+  "mission of exaltacion": null,
+  "pedra canga": null,
+  "matucar\u00e9": {
+    "lat": -12.8092148,
+    "lon": -64.9930272,
+    "confidence": 0.55
+  },
+  "sao joaquim": {
+    "lat": -15.4722736,
+    "lon": -45.0931044,
+    "confidence": 0.55
+  },
+  "jampos": null,
+  "santa ana": {
+    "lat": 33.7494951,
+    "lon": -117.873221,
+    "confidence": 0.9
+  },
+  "cerrito": {
+    "lat": 6.8435992,
+    "lon": -72.6939627,
+    "confidence": 0.55
+  },
+  "madcira railway": null,
+  "santa": {
+    "lat": -8.9565931,
+    "lon": -78.2678528,
+    "confidence": 0.55
+  },
+  "pueblo": {
+    "lat": 38.187635,
+    "lon": -104.5350145,
+    "confidence": 0.85
+  },
+  "cada": {
+    "lat": 15.6134137,
+    "lon": 19.0156172,
+    "confidence": 0.6
+  },
+  "evxaltacion": null,
+  "departamento": {
+    "lat": 4.7831994,
+    "lon": -73.6731282,
+    "confidence": 0.55
+  },
+  "a. river": {
+    "lat": 45.3654544,
+    "lon": -75.6825016,
+    "confidence": 0.55
+  },
+  "san joaquin": {
+    "lat": 36.6066162,
+    "lon": -120.1890447,
+    "confidence": 0.85
+  },
+  "bananciras": null,
+  "ecuador": {
+    "lat": -1.3397668,
+    "lon": -79.3666965,
+    "confidence": 0.6
+  },
+  "chile": {
+    "lat": -31.7613365,
+    "lon": -71.3187697,
+    "confidence": 0.6
+  },
+  "panama": {
+    "lat": 8.9714493,
+    "lon": -79.5341802,
+    "confidence": 0.55
+  },
+  "santa '": {
+    "lat": -8.9565931,
+    "lon": -78.2678528,
+    "confidence": 0.55
+  },
+  "cochabamba": {
+    "lat": -6.474381,
+    "lon": -78.8851926,
+    "confidence": 0.55
+  },
+  "the province of": {
+    "lat": 43.0866293,
+    "lon": -77.6563583,
+    "confidence": 0.85
+  },
+  "bagre": {
+    "lat": -1.8994498,
+    "lon": -50.2103844,
+    "confidence": 0.55
+  },
+  "paullinia": null,
+  "the salto de theotonio": null,
+  "piscidia evythrina": null,
+  "vurt": {
+    "lat": -18.5969739,
+    "lon": -46.5225102,
+    "confidence": 0.6
+  },
+  "conami": null,
+  "the la plata": {
+    "lat": 43.3231365,
+    "lon": -1.9743218,
+    "confidence": 0.55
+  },
+  "curitiba": {
+    "lat": -9.6604477,
+    "lon": -37.7895637,
+    "confidence": 0.55
+  },
+  "bothrops": null,
+  "barbacena": {
+    "lat": 38.960021,
+    "lon": -7.2962887,
+    "confidence": 0.55
+  },
+  "nv": {
+    "lat": 39.5158825,
+    "lon": -116.853722,
+    "confidence": 0.9
+  },
+  "guinea": {
+    "lat": 10.7226226,
+    "lon": -10.7083587,
+    "confidence": 0.6
+  },
+  "tapuyos": null,
+  "california": {
+    "lat": 36.7014631,
+    "lon": -118.755997,
+    "confidence": 0.9
+  },
+  "urary.--the": null,
+  "the sea basin": {
+    "lat": 26.1893227,
+    "lon": -80.1002347,
+    "confidence": 0.9
+  },
+  "&c.": {
+    "lat": 18.9908235,
+    "lon": -71.9943985,
+    "confidence": 0.55
+  },
+  "jriartea": null,
+  "aus": {
+    "lat": 43.6614319,
+    "lon": -92.9327202,
+    "confidence": 0.85
+  },
+  "parand4": null,
+  "jacaranda": {
+    "lat": 26.1229507,
+    "lon": -80.2742619,
+    "confidence": 0.9
+  },
+  "dalbergia": {
+    "lat": -27.03184,
+    "lon": -49.59183,
+    "confidence": 0.55
+  },
+  "palo santo": {
+    "lat": -0.9852669,
+    "lon": -80.7278826,
+    "confidence": 0.55
+  },
+  "barauna": {
+    "lat": -5.0775002,
+    "lon": -37.61752,
+    "confidence": 0.55
+  },
+  "paxiuba": {
+    "lat": -5.654385,
+    "lon": -63.721193,
+    "confidence": 0.55
+  },
+  "ks": {
+    "lat": 38.27312,
+    "lon": -98.5821872,
+    "confidence": 0.9
+  },
+  "urania": {
+    "lat": 31.8637771,
+    "lon": -92.2959723,
+    "confidence": 0.9
+  },
+  "cacao": {
+    "lat": 18.349733,
+    "lon": -65.9633624,
+    "confidence": 0.85
+  },
+  "the praia pe": {
+    "lat": -8.1384343,
+    "lon": -34.970537,
+    "confidence": 0.55
+  },
+  "tucuman": {
+    "lat": -26.8303703,
+    "lon": -65.2038133,
+    "confidence": 0.55
+  },
+  "carica": {
+    "lat": 42.2231812,
+    "lon": -4.9567139,
+    "confidence": 0.55
+  },
+  "sw": {
+    "lat": 37.1850331,
+    "lon": -100.8928434,
+    "confidence": 0.9
+  },
+  "myristica": {
+    "lat": 15.5829921,
+    "lon": 74.1889645,
+    "confidence": 0.6
+  },
+  "jatahy": {
+    "lat": -3.7237271,
+    "lon": -38.5418702,
+    "confidence": 0.55
+  },
+  "jatobi": {
+    "lat": -29.7538069,
+    "lon": -50.0128149,
+    "confidence": 0.6
+  },
+  "anim\u00e9": {
+    "lat": 44.7894228,
+    "lon": 7.9676173,
+    "confidence": 0.55
+  },
+  "maclura": {
+    "lat": 40.3159883,
+    "lon": -74.4662956,
+    "confidence": 0.85
+  },
+  "bignonia chica": null,
+  "guariuba": {
+    "lat": -9.9271211,
+    "lon": -67.8142046,
+    "confidence": 0.55
+  },
+  "mepictnan": null,
+  "lucuma": {
+    "lat": -2.1120309,
+    "lon": -79.8724606,
+    "confidence": 0.55
+  },
+  "quassia": {
+    "lat": 6.7932081,
+    "lon": -10.6637698,
+    "confidence": 0.55
+  },
+  "calophyllum": {
+    "lat": 26.5307195,
+    "lon": -80.1093535,
+    "confidence": 0.9
+  },
+  "curumicda": null,
+  "copernicia": {
+    "lat": -5.2691579,
+    "lon": -38.2666679,
+    "confidence": 0.55
+  },
+  "mart": {
+    "lat": 37.2092761,
+    "lon": -82.2854211,
+    "confidence": 0.85
+  },
+  "munguba": {
+    "lat": -0.9112602,
+    "lon": -52.4294994,
+    "confidence": 0.55
+  },
+  "wullschlaegelia": null,
+  "rutacea": null,
+  "the philippine islands": {
+    "lat": 14.4564299,
+    "lon": 120.9944456,
+    "confidence": 0.55
+  },
+  "the madeira valley": null,
+  "la paz": {
+    "lat": 33.7923828,
+    "lon": -114.0184443,
+    "confidence": 0.9
+  },
+  "arica": {
+    "lat": -18.4785288,
+    "lon": -70.3211394,
+    "confidence": 0.6
+  },
+  "cape horn": {
+    "lat": 39.1290634,
+    "lon": -120.9246638,
+    "confidence": 0.85
+  },
+  "purts": null,
+  "the madeira": {
+    "lat": 51.6064776,
+    "lon": -0.5563306,
+    "confidence": 0.55
+  },
+  "peri": {
+    "lat": 42.0049775,
+    "lon": 8.920963,
+    "confidence": 0.55
+  },
+  "java": {
+    "lat": -7.3279694,
+    "lon": 109.613911,
+    "confidence": 0.55
+  },
+  "himalayas": {
+    "lat": 30.5231861,
+    "lon": 80.5727039,
+    "confidence": 0.55
+  },
+  "mondego": {
+    "lat": 40.927252,
+    "lon": -8.5527883,
+    "confidence": 0.55
+  },
+  "iquitos": {
+    "lat": -3.749365,
+    "lon": -73.2444145,
+    "confidence": 0.6
+  },
+  "tabatinga": {
+    "lat": -4.0300124,
+    "lon": -69.6936839,
+    "confidence": 0.55
+  },
+  "new granada": {
+    "lat": 38.9127897,
+    "lon": -77.0401528,
+    "confidence": 0.85
+  },
+  "mundurucis": null,
+  "levant": {
+    "lat": 44.869496,
+    "lon": -68.935089,
+    "confidence": 0.85
+  },
+  "asia": {
+    "lat": 51.2086975,
+    "lon": 89.2343748,
+    "confidence": 0.6
+  },
+  "mexico": {
+    "lat": 19.4326296,
+    "lon": -99.1331785,
+    "confidence": 0.55
+  },
+  "central america": {
+    "lat": -30.2929528,
+    "lon": 153.1258582,
+    "confidence": 0.6
+  },
+  "the west coast": {
+    "lat": 53.527796,
+    "lon": -113.4865221,
+    "confidence": 0.55
+  },
+  "el": {
+    "lat": 38.915304,
+    "lon": -99.3172531,
+    "confidence": 0.9
+  },
+  "mira": {
+    "lat": 0.7170135,
+    "lon": -78.1918295,
+    "confidence": 0.55
+  },
+  "tapajoz": {
+    "lat": -3.0958776,
+    "lon": -60.0583542,
+    "confidence": 0.6
+  },
+  "pomatum": null,
+  "st. antonio": {
+    "lat": 41.4285753,
+    "lon": -8.6664286,
+    "confidence": 0.55
+  },
+  "genoa": {
+    "lat": 42.667874,
+    "lon": -76.5357634,
+    "confidence": 0.85
+  },
+  "maverna": {
+    "lat": 44.8405044,
+    "lon": 11.6003308,
+    "confidence": 0.55
+  },
+  "the wild indian": null,
+  "miri": {
+    "lat": 10.330308,
+    "lon": 9.7849807,
+    "confidence": 0.55
+  },
+  "coroado": {
+    "lat": -3.0901361,
+    "lon": -59.9734359,
+    "confidence": 0.55
+  },
+  "the passo fundo": {
+    "lat": -28.2396071,
+    "lon": -52.3781859,
+    "confidence": 0.6
+  },
+  "the campos east": null,
+  "chagu": {
+    "lat": 45.5002116,
+    "lon": 2.1509306,
+    "confidence": 0.55
+  },
+  "guapor\u00e9": {
+    "lat": -12.2308086,
+    "lon": -60.6867795,
+    "confidence": 0.55
+  },
+  "kurope": null,
+  "san ignacio": {
+    "lat": 9.7972275,
+    "lon": -84.162439,
+    "confidence": 0.55
+  },
+  "the rocky mountains": {
+    "lat": 43.9521287,
+    "lon": -109.27852,
+    "confidence": 0.9
+  },
+  "mapo": {
+    "lat": 40.1699488,
+    "lon": 116.6519341,
+    "confidence": 0.55
+  },
+  "au ana": {
+    "lat": -27.3203233,
+    "lon": 153.0088941,
+    "confidence": 0.55
+  },
+  "azunnu": null,
+  "kapuena": null,
+  "bugres": {
+    "lat": -15.0683712,
+    "lon": -57.1853688,
+    "confidence": 0.55
+  },
+  "nach": {
+    "lat": 45.877576,
+    "lon": 10.8900398,
+    "confidence": 0.55
+  },
+  "por el p.": {
+    "lat": -0.1070649,
+    "lon": -78.4956074,
+    "confidence": 0.55
+  },
+  "madrid": {
+    "lat": 41.8766526,
+    "lon": -93.8232813,
+    "confidence": 0.9
+  },
+  "0, ya": {
+    "lat": 44.6806778,
+    "lon": -63.2581043,
+    "confidence": 0.55
+  },
+  "md": {
+    "lat": 39.5162401,
+    "lon": -76.9382069,
+    "confidence": 0.9
+  },
+  "garay pa": {
+    "lat": 9.0010071,
+    "lon": -79.4978203,
+    "confidence": 0.55
+  },
+  "arobiar": null,
+  "inheenga": null,
+  "anhangara": null,
+  "southern america": {
+    "lat": 31.3286452,
+    "lon": -89.3367312,
+    "confidence": 0.85
+  },
+  "paj\u00e9": {
+    "lat": 4.5298,
+    "lon": -60.9833,
+    "confidence": 0.55
+  },
+  "the madetra valley": null,
+  "aldcamento": null,
+  "sao pedro": {
+    "lat": 38.6620559,
+    "lon": -27.2419104,
+    "confidence": 0.55
+  },
+  "jurupari": {
+    "lat": 0.1028439,
+    "lon": -50.5397927,
+    "confidence": 0.55
+  },
+  "cuyaba": {
+    "lat": -15.5868521,
+    "lon": -56.1133465,
+    "confidence": 0.55
+  },
+  "sao pedro d'": {
+    "lat": 38.6620559,
+    "lon": -27.2419104,
+    "confidence": 0.55
+  },
+  "salisbury": {
+    "lat": 38.366027,
+    "lon": -75.6009964,
+    "confidence": 0.85
+  },
+  "guajara": {
+    "lat": -0.884595,
+    "lon": -48.164565,
+    "confidence": 0.55
+  },
+  "san antonio": {
+    "lat": 28.3361142,
+    "lon": -82.2745308,
+    "confidence": 0.85
+  },
+  "cordillera de los andes": {
+    "lat": 19.2058067,
+    "lon": -96.182707,
+    "confidence": 0.55
+  },
+  "san jos\u00e9": {
+    "lat": 37.3361663,
+    "lon": -121.890591,
+    "confidence": 0.9
+  },
+  "san javier f. 1690 exaltacion rs": null,
+  "al padre juan": {
+    "lat": 36.8406964,
+    "lon": -2.4576289,
+    "confidence": 0.55
+  },
+  "garriga": {
+    "lat": 20.6985217,
+    "lon": -75.4249301,
+    "confidence": 0.55
+  },
+  "encommiendas": null,
+  "charlevoix": {
+    "lat": 45.202075,
+    "lon": -84.9676387,
+    "confidence": 0.85
+  },
+  "candelaria": {
+    "lat": 3.4090481,
+    "lon": -76.347379,
+    "confidence": 0.55
+  },
+  "egypt": {
+    "lat": 26.2540493,
+    "lon": 29.2675469,
+    "confidence": 0.6
+  },
+  "plata": {
+    "lat": 46.8225727,
+    "lon": 11.177731,
+    "confidence": 0.55
+  },
+  "corpus christi": {
+    "lat": 27.7635302,
+    "lon": -97.4033191,
+    "confidence": 0.9
+  },
+  "the palo maria": null,
+  "spain": {
+    "lat": 39.3260685,
+    "lon": -4.8379791,
+    "confidence": 0.6
+  },
+  "colonia": {
+    "lat": 50.938361,
+    "lon": 6.959974,
+    "confidence": 0.55
+  },
+  "francia": {
+    "lat": 46.603354,
+    "lon": 1.8883335,
+    "confidence": 0.6
+  },
+  "corrientes": {
+    "lat": -27.4687004,
+    "lon": -58.8311982,
+    "confidence": 0.55
+  },
+  "syphiliticos morbos": null,
+  "valparaiso 1861": {
+    "lat": 26.268095,
+    "lon": -98.1870272,
+    "confidence": 0.85
+  },
+  "santa cruz de ja sierra": {
+    "lat": -17.7834217,
+    "lon": -63.1820853,
+    "confidence": 0.6
+  },
+  "lagos": {
+    "lat": 37.1027964,
+    "lon": -8.6728689,
+    "confidence": 0.55
+  },
+  "salta": {
+    "lat": -24.7892946,
+    "lon": -65.4103194,
+    "confidence": 0.55
+  },
+  "sucre": {
+    "lat": 10.4088276,
+    "lon": -63.351996,
+    "confidence": 0.55
+  },
+  "neapolitan": {
+    "lat": 53.4063072,
+    "lon": -2.9785457,
+    "confidence": 0.55
+  },
+  "geneva": {
+    "lat": 42.8690271,
+    "lon": -76.9786122,
+    "confidence": 0.85
+  },
+  "goa": {
+    "lat": 15.3004543,
+    "lon": 74.0855134,
+    "confidence": 0.6
+  },
+  "southern arabia": {
+    "lat": 60.1679512,
+    "lon": 24.949681,
+    "confidence": 0.55
+  },
+  "st. francisco": {
+    "lat": 35.6876096,
+    "lon": -105.938456,
+    "confidence": 0.9
+  },
+  "st. luke": {
+    "lat": 53.2520135,
+    "lon": -2.7924333,
+    "confidence": 0.55
+  },
+  "the north of europe": {
+    "lat": 49.3114412,
+    "lon": -123.0799372,
+    "confidence": 0.6
+  },
+  "the pueblo of": {
+    "lat": 36.1938561,
+    "lon": -115.2698181,
+    "confidence": 0.85
+  },
+  "corpus-christi": {
+    "lat": 27.7635302,
+    "lon": -97.4033191,
+    "confidence": 0.9
+  },
+  "the republic": {
+    "lat": 52.4813269,
+    "lon": -1.9054517,
+    "confidence": 0.55
+  },
+  "the departamento del beni": {
+    "lat": -14.8304866,
+    "lon": -64.8991779,
+    "confidence": 0.6
+  },
+  "patagonia": {
+    "lat": 31.5402016,
+    "lon": -110.753927,
+    "confidence": 0.9
+  },
+  "loreto": {
+    "lat": -7.08562,
+    "lon": -45.1397421,
+    "confidence": 0.55
+  },
+  "the province of s. paul": {
+    "lat": -33.9235172,
+    "lon": 18.4121634,
+    "confidence": 0.55
+  },
+  "manor": {
+    "lat": 31.1038242,
+    "lon": -82.5731939,
+    "confidence": 0.85
+  },
+  "villa rica": {
+    "lat": 33.732052,
+    "lon": -84.9191081,
+    "confidence": 0.9
+  },
+  "acang": {
+    "lat": 29.2434952,
+    "lon": 95.1284522,
+    "confidence": 0.6
+  },
+  "moon": {
+    "lat": 37.4434684,
+    "lon": -76.2927195,
+    "confidence": 0.85
+  },
+  "yetso irare oche yaci": null,
+  "water une acum huanuve nese": null,
+  "mountain mari": {
+    "lat": 37.3928857,
+    "lon": -122.0911249,
+    "confidence": 0.85
+  },
+  "itschavaneve": null,
+  "ndaypotari": null,
+  "amazon basin": {
+    "lat": 28.1628441,
+    "lon": -82.4239285,
+    "confidence": 0.9
+  },
+  "mamor\u00e9 valley": {
+    "lat": -27.0369946,
+    "lon": -48.6266452,
+    "confidence": 0.6
+  },
+  "central africa": {
+    "lat": -25.3579401,
+    "lon": -57.5835295,
+    "confidence": 0.55
+  },
+  "south latitude": {
+    "lat": 33.6806307,
+    "lon": -78.9605439,
+    "confidence": 0.85
+  },
+  "west longitude": {
+    "lat": 39.6389766,
+    "lon": -78.10906,
+    "confidence": 0.85
+  },
+  "the lower madcira--murassuttiba": null,
+  "the upper madeira--rapid": null,
+  "paredao": {
+    "lat": -14.7830986,
+    "lon": -42.554555,
+    "confidence": 0.55
+  },
+  "abuna": {
+    "lat": -9.787876,
+    "lon": -65.5330033,
+    "confidence": 0.55
+  },
+  "wedi x40": {
+    "lat": -7.7459397,
+    "lon": 110.5799219,
+    "confidence": 0.55
+  },
+  "ilha": {
+    "lat": 40.7886553,
+    "lon": -73.9603028,
+    "confidence": 0.85
+  },
+  "caldeiraio": null,
+  "inferno": {
+    "lat": -17.1139274,
+    "lon": -40.1103545,
+    "confidence": 0.55
+  },
+  "santo antonio '": {
+    "lat": -6.3124831,
+    "lon": -35.4815907,
+    "confidence": 0.55
+  },
+  "tae river": {
+    "lat": 13.5663612,
+    "lon": 107.7869598,
+    "confidence": 0.6
+  },
+  "derry": {
+    "lat": 42.8808677,
+    "lon": -71.3264492,
+    "confidence": 0.85
+  },
+  "ste": {
+    "lat": 44.5461118,
+    "lon": -89.5315718,
+    "confidence": 0.9
+  },
+  "ny": {
+    "lat": 43.1561681,
+    "lon": -75.8449946,
+    "confidence": 0.9
+  },
+  "uroa": {
+    "lat": 59.2319885,
+    "lon": 9.673685,
+    "confidence": 0.55
+  },
+  "ks \u00bb": {
+    "lat": 38.27312,
+    "lon": -98.5821872,
+    "confidence": 0.9
+  },
+  "mannheim": {
+    "lat": 49.4892913,
+    "lon": 8.4673098,
+    "confidence": 0.6
+  },
+  "prussia": {
+    "lat": 40.0908111,
+    "lon": -75.3832484,
+    "confidence": 0.85
+  },
+  "potosi": {
+    "lat": 37.936438,
+    "lon": -90.7879086,
+    "confidence": 0.85
+  },
+  "tacna": {
+    "lat": 32.6985289,
+    "lon": -113.9530344,
+    "confidence": 0.9
+  },
+  "argentine republic": {
+    "lat": -34.9964963,
+    "lon": -64.9672817,
+    "confidence": 0.6
+  },
+  "alto-pera": {
+    "lat": 46.4408515,
+    "lon": 11.6929143,
+    "confidence": 0.6
+  },
+  "buenos ayres": {
+    "lat": -34.6095579,
+    "lon": -58.3887904,
+    "confidence": 0.6
+  },
+  "cordova": {
+    "lat": 60.5443385,
+    "lon": -145.7595063,
+    "confidence": 0.9
+  },
+  "tujui": null,
+  "asuncion": {
+    "lat": -9.189317,
+    "lon": -77.394364,
+    "confidence": 0.55
+  },
+  "islay": {
+    "lat": -16.9592838,
+    "lon": -71.7426958,
+    "confidence": 0.55
+  },
+  "arequipa": {
+    "lat": -16.2785197,
+    "lon": -71.5045087,
+    "confidence": 0.55
+  },
+  "the 'titicaca lake": null,
+  "the gran chaco": null,
+  "carac\u00e9les": null,
+  "puno": {
+    "lat": -15.0,
+    "lon": -70.0,
+    "confidence": 0.55
+  }
+}

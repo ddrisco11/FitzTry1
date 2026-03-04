@@ -1,0 +1,61 @@
+corpus:
+  raw_dir: "corpus/raw"
+  cleaned_dir: "corpus/cleaned"
+  metadata_file: "corpus/metadata.json"
+  gatsby_gutenberg_url: "https://www.gutenberg.org/cache/epub/64317/pg64317.txt"
+  doc_filter: ["great_gatsby"]
+
+data_dir: "output/gatsby/data"
+
+ner:
+  corener_model: "aiola/roberta-large-corener"
+  spacy_model: "en_core_web_lg"        # still used by phase 4 (relation extraction)
+  entity_types: ["GPE", "LOC", "FAC"]
+  fictional_overrides: ["East Egg", "West Egg", "Valley of Ashes"]
+  confidence_threshold: 0.7
+  batch_size: 64
+  min_mention_count: 2
+
+grounding:
+  geocoder: "nominatim"
+  user_agent: "fitzgerald_geo_project"
+  cache_file: "data/geocode_cache.json"
+  default_country_bias: ""
+  rate_limit_sleep: 1.1
+
+relations:
+  extraction_methods: ["pattern_match", "co_occurrence", "hf_zero_shot"]
+  co_occurrence_weight: 0.3
+  hedging_penalty: 0.2
+  hf_model: "facebook/bart-large-mnli"
+  hf_min_score: 0.5
+  use_hf_model: true
+
+constraints:
+  epsilon_direction_km: 1.0
+  d_near_km: 10.0
+  d_far_km: 50.0
+  sigma_distance_km: 5.0
+  co_occurrence_weight: 0.1
+  projection_origin_lat: 40.7128
+  projection_origin_lon: -74.0060
+  min_constraints_per_latent: 1
+
+inference:
+  method: "emcee"
+  num_samples: 5000
+  burn_in: 1000
+  thin: 5
+  beta: 1.0
+  proposal_std_km: 10.0
+  init_bbox_radius_km: 300.0
+  num_walkers: 32
+  num_chains: 4
+  random_seed: 42
+
+visualization:
+  output_dir: "output/gatsby/visualizations"
+  map_zoom: 10
+  heatmap_resolution: 100
+  ensemble_num_samples: 50
+  map_tiles: "OpenStreetMap"

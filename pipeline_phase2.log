@@ -1,0 +1,109 @@
+12:04:00 [INFO] src.utils.io — Loaded config from config.yaml
+12:04:00 [INFO] pipeline — Loaded config from config.yaml
+12:04:00 [INFO] pipeline — ━━━ Phase 2: Named Entity Recognition ━━━
+12:04:00 [INFO] src.phase2_ner — === Phase 2: Named Entity Recognition ===
+12:04:00 [INFO] src.phase2_ner — Loading spaCy model: en_core_web_lg
+12:04:01 [INFO] src.phase2_ner — Processing doc_id 'great_gatsby' from corpus/cleaned/great_gatsby.jsonl
+12:04:01 [INFO] src.phase2_ner —   3110 sentences to process
+12:04:10 [INFO] src.phase2_ner — Found 125 unique geographic entities
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): East
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Middle Western
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): New Haven
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the Middle West
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Washington
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): North America
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Columbus
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Normandy
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Lake Forest
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): France
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Georgian Colonial
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): West
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Westchester
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Asheville
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Hot Springs
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Palm Beach
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Park
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Versailles
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Broadway
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Myrtle
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Chester
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the Gasoline Pump
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Marseilles
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Mediterranean
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Pennsylvania Station
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Castile
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Frisco
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Jordan
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Germany
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Louisiana
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Philadelphia
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Murray Hill Hotel
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the Pennsylvania Station
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the enchanted metropolitan twilight
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Warwick
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Daisy's
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Maine
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Island
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Georgia
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Beluga
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Eckhaust
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the De Jongs
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Kellehers
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Times Square
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Baedeker
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Middle West
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Montenegro
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Adriatic Sea
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Doncaster
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the Grand Canal
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Port Roosevelt
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Astoria
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the Queensboro Bridge
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Katspaugh
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Metropole
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): England
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the Plaza Hotel
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Camp Taylor
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): New Orleans
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the Muhlbach Hotel
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the South Seas
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Santa Barbara Tom
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Ventura
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Cannes
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Plaza
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Central Park
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): West Egg Village
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Detroit
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Canada
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): North Dakota
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Lake Superior
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): green jersey
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Nevada
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Montana
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Duluth
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the West Indies
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Barbary Coast
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Continent
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Boston
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): earth
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): the fresher sea
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): New Mexico
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Biloxi
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Tennessee
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Memphis
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Kapiolani
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Montreal
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Hempstead
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Southampton
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Greenwich
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Albany
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Lutheran
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Milwaukee
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): St. Paul
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): Wisconsin
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): my Middle West
+12:04:10 [INFO] src.phase2_ner —   Uncertain entity (will review in grounding): El Greco
+12:04:10 [INFO] src.phase2_ner — Classification: 26 real, 2 fictional, 97 uncertain
+12:04:10 [INFO] src.utils.io — Wrote 125 records to data/entities.jsonl
+12:04:10 [INFO] src.phase2_ner — Phase 2 complete. 125 entities written to data/entities.jsonl
+12:04:10 [INFO] pipeline — Pipeline complete.
