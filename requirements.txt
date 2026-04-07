@@ -41,3 +41,4 @@ pytest-cov>=4.1.0
 # Utilities
 requests>=2.31.0
 tqdm>=4.66.0
+rich>=13.0.0

@@ -23,12 +23,19 @@ grounding:
   rate_limit_sleep: 1.1
 
 relations:
-  extraction_methods: ["pattern_match", "co_occurrence", "hf_zero_shot"]
-  co_occurrence_weight: 0.3
-  hedging_penalty: 0.2
-  hf_model: "facebook/bart-large-mnli"
-  hf_min_score: 0.5
-  use_hf_model: true
+  # Progress and checkpoint files (written by phase 4, read by dashboard)
+  progress_file: "phase4_progress.json"
+  checkpoint_file: "phase4_checkpoint.json"
+
+  mistral:
+    model: "mistral"                  # ollama model name (e.g. mistral, mistral:7b-instruct)
+    host: "http://localhost:11434"    # ollama server address
+    temperature: 0.1                  # low temp = consistent structured output
+    timeout_seconds: 120              # per-chunk request timeout
+    max_retries: 3                    # attempts before skipping a chunk
+    sentences_per_chunk: 6            # sentences fed per Mistral call
+    chunk_overlap: 2                  # overlap to avoid missing cross-boundary relations
+    min_confidence: 0.55              # discard relations below this threshold
 
 constraints:
   epsilon_direction_km: 1.0
