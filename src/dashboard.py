@@ -1,18 +1,21 @@
-"""Phase 4 — Real-Time Extraction Dashboard.
+"""Real-Time Extraction Dashboard.
 
-Run in a separate terminal while phase 4 is extracting:
+Run in a separate terminal while Mistral extraction is running:
 
     python -m src.dashboard
     python -m src.dashboard --progress data/phase4_progress.json
     python -m src.dashboard --refresh 1.5
 
 Displays:
-  • Progress bar with chunk count and percentage
-  • ETA, elapsed time, rate, avg time per chunk
-  • Relation type breakdown table with mini bar charts and projected totals
-  • Live relation feed (most recent extractions)
-  • Current chunk preview
-  • Error log (if any failures)
+  - Progress bar with chunk count and percentage
+  - ETA, elapsed time, rate, avg time per chunk
+  - Relation type breakdown table with mini bar charts and projected totals
+  - Live relation feed (most recent extractions)
+  - Current chunk preview
+  - Error log (if any failures)
+
+Works with both Strategy B (joint extraction) and legacy (relations-only)
+progress files — the dashboard reads the same JSON format.
 """
 
 from __future__ import annotations
@@ -106,6 +109,7 @@ def _header_panel(state: dict) -> Panel:
     doc   = state.get("doc_id", "?").replace("_", " ").title()
     model = state.get("model", "?")
     status = state.get("status", "running")
+    stage  = state.get("stage", "extraction")
     sc     = STATUS_COLOURS.get(status, "white")
 
     title = Text(justify="center")
@@ -115,6 +119,8 @@ def _header_panel(state: dict) -> Panel:
     sub.append(f"{doc}", style="bold white")
     sub.append("  ·  ", style="dim white")
     sub.append(f"{model}", style="cyan")
+    sub.append("  ·  ", style="dim white")
+    sub.append(f"{stage}", style="dim cyan")
     sub.append("  ·  status: ", style="dim white")
     sub.append(f"{status}", style=f"bold {sc}")
 
@@ -164,10 +170,14 @@ def _stats_panel(state: dict, elapsed_s: float) -> Panel:
 
     eta_col = "green" if eta_s < 3600 else "yellow" if eta_s < 7200 else "red"
 
+    ents = state.get("entities_extracted", 0)
+
     tbl.add_row("Elapsed",    f"[white]{_hms(elapsed_s)}[/white]")
     tbl.add_row("ETA",        f"[{eta_col}]{_hms(eta_s)}[/{eta_col}]")
     tbl.add_row("Rate",       f"[cyan]{rate_min:.1f}[/cyan] chunks/min")
     tbl.add_row("Avg/chunk",  f"[white]{avg_dur:.1f} s[/white]")
+    if ents > 0:
+        tbl.add_row("Entities",   f"[bright_cyan]{ents}[/bright_cyan]")
     tbl.add_row("Projected",  f"[bright_white]{proj_total}[/bright_white] relations")
     tbl.add_row("Errors",     f"[{'red' if errs else 'dim green'}]{errs}[/]")
 
@@ -268,13 +278,15 @@ def _waiting_panel(progress_path: Path) -> Panel:
     body.append("\n  Waiting for extraction to begin…\n\n", style="dim white italic")
     body.append(f"  Watching: {progress_path}\n\n", style="dim white")
     body.append(
-        "  Start extraction:\n"
-        "    python -m src.pipeline --config config.yaml --phase 4 --force\n",
+        "  Start extraction (Strategy B):\n"
+        "    python -m src.pipeline --config config.yaml --phase 2 --force\n\n"
+        "  Start extraction (legacy):\n"
+        "    python -m src.pipeline --config config.yaml --phase 5 --force\n",
         style="dim cyan",
     )
     return Panel(
         Align(body, align="center"),
-        title="[bold bright_blue]Phase 4 Dashboard[/bold bright_blue]",
+        title="[bold bright_blue]Extraction Dashboard[/bold bright_blue]",
         box=box.DOUBLE_EDGE,
         border_style="bright_blue",
     )

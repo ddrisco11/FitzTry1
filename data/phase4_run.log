@@ -1,0 +1,165 @@
+14:59:26 [INFO] src.utils.io — Loaded config from config.yaml
+14:59:26 [INFO] pipeline — Loaded config from config.yaml
+14:59:26 [INFO] pipeline — ━━━ Phase 5: Spatial Relation Extraction ━━━
+14:59:26 [INFO] src.phase4_relations — === Phase 4: Spatial Relation Extraction (Mistral/Ollama) ===
+14:59:26 [INFO] src.phase4_relations — Ollama ready  model=mistral  host=http://localhost:11434
+14:59:26 [INFO] src.phase4_relations — Loaded 569 grounded entities
+14:59:26 [INFO] src.phase4_relations — Total chunks to process: 1473
+14:59:26 [INFO] src.phase4_relations — great_gatsby_chunk_0002         entities=1  sentences=6
+15:00:12 [INFO] src.phase4_relations — great_gatsby_chunk_0003         entities=2  sentences=6
+15:00:27 [INFO] src.phase4_relations — great_gatsby_chunk_0004         entities=2  sentences=6
+15:00:41 [INFO] src.phase4_relations — great_gatsby_chunk_0005         entities=3  sentences=6
+15:00:55 [INFO] src.phase4_relations —   → 2 relations  (14.3s)
+15:00:55 [INFO] src.phase4_relations — great_gatsby_chunk_0006         entities=2  sentences=6
+15:01:05 [INFO] src.phase4_relations —   → 1 relations  (10.6s)
+15:01:05 [INFO] src.phase4_relations — great_gatsby_chunk_0007         entities=1  sentences=6
+15:01:17 [INFO] src.phase4_relations — great_gatsby_chunk_0010         entities=4  sentences=6
+15:01:46 [INFO] src.phase4_relations —   → 4 relations  (28.8s)
+15:01:46 [INFO] src.phase4_relations — great_gatsby_chunk_0011         entities=4  sentences=6
+15:02:19 [INFO] src.phase4_relations —   → 4 relations  (32.8s)
+15:02:19 [INFO] src.phase4_relations — great_gatsby_chunk_0012         entities=2  sentences=6
+15:02:44 [INFO] src.phase4_relations — great_gatsby_chunk_0013         entities=5  sentences=6
+15:03:25 [INFO] src.phase4_relations —   → 4 relations  (41.1s)
+15:03:25 [INFO] src.phase4_relations — great_gatsby_chunk_0014         entities=5  sentences=6
+15:04:01 [INFO] src.phase4_relations — great_gatsby_chunk_0015         entities=3  sentences=6
+15:04:35 [INFO] src.phase4_relations —   → 2 relations  (34.7s)
+15:04:35 [INFO] src.phase4_relations — great_gatsby_chunk_0016         entities=1  sentences=6
+15:04:47 [INFO] src.phase4_relations — great_gatsby_chunk_0017         entities=1  sentences=6
+15:04:58 [INFO] src.phase4_relations — great_gatsby_chunk_0018         entities=1  sentences=6
+15:05:13 [INFO] src.phase4_relations — great_gatsby_chunk_0025         entities=2  sentences=6
+15:05:34 [INFO] src.phase4_relations —   → 2 relations  (20.6s)
+15:05:34 [INFO] src.phase4_relations — great_gatsby_chunk_0030         entities=1  sentences=6
+15:05:41 [INFO] src.phase4_relations — great_gatsby_chunk_0031         entities=1  sentences=6
+15:05:50 [INFO] src.phase4_relations — great_gatsby_chunk_0032         entities=1  sentences=6
+15:06:01 [INFO] src.phase4_relations — great_gatsby_chunk_0035         entities=1  sentences=6
+15:06:10 [INFO] src.phase4_relations — great_gatsby_chunk_0041         entities=1  sentences=6
+15:06:21 [INFO] src.phase4_relations — great_gatsby_chunk_0047         entities=1  sentences=6
+15:06:31 [INFO] src.phase4_relations — great_gatsby_chunk_0048         entities=1  sentences=6
+15:06:40 [INFO] src.phase4_relations — great_gatsby_chunk_0054         entities=1  sentences=6
+15:06:49 [INFO] src.phase4_relations — great_gatsby_chunk_0068         entities=1  sentences=6
+15:06:59 [INFO] src.phase4_relations — great_gatsby_chunk_0069         entities=4  sentences=6
+15:07:09 [INFO] src.phase4_relations — great_gatsby_chunk_0074         entities=1  sentences=6
+15:07:18 [INFO] src.phase4_relations — great_gatsby_chunk_0075         entities=2  sentences=6
+15:07:43 [INFO] src.phase4_relations — great_gatsby_chunk_0077         entities=1  sentences=6
+15:07:45 [INFO] src.phase4_relations — great_gatsby_chunk_0078         entities=1  sentences=6
+15:08:02 [INFO] src.phase4_relations — great_gatsby_chunk_0079         entities=1  sentences=6
+15:08:04 [INFO] src.phase4_relations — great_gatsby_chunk_0080         entities=2  sentences=6
+15:08:14 [INFO] src.phase4_relations —   → 1 relations  (9.9s)
+15:08:14 [INFO] src.phase4_relations — great_gatsby_chunk_0081         entities=2  sentences=6
+15:08:33 [INFO] src.phase4_relations —   → 1 relations  (19.4s)
+15:08:33 [INFO] src.phase4_relations — great_gatsby_chunk_0083         entities=2  sentences=6
+15:08:43 [INFO] src.phase4_relations —   → 1 relations  (10.5s)
+15:08:43 [INFO] src.phase4_relations — great_gatsby_chunk_0084         entities=2  sentences=6
+15:08:55 [INFO] src.phase4_relations —   → 1 relations  (11.1s)
+15:08:55 [INFO] src.phase4_relations — great_gatsby_chunk_0085         entities=1  sentences=6
+15:09:11 [INFO] src.phase4_relations —   → 1 relations  (16.0s)
+15:09:11 [INFO] src.phase4_relations — great_gatsby_chunk_0086         entities=1  sentences=6
+15:09:21 [INFO] src.phase4_relations — great_gatsby_chunk_0087         entities=1  sentences=6
+15:09:34 [INFO] src.phase4_relations — great_gatsby_chunk_0088         entities=1  sentences=6
+15:09:45 [INFO] src.phase4_relations — great_gatsby_chunk_0096         entities=1  sentences=6
+15:09:55 [INFO] src.phase4_relations — great_gatsby_chunk_0097         entities=1  sentences=6
+15:10:06 [INFO] src.phase4_relations — great_gatsby_chunk_0098         entities=1  sentences=6
+15:10:18 [INFO] src.phase4_relations — great_gatsby_chunk_0105         entities=1  sentences=6
+15:10:27 [INFO] src.phase4_relations — great_gatsby_chunk_0106         entities=1  sentences=6
+15:10:37 [INFO] src.phase4_relations —   → 1 relations  (9.9s)
+15:10:37 [INFO] src.phase4_relations — great_gatsby_chunk_0107         entities=1  sentences=6
+15:10:48 [INFO] src.phase4_relations —   → 1 relations  (10.3s)
+15:10:48 [INFO] src.phase4_relations — great_gatsby_chunk_0108         entities=2  sentences=6
+15:11:01 [INFO] src.phase4_relations — great_gatsby_chunk_0109         entities=2  sentences=6
+15:11:21 [INFO] src.phase4_relations — great_gatsby_chunk_0110         entities=1  sentences=6
+15:11:31 [INFO] src.phase4_relations — great_gatsby_chunk_0120         entities=1  sentences=6
+15:11:41 [INFO] src.phase4_relations — great_gatsby_chunk_0122         entities=1  sentences=6
+15:11:52 [INFO] src.phase4_relations — great_gatsby_chunk_0123         entities=1  sentences=6
+15:12:03 [INFO] src.phase4_relations — great_gatsby_chunk_0124         entities=2  sentences=6
+15:12:15 [INFO] src.phase4_relations —   → 2 relations  (12.6s)
+15:12:15 [INFO] src.phase4_relations — great_gatsby_chunk_0126         entities=1  sentences=6
+15:12:17 [INFO] src.phase4_relations — great_gatsby_chunk_0127         entities=2  sentences=6
+15:12:46 [INFO] src.phase4_relations —   → 1 relations  (28.9s)
+15:12:46 [INFO] src.phase4_relations — great_gatsby_chunk_0128         entities=1  sentences=6
+15:12:57 [INFO] src.phase4_relations — great_gatsby_chunk_0129         entities=1  sentences=6
+15:13:00 [INFO] src.phase4_relations — great_gatsby_chunk_0130         entities=1  sentences=6
+15:13:11 [INFO] src.phase4_relations — great_gatsby_chunk_0131         entities=2  sentences=6
+15:13:21 [INFO] src.phase4_relations — great_gatsby_chunk_0132         entities=2  sentences=6
+15:13:37 [INFO] src.phase4_relations — great_gatsby_chunk_0133         entities=1  sentences=6
+15:21:09 [INFO] src.utils.io — Loaded config from config.yaml
+15:21:09 [INFO] pipeline — Loaded config from config.yaml
+15:21:09 [INFO] pipeline — ━━━ Phase 4: Geographic Grounding ━━━
+15:21:09 [INFO] src.phase3_grounding — === Phase 3: Geographic Grounding ===
+15:21:09 [INFO] src.phase3_grounding — Loaded 266 entities for grounding
+15:21:09 [INFO] src.phase3_grounding — Loaded geocode cache: 576 entries from data/geocode_cache.json
+15:21:09 [INFO] src.phase3_grounding — Could not geocode 'Solimdes' → classifying as fictional
+15:21:09 [INFO] src.phase3_grounding — Could not geocode 'THE RAPIDS OF THE MADEIRA' → classifying as fictional
+15:21:09 [INFO] src.phase3_grounding — Could not geocode 'THE MADEIRA VALLEY' → classifying as fictional
+15:21:09 [INFO] src.phase3_grounding — Could not geocode 'Indianorum' → classifying as fictional
+15:21:09 [INFO] src.phase3_grounding — Could not geocode 'Kurope' → classifying as fictional
+15:21:09 [INFO] src.phase3_grounding — Could not geocode 'Rio de Janciro' → classifying as fictional
+15:21:09 [INFO] src.phase3_grounding — Could not geocode 'Maranhio' → classifying as fictional
+15:21:17 [INFO] src.phase3_grounding — Could not geocode 'the South American Continent' → classifying as fictional
+15:21:29 [INFO] src.utils.io — Loaded config from config.yaml
+15:21:29 [INFO] pipeline — Loaded config from config.yaml
+15:21:29 [INFO] pipeline — ━━━ Phase 5: Spatial Relation Extraction ━━━
+15:21:29 [INFO] src.phase4_relations — === Phase 4: Spatial Relation Extraction (Mistral/Ollama) ===
+15:21:29 [INFO] src.phase4_relations — Ollama ready  model=mistral  host=http://localhost:11434
+15:21:29 [INFO] src.phase4_relations — Loaded 569 grounded entities
+15:21:29 [INFO] src.phase4_relations — Total chunks to process: 1473
+15:21:29 [INFO] src.phase4_relations — Checkpoint loaded — 133 chunks already done, 29 relations accumulated
+15:21:29 [INFO] src.phase4_relations — great_gatsby_chunk_0133         entities=1  sentences=6
+15:22:05 [INFO] src.phase4_relations —   → 1 relations  (36.6s)
+15:22:05 [INFO] src.phase4_relations — great_gatsby_chunk_0134         entities=2  sentences=6
+15:22:14 [INFO] src.phase4_relations —   → 1 relations  (8.7s)
+15:22:14 [INFO] src.phase4_relations — great_gatsby_chunk_0135         entities=2  sentences=6
+15:22:23 [INFO] src.phase4_relations —   → 1 relations  (8.9s)
+15:22:23 [INFO] src.phase4_relations — great_gatsby_chunk_0136         entities=1  sentences=6
+15:22:38 [INFO] src.phase4_relations — great_gatsby_chunk_0137         entities=1  sentences=6
+15:22:39 [INFO] src.phase4_relations — great_gatsby_chunk_0138         entities=1  sentences=6
+15:22:46 [INFO] src.phase4_relations — great_gatsby_chunk_0143         entities=1  sentences=6
+15:22:55 [INFO] src.phase4_relations —   → 1 relations  (8.7s)
+15:22:55 [INFO] src.phase4_relations — great_gatsby_chunk_0144         entities=1  sentences=6
+15:23:10 [INFO] src.phase4_relations — great_gatsby_chunk_0149         entities=1  sentences=6
+15:23:11 [INFO] src.phase4_relations — great_gatsby_chunk_0150         entities=1  sentences=6
+15:23:25 [INFO] src.phase4_relations — great_gatsby_chunk_0151         entities=1  sentences=6
+15:23:36 [INFO] src.phase4_relations — great_gatsby_chunk_0152         entities=1  sentences=6
+15:23:47 [INFO] src.phase4_relations — great_gatsby_chunk_0153         entities=1  sentences=6
+15:24:02 [INFO] src.phase4_relations —   → 1 relations  (15.7s)
+15:24:02 [INFO] src.phase4_relations — great_gatsby_chunk_0154         entities=2  sentences=6
+15:24:13 [INFO] src.phase4_relations —   → 1 relations  (11.0s)
+15:24:13 [INFO] src.phase4_relations — great_gatsby_chunk_0155         entities=3  sentences=6
+15:24:43 [INFO] src.phase4_relations —   → 1 relations  (30.1s)
+15:24:43 [INFO] src.phase4_relations — great_gatsby_chunk_0156         entities=1  sentences=6
+15:24:56 [INFO] src.phase4_relations — great_gatsby_chunk_0157         entities=1  sentences=6
+15:25:10 [INFO] src.phase4_relations —   → 1 relations  (14.4s)
+15:25:10 [INFO] src.phase4_relations — great_gatsby_chunk_0166         entities=1  sentences=6
+15:25:12 [INFO] src.phase4_relations — great_gatsby_chunk_0167         entities=1  sentences=6
+15:25:14 [INFO] src.phase4_relations — great_gatsby_chunk_0168         entities=1  sentences=6
+15:25:23 [INFO] src.phase4_relations — great_gatsby_chunk_0170         entities=1  sentences=6
+15:25:36 [INFO] src.phase4_relations — great_gatsby_chunk_0171         entities=3  sentences=6
+15:26:09 [INFO] src.phase4_relations —   → 1 relations  (33.4s)
+15:26:09 [INFO] src.phase4_relations — great_gatsby_chunk_0180         entities=1  sentences=6
+15:26:11 [INFO] src.phase4_relations — great_gatsby_chunk_0186         entities=1  sentences=6
+15:26:21 [INFO] src.phase4_relations — great_gatsby_chunk_0187         entities=2  sentences=6
+15:26:46 [INFO] src.phase4_relations — great_gatsby_chunk_0188         entities=1  sentences=6
+15:26:56 [INFO] src.phase4_relations —   → 1 relations  (9.3s)
+15:26:56 [INFO] src.phase4_relations — great_gatsby_chunk_0192         entities=1  sentences=6
+15:27:08 [INFO] src.phase4_relations —   → 1 relations  (12.0s)
+15:27:08 [INFO] src.phase4_relations — great_gatsby_chunk_0193         entities=2  sentences=6
+15:27:37 [INFO] src.phase4_relations — great_gatsby_chunk_0194         entities=1  sentences=6
+15:27:47 [INFO] src.phase4_relations — great_gatsby_chunk_0196         entities=2  sentences=6
+15:27:50 [INFO] src.phase4_relations — great_gatsby_chunk_0197         entities=3  sentences=6
+15:27:59 [INFO] src.phase4_relations —   → 1 relations  (9.2s)
+15:27:59 [INFO] src.phase4_relations — great_gatsby_chunk_0206         entities=2  sentences=6
+15:28:10 [INFO] src.phase4_relations —   → 1 relations  (11.2s)
+15:28:10 [INFO] src.phase4_relations — great_gatsby_chunk_0207         entities=2  sentences=6
+15:28:22 [INFO] src.phase4_relations — great_gatsby_chunk_0210         entities=1  sentences=6
+15:28:35 [INFO] src.phase4_relations — great_gatsby_chunk_0213         entities=1  sentences=6
+15:28:46 [INFO] src.phase4_relations — great_gatsby_chunk_0214         entities=1  sentences=6
+15:28:48 [INFO] src.phase4_relations — great_gatsby_chunk_0227         entities=1  sentences=6
+15:28:58 [INFO] src.phase4_relations — great_gatsby_chunk_0228         entities=6  sentences=6
+15:30:08 [INFO] src.phase4_relations —   → 1 relations  (69.7s)
+15:30:08 [INFO] src.phase4_relations — great_gatsby_chunk_0229         entities=7  sentences=6
+15:30:40 [INFO] src.phase4_relations —   → 3 relations  (31.7s)
+15:30:40 [INFO] src.phase4_relations — great_gatsby_chunk_0230         entities=1  sentences=6
+15:30:54 [INFO] src.phase4_relations — great_gatsby_chunk_0232         entities=2  sentences=6
+15:31:06 [INFO] src.phase4_relations —   → 1 relations  (11.9s)
+15:31:06 [INFO] src.phase4_relations — great_gatsby_chunk_0240         entities=2  sentences=6
+15:31:18 [INFO] src.phase4_relations — great_gatsby_chunk_0241         entities=2  sentences=6
+15:31:30 [INFO] src.phase4_relations — great_gatsby_chunk_0242         entities=6  sentences=6

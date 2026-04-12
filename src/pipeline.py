@@ -1,5 +1,31 @@
 """Pipeline orchestrator — runs all phases end-to-end or individually.
 
+Strategy B stage ordering (when ner.backend == "mistral_joint"):
+
+  1. Cleaning           — sentence-segmented corpus
+  2. Mistral Extraction — joint NER + spatial relation extraction (Ollama)
+  3. Coreference        — cross-span coref on Mistral-produced entities
+  4. Geographic Grounding — Nominatim geocoding
+  5. Graph Building     — finalise relations.jsonl using grounded entities
+  6. Geographic Edges   — real<->real + anchor constraints
+  7. Constraints        — formal constraint model
+  8. Inference          — probabilistic positioning (emcee / Metropolis)
+  9. Convergence        — diagnostics
+ 10. Visualisation      — maps and plots
+
+Legacy ordering (when ner.backend == "corener"):
+
+  1. Cleaning
+  2. CoReNer NER
+  3. Coreference
+  4. Geographic Grounding
+  5. Mistral Relations (old Phase 4)
+  6. Geographic Edges
+  7. Constraints
+  8. Inference
+  9. Convergence
+ 10. Visualisation
+
 Usage:
     python -m src.pipeline --config config.yaml
     python -m src.pipeline --config config.yaml --phase 2
@@ -16,7 +42,7 @@ import click
 
 from src.utils.io import load_config
 
-# Phase imports
+# Phase/stage imports — all paths
 from src import (
     phase1_corpus_prep,
     phase2_ner,
@@ -28,33 +54,73 @@ from src import (
     phase6_inference,
     phase7_convergence,
     phase8_visualization,
+    phase_mistral_joint,
+    phase_graph_build,
 )
 
-PHASES = [
-    phase1_corpus_prep,
-    phase2_ner,
-    phase2b_coref,
-    phase3_grounding,
-    phase4_relations,
-    phase4b_geographic_edges,
-    phase5_constraints,
-    phase6_inference,
-    phase7_convergence,
-    phase8_visualization,
+# ---------------------------------------------------------------------------
+# Strategy B — Mistral-first pipeline (default)
+# ---------------------------------------------------------------------------
+
+PHASES_STRATEGY_B = [
+    phase1_corpus_prep,       # 1: Cleaning
+    phase_mistral_joint,      # 2: Joint Mistral NER + Relations
+    phase2b_coref,            # 3: Coreference Resolution
+    phase3_grounding,         # 4: Geographic Grounding
+    phase_graph_build,        # 5: Graph Building
+    phase4b_geographic_edges, # 6: Geographic Knowledge Edges
+    phase5_constraints,       # 7: Formal Constraint Model
+    phase6_inference,         # 8: Probabilistic Inference
+    phase7_convergence,       # 9: Convergence Diagnostics
+    phase8_visualization,     # 10: Visualisation
 ]
 
-PHASE_NAMES = [
-    "Corpus Preparation",
-    "Named Entity Recognition",
+PHASE_NAMES_STRATEGY_B = [
+    "Cleaning",
+    "Mistral Joint Extraction",
     "Coreference Resolution",
     "Geographic Grounding",
-    "Spatial Relation Extraction",
+    "Graph Building",
     "Geographic Knowledge Edges",
     "Formal Constraint Model",
     "Probabilistic Inference",
     "Convergence Diagnostics",
-    "Visualization",
+    "Visualisation",
 ]
+
+# ---------------------------------------------------------------------------
+# Legacy — CoReNer-first pipeline
+# ---------------------------------------------------------------------------
+
+PHASES_LEGACY = [
+    phase1_corpus_prep,       # 1: Cleaning
+    phase2_ner,               # 2: CoReNer NER
+    phase2b_coref,            # 3: Coreference Resolution
+    phase3_grounding,         # 4: Geographic Grounding
+    phase4_relations,         # 5: Mistral Relations (old Phase 4)
+    phase4b_geographic_edges, # 6: Geographic Knowledge Edges
+    phase5_constraints,       # 7: Formal Constraint Model
+    phase6_inference,         # 8: Probabilistic Inference
+    phase7_convergence,       # 9: Convergence Diagnostics
+    phase8_visualization,     # 10: Visualisation
+]
+
+PHASE_NAMES_LEGACY = [
+    "Cleaning",
+    "Named Entity Recognition (CoReNer)",
+    "Coreference Resolution",
+    "Geographic Grounding",
+    "Spatial Relation Extraction (Mistral)",
+    "Geographic Knowledge Edges",
+    "Formal Constraint Model",
+    "Probabilistic Inference",
+    "Convergence Diagnostics",
+    "Visualisation",
+]
+
+# Backwards compatibility aliases
+PHASES = PHASES_STRATEGY_B
+PHASE_NAMES = PHASE_NAMES_STRATEGY_B
 
 
 def _setup_logging(verbose: bool = False) -> None:
@@ -66,9 +132,18 @@ def _setup_logging(verbose: bool = False) -> None:
     )
 
 
+def _select_pipeline(cfg: dict):
+    """Return (phases, phase_names) based on ner.backend config."""
+    backend = cfg.get("ner", {}).get("backend", "mistral_joint")
+    if backend == "corener":
+        return PHASES_LEGACY, PHASE_NAMES_LEGACY
+    # Default: Strategy B
+    return PHASES_STRATEGY_B, PHASE_NAMES_STRATEGY_B
+
+
 @click.command()
 @click.option("--config", default="config.yaml", show_default=True, help="Path to config.yaml")
-@click.option("--phase", default=None, type=int, help="Run only this phase (1–8). Omit to run all.")
+@click.option("--phase", default=None, type=int, help="Run only this phase (1-N). Omit to run all.")
 @click.option("--force", is_flag=True, default=False, help="Overwrite existing outputs.")
 @click.option("--verbose", is_flag=True, default=False, help="Enable DEBUG logging.")
 def main(config: str, phase: int | None, force: bool, verbose: bool) -> None:
@@ -84,28 +159,39 @@ def main(config: str, phase: int | None, force: bool, verbose: bool) -> None:
     cfg = load_config(cfg_path)
     log.info("Loaded config from %s", cfg_path)
 
+    phases, phase_names = _select_pipeline(cfg)
+    backend = cfg.get("ner", {}).get("backend", "mistral_joint")
+    log.info("Pipeline backend: %s (%d stages)", backend, len(phases))
+
     if phase is not None:
-        if not 1 <= phase <= len(PHASES):
-            log.error("--phase must be between 1 and %d (4b = 5)", len(PHASES))
+        if not 1 <= phase <= len(phases):
+            log.error("--phase must be between 1 and %d", len(phases))
             sys.exit(1)
-        _run_phase(phase - 1, cfg, force, log)
+        _run_phase(phase - 1, phases, phase_names, cfg, force, log)
     else:
-        log.info("Running full pipeline (%d phases)", len(PHASES))
-        for i in range(len(PHASES)):
-            _run_phase(i, cfg, force, log)
+        log.info("Running full pipeline (%d stages)", len(phases))
+        for i in range(len(phases)):
+            _run_phase(i, phases, phase_names, cfg, force, log)
 
     log.info("Pipeline complete.")
 
 
-def _run_phase(idx: int, cfg: dict, force: bool, log: logging.Logger) -> None:
-    name = PHASE_NAMES[idx]
-    module = PHASES[idx]
-    log.info("━━━ Phase %d: %s ━━━", idx + 1, name)
+def _run_phase(
+    idx: int,
+    phases: list,
+    phase_names: list,
+    cfg: dict,
+    force: bool,
+    log: logging.Logger,
+) -> None:
+    name = phase_names[idx]
+    module = phases[idx]
+    log.info("━━━ Stage %d: %s ━━━", idx + 1, name)
     try:
         module.run(cfg, force=force)
     except Exception as exc:
-        log.exception("Phase %d (%s) failed: %s", idx + 1, name, exc)
-        raise SystemExit(f"Aborting: Phase {idx + 1} ({name}) failed.") from exc
+        log.exception("Stage %d (%s) failed: %s", idx + 1, name, exc)
+        raise SystemExit(f"Aborting: Stage {idx + 1} ({name}) failed.") from exc
 
 
 if __name__ == "__main__":

@@ -2348,5 +2348,148 @@
     "lat": -15.0,
     "lon": -70.0,
     "confidence": 0.55
+  },
+  "paran\u00e9": {
+    "lat": 12.2711347,
+    "lon": 75.7173463,
+    "confidence": 0.85
+  },
+  "solimdes": null,
+  "beni": {
+    "lat": -14.0,
+    "lon": -65.0,
+    "confidence": 0.85
+  },
+  "the rapids of the madeira": null,
+  "mamore": {
+    "lat": -10.1860098,
+    "lon": -65.3035929,
+    "confidence": 0.85
+  },
+  "paranapanema": {
+    "lat": -23.390161,
+    "lon": -48.720868,
+    "confidence": 0.85
+  },
+  "rio pe janeiro": {
+    "lat": -22.8805985,
+    "lon": -43.3135023,
+    "confidence": 0.85
+  },
+  "manaos": {
+    "lat": -3.1316333,
+    "lon": -59.9825041,
+    "confidence": 0.85
+  },
+  "amazon": {
+    "lat": 0.6395295,
+    "lon": -50.3706084,
+    "confidence": 0.85
+  },
+  "missions": {
+    "lat": -27.3312147,
+    "lon": -55.51659,
+    "confidence": 0.85
+  },
+  "mojos": {
+    "lat": -14.9961581,
+    "lon": -65.641067,
+    "confidence": 0.85
+  },
+  "minas geraes": {
+    "lat": -5.3139473,
+    "lon": -44.488819,
+    "confidence": 0.85
+  },
+  "espirito santo": {
+    "lat": -19.5687682,
+    "lon": -40.1721991,
+    "confidence": 0.85
+  },
+  "aldeamento": {
+    "lat": -19.3778171,
+    "lon": -41.3185994,
+    "confidence": 0.85
+  },
+  "the atlantic": {
+    "lat": 39.9472855,
+    "lon": -75.1651758,
+    "confidence": 0.85
+  },
+  "maranhao .": {
+    "lat": -5.2085503,
+    "lon": -45.3930262,
+    "confidence": 0.85
+  },
+  "cear\u00e9": {
+    "lat": 37.7776072,
+    "lon": 13.7152821,
+    "confidence": 0.85
+  },
+  "rio grande do norte": {
+    "lat": -5.6781175,
+    "lon": -36.4781776,
+    "confidence": 0.85
+  },
+  "rio grande do sul": {
+    "lat": -29.8425284,
+    "lon": -53.7680577,
+    "confidence": 0.85
+  },
+  "goyaz": {
+    "lat": 43.1418612,
+    "lon": -2.1632121,
+    "confidence": 0.85
+  },
+  "observatory": {
+    "lat": 33.3539758,
+    "lon": -116.8613743,
+    "confidence": 0.85
+  },
+  "maranhio": null,
+  "piauhy": {
+    "lat": -7.6992782,
+    "lon": -42.5043787,
+    "confidence": 0.85
+  },
+  "campos": {
+    "lat": -21.7546,
+    "lon": -41.3242,
+    "confidence": 0.85
+  },
+  "rio doce": {
+    "lat": -17.8683787,
+    "lon": -51.3401572,
+    "confidence": 0.85
+  },
+  "petropolis": {
+    "lat": -22.3880004,
+    "lon": -43.1752593,
+    "confidence": 0.85
+  },
+  "transatlantic": {
+    "lat": 32.6982825,
+    "lon": -80.009985,
+    "confidence": 0.85
+  },
+  "southern": {
+    "lat": -16.5381715,
+    "lon": 26.7374997,
+    "confidence": 0.85
+  },
+  "rio negro": {
+    "lat": -0.4068548,
+    "lon": -65.0475731,
+    "confidence": 0.85
+  },
+  "mandos": {
+    "lat": -16.4244138,
+    "lon": -71.52154,
+    "confidence": 0.85
+  },
+  "jequitinhonha": {
+    "lat": -16.4335098,
+    "lon": -41.0035557,
+    "confidence": 0.85
   }
 }

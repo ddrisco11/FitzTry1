@@ -37,7 +37,18 @@
       "Bash(PDF=\"/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/corpus/raw/service-gdc-gdclccn-02-02-99-50-02029950-02029950.pdf\"\n.venv/bin/python -c \"\nimport fitz\ndoc = fitz.open\\('$PDF'\\)\nprint\\(f'Pages: {len\\(doc\\)}'\\)\n# Check if first few pages have text\nfor i in range\\(min\\(3, len\\(doc\\)\\)\\):\n    text = doc[i].get_text\\(\\)\n    print\\(f'Page {i+1}: {len\\(text\\)} chars, preview: {repr\\(text[:100]\\)}'\\)\n\")",
       "Bash(\\\\\n.venv/bin/python scripts/ocr_pdf.py \\\\\n  \"corpus/raw/service-gdc-gdclccn-02-02-99-50-02029950-02029950.pdf\" \\\\\n  \"corpus/raw/amazon_madeira_rivers.txt\" 2>&1)",
       "Bash(\\\\\n.venv/bin/python -m src.pipeline --config config.yaml --force --verbose 2>&1)",
-      "Bash(.venv/bin/python -c \"\nimport json\n# Print summaries for key Amazon/Madeira entities\nwith open\\('data/convergence/posterior_summaries.jsonl'\\) as f:\n    for line in f:\n        e = json.loads\\(line\\)\n        if any\\(k in e['name'].lower\\(\\) for k in ['amazon', 'madeira', 'rio', 'brazil', 'theresop']\\):\n            print\\(f\\\\\"{e['name']}: mean=\\({e['posterior_mean']['x']:.1f}, {e['posterior_mean']['y']:.1f}\\) std=\\({e['posterior_std']['x']:.1f}, {e['posterior_std']['y']:.1f}\\) entropy={e['spatial_entropy']:.2f}\\\\\"\\)\n\")"
+      "Bash(.venv/bin/python -c \"\nimport json\n# Print summaries for key Amazon/Madeira entities\nwith open\\('data/convergence/posterior_summaries.jsonl'\\) as f:\n    for line in f:\n        e = json.loads\\(line\\)\n        if any\\(k in e['name'].lower\\(\\) for k in ['amazon', 'madeira', 'rio', 'brazil', 'theresop']\\):\n            print\\(f\\\\\"{e['name']}: mean=\\({e['posterior_mean']['x']:.1f}, {e['posterior_mean']['y']:.1f}\\) std=\\({e['posterior_std']['x']:.1f}, {e['posterior_std']['y']:.1f}\\) entropy={e['spatial_entropy']:.2f}\\\\\"\\)\n\")",
+      "Bash(/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/.venv/bin/pip install:*)",
+      "Bash(/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/.venv/bin/pip show:*)",
+      "Bash(ollama --version)",
+      "Bash(brew install:*)",
+      "Bash(brew services:*)",
+      "Bash(ollama list:*)",
+      "Bash(/Users/David/Downloads/WheelOfFortuneLab-DavidDriscoll/FitzTry1/.venv/bin/python:*)",
+      "Bash(pkill -f \"src.pipeline\")",
+      "Bash(python3 -c \"import sys,json; [print\\(json.loads\\(l\\)['canonical_name'], '|', json.loads\\(l\\)['type']\\) for l in sys.stdin]\")",
+      "Bash(python3 -c ':*)",
+      "Bash(.venv/bin/python:*)"
     ]
   }
 }

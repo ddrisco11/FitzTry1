@@ -5,10 +5,14 @@ corpus:
   gatsby_gutenberg_url: "https://www.gutenberg.org/cache/epub/64317/pg64317.txt"
 
 ner:
-  corener_model: "aiola/roberta-large-corener"  # or roberta-base-corener (~3x faster)
+  # Strategy B: "mistral_joint" = joint NER+relations via Ollama (default)
+  # Legacy:     "corener"       = CoReNer NER then separate Mistral relations
+  backend: "mistral_joint"
+
+  corener_model: "aiola/roberta-large-corener"  # used by legacy backend + coref stage
   max_chunk_tokens: 350                # max subword tokens per chunk (RoBERTa limit 512)
-  skip_phase2b_coref: true            # set false for full coref; true skips ~15 min
-  spacy_model: "en_core_web_lg"        # still used by phase 4 (relation extraction)
+  skip_phase2b_coref: false           # false in Strategy B so coref runs after Mistral
+  spacy_model: "en_core_web_lg"        # still used by downstream stages
   entity_types: ["GPE", "LOC", "FAC"]
   fictional_overrides: ["East Egg", "West Egg", "Valley of Ashes"]
   confidence_threshold: 0.7
