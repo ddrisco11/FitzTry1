@@ -77,7 +77,7 @@ PHASES_STRATEGY_B = [
 
 PHASE_NAMES_STRATEGY_B = [
     "Cleaning",
-    "Mistral Joint Extraction",
+    "Mistral Relation Extraction",
     "Coreference Resolution",
     "Geographic Grounding",
     "Graph Building",

@@ -395,6 +395,12 @@ def run(cfg: dict, force: bool = False) -> None:
         log.info("Visualization outputs exist, skipping (use --force to overwrite).")
         return
 
+    # Clean old outputs to prevent stale files from prior runs
+    import shutil
+    if heatmaps_dir.exists():
+        shutil.rmtree(heatmaps_dir)
+        log.info("Cleared old heatmaps directory")
+
     # Load data
     dd = data_dir(cfg)
     model: ConstraintModel = read_json(dd / "constraints.json", model=ConstraintModel)

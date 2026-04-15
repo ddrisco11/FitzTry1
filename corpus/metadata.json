@@ -6,13 +6,5 @@
     "type": "novel",
     "source_file": "corpus/raw/the_great_gatsby.txt",
     "num_sentences": 3110
-  },
-  {
-    "doc_id": "amazon_madeira_rivers",
-    "title": "The Amazon and Madeira Rivers",
-    "year": 1875,
-    "type": "travelogue",
-    "source_file": "corpus/raw/amazon_madeira_rivers.txt",
-    "num_sentences": 2780
   }
 ]

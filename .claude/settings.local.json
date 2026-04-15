@@ -48,7 +48,16 @@
       "Bash(pkill -f \"src.pipeline\")",
       "Bash(python3 -c \"import sys,json; [print\\(json.loads\\(l\\)['canonical_name'], '|', json.loads\\(l\\)['type']\\) for l in sys.stdin]\")",
       "Bash(python3 -c ':*)",
-      "Bash(.venv/bin/python:*)"
+      "Bash(.venv/bin/python:*)",
+      "Bash(echo \"Dashboard started with PID $!\")",
+      "Bash(pkill -f \"src.dashboard\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); durs=d.get\\('chunk_durations_s',[]\\); print\\(f'Processed: {d[\\\\\"processed_chunks\\\\\"]}/{d[\\\\\"total_chunks\\\\\"]}'\\); print\\(f'Relations: {d[\\\\\"relations_extracted\\\\\"]}'\\); print\\(f'Entities: {d[\\\\\"entities_extracted\\\\\"]}'\\); print\\(f'Avg time/chunk: {sum\\(durs\\)/len\\(durs\\):.1f}s' if durs else 'No data'\\); print\\(f'Errors: {d[\\\\\"error_chunks\\\\\"]}'\\)\")",
+      "Bash(launchctl setenv:*)",
+      "Bash(disown sleep:*)",
+      "Bash(python3 -c \"import sys,json; print\\('Ollama up:', bool\\(json.load\\(sys.stdin\\).get\\('models'\\)\\)\\)\")",
+      "Bash(curl -s http://localhost:11434/api/tags)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('Ollama up, models:', [m['name'] for m in d.get\\('models',[]\\)]\\)\")",
+      "Bash(OLLAMA_NUM_PARALLEL=4 ollama pull:*)"
     ]
   }
 }

@@ -3,6 +3,7 @@ corpus:
   cleaned_dir: "corpus/cleaned"
   metadata_file: "corpus/metadata.json"
   gatsby_gutenberg_url: "https://www.gutenberg.org/cache/epub/64317/pg64317.txt"
+  doc_filter: ["great_gatsby"]
 
 ner:
   # Strategy B: "mistral_joint" = joint NER+relations via Ollama (default)
@@ -32,13 +33,14 @@ relations:
   checkpoint_file: "phase4_checkpoint.json"
 
   mistral:
-    model: "mistral"                  # ollama model name (e.g. mistral, mistral:7b-instruct)
+    model: "mistral"                  # ollama model name
     host: "http://localhost:11434"    # ollama server address
     temperature: 0.1                  # low temp = consistent structured output
     timeout_seconds: 120              # per-chunk request timeout
     max_retries: 3                    # attempts before skipping a chunk
     sentences_per_chunk: 6            # sentences fed per Mistral call
     chunk_overlap: 2                  # overlap to avoid missing cross-boundary relations
+    num_workers: 4                    # parallel extraction threads (match OLLAMA_NUM_PARALLEL)
     min_confidence: 0.55              # discard relations below this threshold
 
 constraints:

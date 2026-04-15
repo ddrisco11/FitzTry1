@@ -10,7 +10,6 @@ from src.phase_mistral_joint import (
     _find_mentions,
     _parse_model_response,
     _validate_relation,
-    _resolve_entity,
     _build_chunks,
     VALID_RELATION_TYPES,
     NULLABLE_ENTITY2_TYPES,
@@ -165,93 +164,64 @@ class TestBuildChunks:
         assert len(chunks) == 1
 
 
-class TestResolveEntity:
-    def test_exact_match(self):
-        lookup = {"east egg": "East Egg", "new york": "New York"}
-        assert _resolve_entity("East Egg", lookup) == "East Egg"
-
-    def test_case_insensitive(self):
-        lookup = {"east egg": "East Egg"}
-        assert _resolve_entity("east egg", lookup) == "East Egg"
-
-    def test_substring_fallback(self):
-        lookup = {"new york": "New York"}
-        assert _resolve_entity("New York City", lookup) == "New York"
-
-    def test_no_match(self):
-        lookup = {"east egg": "East Egg"}
-        assert _resolve_entity("Chicago", lookup) is None
-
-    def test_empty(self):
-        assert _resolve_entity("", {}) is None
-        assert _resolve_entity(None, {}) is None
-
-
 class TestValidateRelation:
     def test_valid_relation(self):
-        lookup = {"east egg": "East Egg", "west egg": "West Egg"}
         raw = {
             "entity_1": "East Egg",
+            "entity_1_type": "GPE",
+            "entity_1_class": "fictional",
             "relation_type": "across",
             "entity_2": "West Egg",
+            "entity_2_type": "GPE",
+            "entity_2_class": "fictional",
             "confidence": 0.9,
-            "evidence": "across the bay",
         }
-        result = _validate_relation(raw, lookup, "East Egg was across the bay from West Egg")
+        result = _validate_relation(raw)
         assert result is not None
         assert result["entity_1"] == "East Egg"
         assert result["entity_2"] == "West Egg"
         assert result["relation_type"] == "across"
 
     def test_invalid_type(self):
-        lookup = {"east egg": "East Egg"}
         raw = {"entity_1": "East Egg", "relation_type": "unknown_type", "entity_2": "West Egg"}
-        assert _validate_relation(raw, lookup, "") is None
+        assert _validate_relation(raw) is None
 
-    def test_missing_entity_1(self):
-        lookup = {"east egg": "East Egg"}
-        raw = {"entity_1": "Unknown Place", "relation_type": "near", "entity_2": "East Egg"}
-        assert _validate_relation(raw, lookup, "") is None
+    def test_empty_entity_1(self):
+        raw = {"entity_1": "", "relation_type": "near", "entity_2": "East Egg"}
+        assert _validate_relation(raw) is None
 
     def test_self_relation(self):
-        lookup = {"east egg": "East Egg"}
         raw = {"entity_1": "East Egg", "relation_type": "near", "entity_2": "East Egg"}
-        assert _validate_relation(raw, lookup, "") is None
+        assert _validate_relation(raw) is None
 
     def test_null_entity_2_for_on_coast(self):
-        lookup = {"east egg": "East Egg"}
         raw = {"entity_1": "East Egg", "relation_type": "on_coast", "entity_2": None}
-        result = _validate_relation(raw, lookup, "")
+        result = _validate_relation(raw)
         assert result is not None
         assert result["entity_2"] is None
 
     def test_null_entity_2_for_near_rejected(self):
-        lookup = {"east egg": "East Egg"}
         raw = {"entity_1": "East Egg", "relation_type": "near", "entity_2": None}
-        assert _validate_relation(raw, lookup, "") is None
+        assert _validate_relation(raw) is None
 
     def test_confidence_clamped(self):
-        lookup = {"east egg": "East Egg", "west egg": "West Egg"}
         raw = {
             "entity_1": "East Egg", "relation_type": "near",
             "entity_2": "West Egg", "confidence": 5.0,
         }
-        result = _validate_relation(raw, lookup, "")
+        result = _validate_relation(raw)
         assert result["confidence"] <= 1.0
 
 
 class TestParseModelResponse:
-    def test_valid_joint_response(self, sample_sentences):
+    def test_valid_relation_response(self, sample_sentences):
         response = json.dumps({
-            "entities": [
-                {"name": "West Egg", "ner_label": "GPE", "classification": "fictional"},
-                {"name": "East Egg", "ner_label": "GPE", "classification": "fictional"},
-            ],
             "relations": [
                 {
-                    "entity_1": "West Egg", "relation_type": "across",
-                    "entity_2": "East Egg", "confidence": 0.9,
-                    "evidence": "across the bay",
+                    "entity_1": "West Egg", "entity_1_type": "GPE", "entity_1_class": "fictional",
+                    "relation_type": "across",
+                    "entity_2": "East Egg", "entity_2_type": "GPE", "entity_2_class": "fictional",
+                    "confidence": 0.9,
                 }
             ],
         })
@@ -264,8 +234,8 @@ class TestParseModelResponse:
         assert len(relations) == 1
         assert relations[0]["relation_type"] == "across"
 
-    def test_empty_response(self, sample_sentences):
-        response = json.dumps({"entities": [], "relations": []})
+    def test_no_relations_means_no_entities(self, sample_sentences):
+        response = json.dumps({"relations": []})
         entities, relations = _parse_model_response(response, "", sample_sentences[:1], "gatsby")
         assert len(entities) == 0
         assert len(relations) == 0
@@ -278,11 +248,12 @@ class TestParseModelResponse:
         assert len(relations) == 0
 
     def test_salvage_json(self, sample_sentences):
-        response = 'Here is the result: {"entities": [{"name": "New York", "ner_label": "GPE", "classification": "real"}], "relations": []}'
+        response = 'Here is the result: {"relations": [{"entity_1": "New York", "entity_1_type": "GPE", "entity_1_class": "real", "relation_type": "within", "entity_2": "Long Island", "entity_2_type": "GPE", "entity_2_class": "real", "confidence": 0.8}]}'
         entities, relations = _parse_model_response(
             response, "We drove to New York.", sample_sentences[2:3], "gatsby",
         )
         assert "New York" in entities
+        assert len(relations) == 1
 
 
 # ---------------------------------------------------------------------------

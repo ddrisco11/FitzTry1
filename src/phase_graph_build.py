@@ -209,8 +209,6 @@ def run(cfg: dict, force: bool = False) -> None:
             "confidence": r.get("confidence", 0.7),
             "distance_value": r.get("distance_value"),
             "distance_unit": r.get("distance_unit"),
-            "evidence": r.get("evidence", ""),
-            "reasoning": r.get("reasoning", ""),
             "source_chunk_id": r.get("source_chunk_id", ""),
         })
 
@@ -241,7 +239,7 @@ def run(cfg: dict, force: bool = False) -> None:
                 weight=round(r.get("confidence", 0.7), 3),
                 uncertainty=round(1.0 - r.get("confidence", 0.7), 3),
                 source_sentence_id=r.get("source_chunk_id", ""),
-                source_text=r.get("evidence", "")[:200],
+                source_text="",
                 extraction_method="mistral",
             )
         )

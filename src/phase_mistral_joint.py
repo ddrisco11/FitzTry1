@@ -1,15 +1,14 @@
-"""Stage 2 (Strategy B) — Joint Mistral NER + Spatial Relation Extraction.
+"""Stage 2 (Strategy B) — Mistral Spatial Relation Extraction.
 
-Single Ollama call per chunk returns structured {entities, relations}.
-CoReNer NER is bypassed; entity discovery is model-driven with no static
-blocklist.  Outputs:
+Single Ollama call per chunk extracts spatial relations between geographic
+entities.  Entities are created implicitly from relation endpoints — if a
+place has no spatial relation it is not included.  This keeps the model
+focused on the harder relation task and avoids generating standalone
+entity lists.
 
-  - data/entities.jsonl   (Entity objects for downstream coref + grounding)
-  - data/phase4_checkpoint.json  (relation candidates, consumed later by
-    the graph-building stage after coref and grounding are complete)
-
-Reuses the OllamaClient, Checkpoint, and ProgressTracker patterns from the
-original phase4_relations module.
+Outputs:
+  - data/entities.jsonl          (entities derived from relation endpoints)
+  - data/phase4_checkpoint.json  (relation candidates for graph-building)
 
 Run:
     python -m src.pipeline --config config.yaml --phase 2 --force
@@ -22,12 +21,13 @@ import logging
 import re
 import time
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
+from threading import Lock
 from typing import Dict, List, Optional, Set, Tuple
 
 import requests
-
 from src.utils.io import data_dir, iter_jsonl, read_json, write_jsonl
 from src.utils.schemas import Entity, EntityMention, SentenceRecord
 
@@ -46,11 +46,6 @@ VALID_RELATION_TYPES: Set[str] = {
 }
 
 NULLABLE_ENTITY2_TYPES: Set[str] = {"on_coast"}
-
-_EVIDENCE_NULL_VALUES: Set[str] = {
-    "", "none", "null", "n/a", "not stated", "not mentioned",
-    "not found", "not specified", "not applicable",
-}
 
 # Known fictional Fitzgerald places — used for type classification only,
 # NOT as a blocklist.
@@ -111,7 +106,7 @@ class OllamaClient:
             "options": {
                 "temperature": temperature,
                 "top_p": 0.9,
-                "num_predict": 4096,
+                "num_predict": 1024,
             },
         }
         resp = requests.post(self._chat_url, json=payload, timeout=self.timeout)
@@ -260,7 +255,6 @@ class ProgressTracker:
                 "relation_type": r["relation_type"],
                 "entity_2": r.get("entity_2"),
                 "confidence": r.get("confidence", 0.0),
-                "evidence": r.get("evidence", "")[:120],
             })
         self._state["recent_relations"] = self._state["recent_relations"][-8:]
         self._state["last_updated"] = datetime.now(timezone.utc).isoformat()
@@ -279,83 +273,52 @@ class ProgressTracker:
 
 
 # ---------------------------------------------------------------------------
-# Prompts — joint extraction (entities + relations in one call)
+# Prompts — relation-only extraction (entities derived from relation endpoints)
 # ---------------------------------------------------------------------------
 
 _SYSTEM_PROMPT = """\
-You are a precise geographic entity and spatial relation extractor for literary texts.
-Read the provided passage and:
-1. Identify all geographic entities (places, regions, bodies of water, landmarks, streets, buildings).
-2. Extract spatial relationships between those entities.
+You are a spatial relation extractor for literary texts.
+Extract spatial relationships between GEOGRAPHIC entities only.
 
-== ENTITY RULES ==
-- Include ANY named place, region, body of water, landmark, street, or building mentioned in the passage.
-- Classify each entity as "GPE" (geopolitical: city, state, country), "LOC" (natural: river, mountain, sea), or "FAC" (facility: building, bridge, road, station).
-- Include fictional/invented places (e.g. "East Egg") — classify them with the most appropriate NER label.
-- Do NOT include person names, character names, or non-geographic nouns.
-- Use the entity name exactly as it appears in the text. Normalise abbreviations (e.g. "N.Y." -> "New York").
+== WHAT COUNTS AS A GEOGRAPHIC ENTITY ==
+YES: cities, states, countries, regions, rivers, lakes, oceans, mountains, islands, bays, streets, roads, bridges, buildings, stations, neighborhoods
+NO: people (Gatsby, Tom, Daisy, Nick, Jordan), objects (car, house, lawn, dock, light), abstract concepts (wealth, dream), organizations, events
 
-== RELATION RULES ==
-1. Only extract relations between entities you listed.
+== RULES ==
+1. Both entity_1 and entity_2 MUST be named geographic places — never people or objects.
 2. Only extract relations explicitly stated or unambiguously implied — never speculate.
 3. Quality over quantity: when uncertain, omit.
-4. The "evidence" field must be a verbatim or near-verbatim quote from the passage.
-5. entity_2 may be null ONLY for "on_coast" when no body of water is named.
+4. entity_2 may be null ONLY for "on_coast".
+5. Use entity names exactly as in the text. Normalise abbreviations (e.g. "N.Y." -> "New York").
+6. Include fictional places (e.g. "East Egg", "West Egg", "Valley of Ashes").
 
 == RELATION TYPES ==
-  near           — close proximity (~10 km)
-  far            — distant (>50 km)
-  north_of       — entity_1 is north of entity_2
-  south_of       — entity_1 is south of entity_2
-  east_of        — entity_1 is east of entity_2
-  west_of        — entity_1 is west of entity_2
-  across         — entity_1 is across a body of water from entity_2
-  on_coast       — entity_1 is on a shoreline (entity_2 = body of water or null)
-  within         — entity_1 is inside entity_2
-  contains       — entity_1 contains entity_2
-  part_of        — entity_1 is administratively part of entity_2
-  borders        — entity_1 and entity_2 share a boundary
-  on_shore_of    — entity_1 is on the bank/shore of entity_2
-  connected_via  — entity_1 and entity_2 are connected by a road/bridge/waterway
-  distance_approx — entity_1 is approximately N units from entity_2
+near, far, north_of, south_of, east_of, west_of, across, on_coast, within, contains, part_of, borders, on_shore_of, connected_via, distance_approx
 
 == OUTPUT FORMAT ==
-Return ONLY a valid JSON object. No markdown, no explanation.
-
+Return ONLY valid JSON. No markdown, no explanation.
 {
-  "entities": [
-    {
-      "name": "<entity name as in text>",
-      "ner_label": "GPE" | "LOC" | "FAC",
-      "classification": "real" | "fictional" | "uncertain"
-    }
-  ],
   "relations": [
     {
-      "entity_1": "<exact entity name>",
-      "relation_type": "<type from list above>",
-      "entity_2": "<exact entity name or null>",
+      "entity_1": "<place name>",
+      "entity_1_type": "GPE"|"LOC"|"FAC",
+      "entity_1_class": "real"|"fictional"|"uncertain",
+      "relation_type": "<type>",
+      "entity_2": "<place name or null>",
+      "entity_2_type": "GPE"|"LOC"|"FAC"|null,
+      "entity_2_class": "real"|"fictional"|"uncertain"|null,
       "confidence": <0.5-1.0>,
       "distance_value": <number or null>,
-      "distance_unit": "miles" | "km" | null,
-      "evidence": "<verbatim quote from passage>",
-      "reasoning": "<one sentence>"
+      "distance_unit": "miles"|"km"|null
     }
   ]
 }
-
-If no entities found, return: {"entities": [], "relations": []}
-If entities but no relations, return: {"entities": [...], "relations": []}
-
-Confidence guide:
-  0.90-1.00 -> explicitly stated
-  0.70-0.89 -> clearly implied
-  0.50-0.69 -> weakly implied (use sparingly)
+If no spatial relations found: {"relations": []}
 """
 
 _FALLBACK_PROMPT_SUFFIX = (
     "\n\nCRITICAL: Return ONLY a valid JSON object with this exact structure: "
-    '{"entities": [...], "relations": [...]}. No markdown, no backticks, no explanation.'
+    '{"relations": [...]}. No markdown, no backticks, no explanation.'
 )
 
 
@@ -453,7 +416,7 @@ def _classify_entity(name: str, classification_hint: str, fictional_overrides: S
 
 
 # ---------------------------------------------------------------------------
-# Response parsing — joint entities + relations
+# Response parsing — entities derived from relation endpoints
 # ---------------------------------------------------------------------------
 
 def _parse_model_response(
@@ -462,13 +425,13 @@ def _parse_model_response(
     sentences: List[SentenceRecord],
     doc_id: str,
 ) -> Tuple[Dict[str, dict], List[dict]]:
-    """Parse Mistral's joint JSON response.
+    """Parse Mistral's relation-only JSON response.
+
+    Entities are derived from the endpoints of validated relations — any
+    place that doesn't participate in a relation is not included.
 
     Returns:
         (entity_registry, validated_relations)
-        entity_registry: canonical_name -> {name, canonical_name, ner_label,
-                         classification, mentions, doc_ids}
-        validated_relations: list of cleaned relation dicts
     """
     # Parse JSON
     try:
@@ -488,57 +451,48 @@ def _parse_model_response(
         log.warning("Unexpected top-level JSON type: %s", type(data))
         return {}, []
 
-    # --- Parse entities ---
-    raw_entities = data.get("entities", [])
-    if not isinstance(raw_entities, list):
-        raw_entities = []
-
-    entity_registry: Dict[str, dict] = {}
-    entity_name_lookup: Dict[str, str] = {}  # normalized -> canonical
-
-    for raw_ent in raw_entities:
-        if not isinstance(raw_ent, dict):
-            continue
-        raw_name = str(raw_ent.get("name", "")).strip()
-        if not raw_name or len(raw_name) < 2:
-            continue
-        ner_label = str(raw_ent.get("ner_label", "LOC")).strip().upper()
-        if ner_label not in ("GPE", "LOC", "FAC"):
-            ner_label = "LOC"
-        classification = str(raw_ent.get("classification", "uncertain")).strip()
-
-        canon = _canonical_name(raw_name)
-        norm_key = _normalize(canon)
-
-        if norm_key not in entity_name_lookup:
-            entity_name_lookup[norm_key] = canon
-            # Find mention spans in the chunk text
-            mentions = _find_mentions(raw_name, chunk_text, sentences)
-            entity_registry[canon] = {
-                "name": canon,
-                "canonical_name": canon,
-                "ner_label": ner_label,
-                "classification": classification,
-                "mentions": [m.model_dump() for m in mentions],
-                "doc_ids": [doc_id],
-            }
-        else:
-            # Entity already seen — add any new mentions
-            existing_canon = entity_name_lookup[norm_key]
-            new_mentions = _find_mentions(raw_name, chunk_text, sentences)
-            for m in new_mentions:
-                entity_registry[existing_canon]["mentions"].append(m.model_dump())
-
-    # --- Parse relations ---
     raw_relations = data.get("relations", [])
     if not isinstance(raw_relations, list):
         raw_relations = []
 
+    entity_registry: Dict[str, dict] = {}
+    seen_norm: Dict[str, str] = {}  # normalized -> canonical
     validated: List[dict] = []
+
     for raw_rel in raw_relations:
-        cleaned = _validate_relation(raw_rel, entity_name_lookup, chunk_text)
-        if cleaned:
-            validated.append(cleaned)
+        cleaned = _validate_relation(raw_rel)
+        if not cleaned:
+            continue
+
+        # Register entities from this relation's endpoints
+        for prefix in ("entity_1", "entity_2"):
+            raw_name = cleaned.get(prefix)
+            if not raw_name:
+                continue
+            canon = _canonical_name(raw_name)
+            ner_label = cleaned.pop(f"{prefix}_type", "LOC")
+            classification = cleaned.pop(f"{prefix}_class", "uncertain")
+
+            norm_key = _normalize(canon)
+            if norm_key not in seen_norm:
+                seen_norm[norm_key] = canon
+                mentions = _find_mentions(raw_name, chunk_text, sentences)
+                entity_registry[canon] = {
+                    "name": canon,
+                    "canonical_name": canon,
+                    "ner_label": ner_label,
+                    "classification": classification,
+                    "mentions": [m.model_dump() for m in mentions],
+                    "doc_ids": [doc_id],
+                }
+            else:
+                # Use the existing canonical form
+                canon = seen_norm[norm_key]
+
+            # Remap relation endpoint to canonical name
+            cleaned[prefix] = canon
+
+        validated.append(cleaned)
 
     return entity_registry, validated
 
@@ -577,12 +531,12 @@ def _find_mentions(
     return mentions
 
 
-def _validate_relation(
-    raw: dict,
-    entity_name_lookup: Dict[str, str],
-    chunk_text: str,
-) -> Optional[dict]:
-    """Validate and normalise a single relation dict from Mistral."""
+def _validate_relation(raw: dict) -> Optional[dict]:
+    """Validate and normalise a single relation dict from Mistral.
+
+    Returns a dict with entity metadata fields (entity_1_type, entity_1_class,
+    etc.) preserved — the caller pops them to build the entity registry.
+    """
     if not isinstance(raw, dict):
         return None
 
@@ -592,17 +546,15 @@ def _validate_relation(
         return None
 
     e1_raw = str(raw.get("entity_1", "")).strip()
-    e1 = _resolve_entity(e1_raw, entity_name_lookup)
-    if not e1:
-        log.debug("Discarding: entity_1 %r not in entity set", e1_raw)
+    if not e1_raw or len(e1_raw) < 2:
+        log.debug("Discarding: entity_1 empty or too short")
         return None
 
     raw_e2 = raw.get("entity_2")
     if raw_e2 and str(raw_e2).strip().lower() not in ("null", "none", ""):
-        e2 = _resolve_entity(str(raw_e2).strip(), entity_name_lookup)
-        if not e2:
-            log.debug("Discarding: entity_2 %r not in entity set", raw_e2)
-            return None
+        e2 = str(raw_e2).strip()
+        if len(e2) < 2:
+            e2 = None
     else:
         e2 = None
 
@@ -610,8 +562,8 @@ def _validate_relation(
         log.debug("Discarding: entity_2 is null for non-unary type %r", rel_type)
         return None
 
-    if e1 == e2:
-        log.debug("Discarding self-relation for %r", e1)
+    if e2 and _normalize(e1_raw) == _normalize(e2):
+        log.debug("Discarding self-relation for %r", e1_raw)
         return None
 
     try:
@@ -619,12 +571,6 @@ def _validate_relation(
         confidence = max(0.0, min(1.0, confidence))
     except (TypeError, ValueError):
         confidence = 0.5
-
-    evidence = str(raw.get("evidence", "")).strip()
-    if len(evidence) > 15:
-        snippet = evidence[:60].lower()
-        if snippet not in chunk_text.lower():
-            confidence *= 0.85
 
     dist_value: Optional[float] = None
     dist_unit: Optional[str] = None
@@ -638,34 +584,32 @@ def _validate_relation(
     if du in ("miles", "km"):
         dist_unit = du
 
-    return {
-        "entity_1": e1,
+    # Entity metadata — consumed by _parse_model_response to build the registry
+    e1_type = str(raw.get("entity_1_type", "LOC")).strip().upper()
+    if e1_type not in ("GPE", "LOC", "FAC"):
+        e1_type = "LOC"
+    e1_class = str(raw.get("entity_1_class", "uncertain")).strip().lower()
+
+    result = {
+        "entity_1": e1_raw,
+        "entity_1_type": e1_type,
+        "entity_1_class": e1_class,
         "relation_type": rel_type,
         "entity_2": e2,
         "confidence": round(confidence, 3),
         "distance_value": dist_value,
         "distance_unit": dist_unit,
-        "evidence": evidence[:500],
-        "reasoning": str(raw.get("reasoning", "")).strip()[:500],
     }
 
+    if e2:
+        e2_type = str(raw.get("entity_2_type", "LOC")).strip().upper()
+        if e2_type not in ("GPE", "LOC", "FAC"):
+            e2_type = "LOC"
+        e2_class = str(raw.get("entity_2_class", "uncertain")).strip().lower()
+        result["entity_2_type"] = e2_type
+        result["entity_2_class"] = e2_class
 
-def _resolve_entity(raw: str, lookup: Dict[str, str]) -> Optional[str]:
-    """Map a raw entity name to a canonical name via the lookup."""
-    if not raw:
-        return None
-    key = _normalize(raw)
-    if key in lookup:
-        return lookup[key]
-    # Also try canonical form
-    canon_key = _normalize(_canonical_name(raw))
-    if canon_key in lookup:
-        return lookup[canon_key]
-    # Substring fallback
-    for norm_key, canonical in lookup.items():
-        if key in norm_key or norm_key in key:
-            return canonical
-    return None
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -681,7 +625,7 @@ def _extract_chunk(
     max_retries: int = 3,
     temperature: float = 0.1,
 ) -> Tuple[Dict[str, dict], List[dict], Optional[str]]:
-    """Extract entities + relations from a single chunk.
+    """Extract relations from a single chunk; entities derived from endpoints.
 
     Returns: (entity_registry, relations, error_message_or_None)
     """
@@ -737,7 +681,7 @@ def _extract_chunk(
 # ---------------------------------------------------------------------------
 
 def run(cfg: dict, force: bool = False) -> None:
-    log.info("=== Stage 2: Joint Mistral NER + Relation Extraction ===")
+    log.info("=== Stage 2: Mistral Spatial Relation Extraction ===")
 
     dd = data_dir(cfg)
     entities_path = dd / "entities.jsonl"
@@ -828,16 +772,23 @@ def run(cfg: dict, force: bool = False) -> None:
     # ── Configuration ─────────────────────────────────────────────────────
     fictional_overrides = set(cfg.get("ner", {}).get("fictional_overrides", []))
 
-    # ── Main extraction loop ──────────────────────────────────────────────
-    for chunk_id, sentences, doc_id in all_chunks:
-        if checkpoint.is_done(chunk_id):
-            continue
+    # ── Parallel extraction ─────────────────────────────────────────────
+    num_workers = int(m_cfg.get("num_workers", 2))
+    log.info("Parallel extraction with %d workers", num_workers)
 
+    # Filter to pending chunks
+    pending = [
+        (chunk_id, sents, did)
+        for chunk_id, sents, did in all_chunks
+        if not checkpoint.is_done(chunk_id)
+    ]
+    log.info("Pending chunks: %d / %d", len(pending), len(all_chunks))
+
+    checkpoint_lock = Lock()
+
+    def _process_one(item):
+        chunk_id, sentences, doc_id = item
         chunk_text = " ".join(s.text for s in sentences)
-        preview = chunk_text[:250].replace("\n", " ")
-        progress.chunk_started(preview)
-
-        log.info("%-30s  sentences=%d", chunk_id, len(sentences))
 
         t0 = time.monotonic()
         new_entities, relations, error = _extract_chunk(
@@ -851,28 +802,34 @@ def run(cfg: dict, force: bool = False) -> None:
         )
         duration = time.monotonic() - t0
 
-        # Apply confidence threshold to relations
         relations = [r for r in relations if r["confidence"] >= min_conf]
-
-        # Tag relations with source chunk
         for r in relations:
             r["source_chunk_id"] = chunk_id
 
-        checkpoint.save(chunk_id, new_entities, relations)
-        progress.chunk_done(
-            new_relations=relations,
-            new_entity_count=len(new_entities),
-            duration_s=duration,
-            error=error,
-        )
+        return chunk_id, new_entities, relations, duration, error
 
-        if new_entities or relations:
-            log.info(
-                "  -> %d entities, %d relations  (%.1fs)",
-                len(new_entities), len(relations), duration,
-            )
-        elif error:
-            log.warning("  -> %s", error)
+    with ThreadPoolExecutor(max_workers=num_workers) as pool:
+        futures = {pool.submit(_process_one, item): item for item in pending}
+
+        for future in as_completed(futures):
+            chunk_id, new_entities, relations, duration, error = future.result()
+
+            with checkpoint_lock:
+                checkpoint.save(chunk_id, new_entities, relations)
+                progress.chunk_done(
+                    new_relations=relations,
+                    new_entity_count=len(new_entities),
+                    duration_s=duration,
+                    error=error,
+                )
+
+            if new_entities or relations:
+                log.info(
+                    "%-30s  %d entities, %d relations  (%.1fs)",
+                    chunk_id, len(new_entities), len(relations), duration,
+                )
+            elif error:
+                log.warning("  -> %s", error)
 
     # ── Materialise entities.jsonl ────────────────────────────────────────
     log.info("Materialising %d entities to entities.jsonl", len(checkpoint.entities))

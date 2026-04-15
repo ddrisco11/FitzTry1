@@ -2491,5 +2491,666 @@
     "lat": -16.4335098,
     "lon": -41.0035557,
     "confidence": 0.85
-  }
+  },
+  "a dozen headlights": null,
+  "a famous chorus": null,
+  "a host of spires": null,
+  "a snub-nosed motorboat": null,
+  "abounding blessed isles": null,
+  "all-night restaurant": {
+    "lat": 37.7988942,
+    "lon": -122.409032,
+    "confidence": 0.85
+  },
+  "apartment": {
+    "lat": 37.1438665,
+    "lon": -80.5497187,
+    "confidence": 0.85
+  },
+  "artistic game": null,
+  "ash-heaps": null,
+  "beach": {
+    "lat": 30.3199322,
+    "lon": -95.4213284,
+    "confidence": 0.85
+  },
+  "beale street": {
+    "lat": 37.786486,
+    "lon": -122.3899689,
+    "confidence": 0.85
+  },
+  "black beach": {
+    "lat": 41.5917745,
+    "lon": -70.6466972,
+    "confidence": 0.85
+  },
+  "blackwell's island": {
+    "lat": 41.5055279,
+    "lon": -71.3053314,
+    "confidence": 0.85
+  },
+  "bright rosy-coloured space": null,
+  "buchanans' house": {
+    "lat": 44.4496313,
+    "lon": -64.3813858,
+    "confidence": 0.85
+  },
+  "bushes": {
+    "lat": 38.5625176,
+    "lon": -90.410019,
+    "confidence": 0.85
+  },
+  "carraway house": null,
+  "cemetery": {
+    "lat": 41.3594093,
+    "lon": -72.1001495,
+    "confidence": 0.85
+  },
+  "church": {
+    "lat": 40.0105932,
+    "lon": -75.088958,
+    "confidence": 0.85
+  },
+  "city": {
+    "lat": 39.3259726,
+    "lon": -76.5967586,
+    "confidence": 0.85
+  },
+  "city lights": {
+    "lat": 39.7202884,
+    "lon": -104.8206789,
+    "confidence": 0.85
+  },
+  "cody": {
+    "lat": 37.1186617,
+    "lon": -93.1193476,
+    "confidence": 0.85
+  },
+  "commuting town": null,
+  "couch": {
+    "lat": 38.7886934,
+    "lon": -82.0587526,
+    "confidence": 0.85
+  },
+  "coup\u00e9": {
+    "lat": 48.3300636,
+    "lon": -0.7152379,
+    "confidence": 0.85
+  },
+  "courtesy bay": {
+    "lat": 42.1485774,
+    "lon": -80.0758672,
+    "confidence": 0.85
+  },
+  "daisy": {
+    "lat": 39.2936702,
+    "lon": -77.068497,
+    "confidence": 0.85
+  },
+  "daisy's dock": {
+    "lat": 35.5862788,
+    "lon": -77.6523833,
+    "confidence": 0.85
+  },
+  "daisy's home": {
+    "lat": 35.2362811,
+    "lon": -85.1993823,
+    "confidence": 0.85
+  },
+  "daisy's house": {
+    "lat": 18.0385455,
+    "lon": -63.0638025,
+    "confidence": 0.85
+  },
+  "dan cody's yacht": null,
+  "divan": {
+    "lat": 45.9098122,
+    "lon": 16.4427235,
+    "confidence": 0.85
+  },
+  "doorway": {
+    "lat": 37.295924,
+    "lon": -83.539355,
+    "confidence": 0.85
+  },
+  "drawing-room": {
+    "lat": 41.881757,
+    "lon": -87.62476,
+    "confidence": 0.85
+  },
+  "drive": {
+    "lat": 49.3233771,
+    "lon": -123.1066126,
+    "confidence": 0.85
+  },
+  "drugstore": {
+    "lat": 15.654671,
+    "lon": -86.0049211,
+    "confidence": 0.85
+  },
+  "everyone near by, including the woman": null,
+  "farther out on the island": null,
+  "ferryboat": {
+    "lat": 51.658144,
+    "lon": -3.9178301,
+    "confidence": 0.85
+  },
+  "flat below": null,
+  "floor": {
+    "lat": 32.7797097,
+    "lon": -96.8084399,
+    "confidence": 0.85
+  },
+  "flushing": {
+    "lat": 40.7654301,
+    "lon": -73.8174291,
+    "confidence": 0.85
+  },
+  "forties": {
+    "lat": 44.7321134,
+    "lon": -64.5601643,
+    "confidence": 0.85
+  },
+  "forty-third street": {
+    "lat": 43.5900934,
+    "lon": -79.5466812,
+    "confidence": 0.85
+  },
+  "fresh grass": {
+    "lat": 32.9119443,
+    "lon": -97.3103884,
+    "confidence": 0.85
+  },
+  "front door": {
+    "lat": 44.2934802,
+    "lon": -73.0244095,
+    "confidence": 0.85
+  },
+  "gad's hill": {
+    "lat": 53.7190916,
+    "lon": -1.8949712,
+    "confidence": 0.85
+  },
+  "garage": {
+    "lat": 49.23244,
+    "lon": 6.9995193,
+    "confidence": 0.85
+  },
+  "garden": {
+    "lat": 45.7747,
+    "lon": -86.550695,
+    "confidence": 0.85
+  },
+  "gate": {
+    "lat": 36.8522091,
+    "lon": -100.0559226,
+    "confidence": 0.85
+  },
+  "gatsby": {
+    "lat": 38.8747959,
+    "lon": -77.0076337,
+    "confidence": 0.85
+  },
+  "gatsby and me": null,
+  "gatsby's drive": {
+    "lat": 39.8798657,
+    "lon": -86.272314,
+    "confidence": 0.85
+  },
+  "gatsby's front door": null,
+  "gatsby's gardener": null,
+  "gatsby's grave": null,
+  "gatsby's house": null,
+  "gatsby's mansion": null,
+  "gatsby's party": null,
+  "gatsby's window": null,
+  "green light": {
+    "lat": 52.5170064,
+    "lon": 13.3063028,
+    "confidence": 0.85
+  },
+  "green light on a dock": null,
+  "hall": {
+    "lat": 42.7939562,
+    "lon": -77.066359,
+    "confidence": 0.85
+  },
+  "her": {
+    "lat": 35.337058,
+    "lon": 25.180972,
+    "confidence": 0.85
+  },
+  "her artificial world": null,
+  "here": {
+    "lat": 51.5030443,
+    "lon": -0.0015493,
+    "confidence": 0.85
+  },
+  "him": {
+    "lat": 59.4720964,
+    "lon": 6.3087353,
+    "confidence": 0.85
+  },
+  "his house": {
+    "lat": 33.9839367,
+    "lon": -81.2616475,
+    "confidence": 0.85
+  },
+  "home": {
+    "lat": 40.7395087,
+    "lon": -79.1053129,
+    "confidence": 0.85
+  },
+  "hotel": {
+    "lat": 10.37532,
+    "lon": -85.1223097,
+    "confidence": 0.85
+  },
+  "house": {
+    "lat": 35.6546048,
+    "lon": -77.3649653,
+    "confidence": 0.85
+  },
+  "house-party": {
+    "lat": 40.6885416,
+    "lon": -73.9168727,
+    "confidence": 0.85
+  },
+  "irregular lawn": null,
+  "jay gatsby": null,
+  "kitchen": {
+    "lat": 37.9817007,
+    "lon": -82.0344275,
+    "confidence": 0.85
+  },
+  "library": {
+    "lat": 40.2870166,
+    "lon": -80.0206932,
+    "confidence": 0.85
+  },
+  "living-room": {
+    "lat": 37.772597,
+    "lon": -122.4655858,
+    "confidence": 0.85
+  },
+  "locality": {
+    "lat": 69.703426,
+    "lon": 19.6204635,
+    "confidence": 0.85
+  },
+  "long island sound": {
+    "lat": 41.0508886,
+    "lon": -72.9479898,
+    "confidence": 0.85
+  },
+  "michaelis": {
+    "lat": 30.0152158,
+    "lon": -97.8894698,
+    "confidence": 0.85
+  },
+  "monte carlo": {
+    "lat": 43.7402961,
+    "lon": 7.426559,
+    "confidence": 0.85
+  },
+  "mr. gatsby": {
+    "lat": 57.6337129,
+    "lon": 11.9368458,
+    "confidence": 0.85
+  },
+  "music-room": {
+    "lat": 38.7193095,
+    "lon": -9.1600492,
+    "confidence": 0.85
+  },
+  "my neighbour's lawn": null,
+  "my yard": {
+    "lat": 18.0512295,
+    "lon": -76.8454437,
+    "confidence": 0.85
+  },
+  "my house": {
+    "lat": 48.8151255,
+    "lon": 2.3458468,
+    "confidence": 0.85
+  },
+  "my own house": {
+    "lat": 39.9512851,
+    "lon": -75.2019031,
+    "confidence": 0.85
+  },
+  "national biscuit company": {
+    "lat": 14.7138505,
+    "lon": 121.0058625,
+    "confidence": 0.85
+  },
+  "negro": {
+    "lat": 42.7755624,
+    "lon": 19.2022423,
+    "confidence": 0.85
+  },
+  "nick": {
+    "lat": 37.1297679,
+    "lon": -86.3110924,
+    "confidence": 0.85
+  },
+  "north shore": {
+    "lat": 40.4474127,
+    "lon": -80.0078641,
+    "confidence": 0.85
+  },
+  "office": {
+    "lat": 40.4349597,
+    "lon": -75.0865354,
+    "confidence": 0.85
+  },
+  "official people": {
+    "lat": 51.5620837,
+    "lon": -0.1869719,
+    "confidence": 0.85
+  },
+  "one of the girls in yellow": null,
+  "outdoors": {
+    "lat": 8.2916058,
+    "lon": -62.7435097,
+    "confidence": 0.85
+  },
+  "over here": {
+    "lat": 37.4031425,
+    "lon": -79.1720598,
+    "confidence": 0.85
+  },
+  "owl-eyes": {
+    "lat": 40.2801631,
+    "lon": -7.5071099,
+    "confidence": 0.85
+  },
+  "pantry": {
+    "lat": 51.4272856,
+    "lon": -0.3323683,
+    "confidence": 0.85
+  },
+  "path": {
+    "lat": 40.7128533,
+    "lon": -74.0193448,
+    "confidence": 0.85
+  },
+  "photographer": {
+    "lat": 51.3625209,
+    "lon": 19.3641152,
+    "confidence": 0.85
+  },
+  "pink clouds": {
+    "lat": 37.7974859,
+    "lon": -122.4091865,
+    "confidence": 0.85
+  },
+  "plaza hotel": {
+    "lat": 31.7587835,
+    "lon": -106.4885546,
+    "confidence": 0.85
+  },
+  "pool": {
+    "lat": 50.2269433,
+    "lon": -5.2705123,
+    "confidence": 0.85
+  },
+  "porch": {
+    "lat": 51.0379524,
+    "lon": -114.0786504,
+    "confidence": 0.85
+  },
+  "queensboro bridge": {
+    "lat": 40.7529862,
+    "lon": -73.9453682,
+    "confidence": 0.85
+  },
+  "railroad track": {
+    "lat": 42.6996696,
+    "lon": -73.830272,
+    "confidence": 0.85
+  },
+  "repairs": {
+    "lat": 53.4573792,
+    "lon": -6.2207142,
+    "confidence": 0.85
+  },
+  "restaurant": {
+    "lat": 19.2892832,
+    "lon": -99.1637485,
+    "confidence": 0.85
+  },
+  "road": {
+    "lat": 17.9547164,
+    "lon": -76.8834332,
+    "confidence": 0.85
+  },
+  "room": {
+    "lat": 41.8933203,
+    "lon": 12.4829321,
+    "confidence": 0.85
+  },
+  "room beyond": {
+    "lat": 0.3152024,
+    "lon": 32.5740001,
+    "confidence": 0.85
+  },
+  "rooms": {
+    "lat": 51.5506829,
+    "lon": -0.0552567,
+    "confidence": 0.85
+  },
+  "sea": {
+    "lat": 47.4475673,
+    "lon": -122.3080159,
+    "confidence": 0.85
+  },
+  "shade": {
+    "lat": 39.2259083,
+    "lon": -82.0384751,
+    "confidence": 0.85
+  },
+  "sidewalk": {
+    "lat": 40.59656,
+    "lon": -74.1476603,
+    "confidence": 0.85
+  },
+  "small foul river": null,
+  "sound": {
+    "lat": 59.1680378,
+    "lon": -2.9330067,
+    "confidence": 0.85
+  },
+  "st. olaf's": {
+    "lat": 42.9286198,
+    "lon": -91.3860637,
+    "confidence": 0.85
+  },
+  "station": {
+    "lat": 54.5353811,
+    "lon": -1.554196,
+    "confidence": 0.85
+  },
+  "steps": {
+    "lat": 53.6115194,
+    "lon": -1.7873022,
+    "confidence": 0.85
+  },
+  "street": {
+    "lat": 39.6689941,
+    "lon": -76.3794052,
+    "confidence": 0.85
+  },
+  "sunlight": {
+    "lat": 37.9870639,
+    "lon": -80.4614682,
+    "confidence": 0.85
+  },
+  "the ash-heaps": null,
+  "the bay": {
+    "lat": 7.4929263,
+    "lon": -58.7794688,
+    "confidence": 0.85
+  },
+  "the city": {
+    "lat": 51.5156177,
+    "lon": -0.0919983,
+    "confidence": 0.85
+  },
+  "the conductor": {
+    "lat": 49.104518,
+    "lon": -122.6566354,
+    "confidence": 0.85
+  },
+  "the ditch beside the road": null,
+  "the gate": {
+    "lat": 51.4914094,
+    "lon": -3.1686169,
+    "confidence": 0.85
+  },
+  "the house": {
+    "lat": 38.8889772,
+    "lon": -77.0090433,
+    "confidence": 0.85
+  },
+  "the main gate": {
+    "lat": 46.2005003,
+    "lon": 30.3507652,
+    "confidence": 0.85
+  },
+  "the road": {
+    "lat": 45.0604909,
+    "lon": -64.5342897,
+    "confidence": 0.85
+  },
+  "the same senior society": null,
+  "theatre district": {
+    "lat": 42.89153,
+    "lon": -78.8724863,
+    "confidence": 0.85
+  },
+  "tom": {
+    "lat": 58.185857,
+    "lon": -7.0561492,
+    "confidence": 0.85
+  },
+  "tom buchanan": {
+    "lat": 31.4776792,
+    "lon": -100.4197951,
+    "confidence": 0.85
+  },
+  "town": {
+    "lat": 13.7292351,
+    "lon": -60.954661,
+    "confidence": 0.85
+  },
+  "trees": {
+    "lat": 41.4250533,
+    "lon": -87.270692,
+    "confidence": 0.85
+  },
+  "tunnel": {
+    "lat": 48.8554803,
+    "lon": 11.4657042,
+    "confidence": 0.85
+  },
+  "twenty miles from the city": null,
+  "two young women": null,
+  "union station": {
+    "lat": 43.6447084,
+    "lon": -79.3801462,
+    "confidence": 0.85
+  },
+  "verandas": {
+    "lat": 27.8450344,
+    "lon": -82.8420908,
+    "confidence": 0.85
+  },
+  "village": {
+    "lat": 13.9049503,
+    "lon": -61.0673547,
+    "confidence": 0.85
+  },
+  "waste land": {
+    "lat": 15.4368796,
+    "lon": -61.4131826,
+    "confidence": 0.85
+  },
+  "wastebasket": null,
+  "west egg, long island": null,
+  "west fifties": {
+    "lat": 46.5375729,
+    "lon": -84.3830902,
+    "confidence": 0.85
+  },
+  "west hundreds": {
+    "lat": 51.2901401,
+    "lon": -0.8553647,
+    "confidence": 0.85
+  },
+  "white palace": {
+    "lat": 35.3784084,
+    "lon": 24.5644369,
+    "confidence": 0.85
+  },
+  "winebrenner's poolroom": null,
+  "workmen": {
+    "lat": 39.2806541,
+    "lon": -76.5262234,
+    "confidence": 0.85
+  },
+  "worktable": null,
+  "yard": {
+    "lat": 31.8615543,
+    "lon": -95.9710757,
+    "confidence": 0.85
+  },
+  "you": {
+    "lat": 13.7034206,
+    "lon": -2.1413246,
+    "confidence": 0.85
+  },
+  "younger of the two": null,
+  "your house": {
+    "lat": 10.0050486,
+    "lon": -84.1796232,
+    "confidence": 0.85
+  },
+  "a sunken italian garden": null,
+  "borough of queens": {
+    "lat": 40.6769092,
+    "lon": -73.7456115,
+    "confidence": 0.85
+  },
+  "green sound": {
+    "lat": 26.7595793,
+    "lon": -77.3211372,
+    "confidence": 0.85
+  },
+  "lower new york": {
+    "lat": 41.4153964,
+    "lon": -73.8167368,
+    "confidence": 0.85
+  },
+  "me": {
+    "lat": 45.709097,
+    "lon": -68.8590201,
+    "confidence": 0.85
+  },
+  "old metropole": {
+    "lat": 45.3986146,
+    "lon": -75.7506447,
+    "confidence": 0.85
+  },
+  "southern minnesota": {
+    "lat": 43.9883038,
+    "lon": -92.3554241,
+    "confidence": 0.85
+  },
+  "the sound": {
+    "lat": 42.8032639,
+    "lon": -70.828902,
+    "confidence": 0.85
+  },
+  "white palaces of fashionable east egg": null
 }
