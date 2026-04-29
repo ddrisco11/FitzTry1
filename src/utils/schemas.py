@@ -83,6 +83,38 @@ class SpatialRelation(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Phase 4 (overhauled) — Location–Location Spatial Relation Extraction
+#
+# Schema follows the Spatial Role Labeling annotation tradition; cf.
+#   Kordjamshidi, P., van Otterlo, M., & Moens, M.-F. (2017).
+#   "Spatial Role Labeling Annotation Scheme."
+#   In N. Ide & J. Pustejovsky (Eds.), Handbook of Linguistic Annotation.
+#   Springer.
+# Each LocationRelation captures a (trajector, spatial_indicator, landmark)
+# triple where both trajector and landmark are LOCATION spans.
+# ---------------------------------------------------------------------------
+
+class LocationRelation(BaseModel):
+    """A spatial relation whose two arguments are both location spans."""
+    location_1: str                          # trajector — the located entity
+    location_2: str                          # landmark — the reference entity
+    spatial_indicator: str                   # verbatim spatial cue from the text
+    semantic_type: List[str]                 # subset of {"REGION", "DIRECTION", "DISTANCE"}
+
+
+class SentenceLocationRelations(BaseModel):
+    """All location–location relations grounded in a single sentence.
+
+    Only emitted when the sentence contains at least one valid relation
+    (i.e. two location spans linked by a spatial indicator).
+    """
+    doc_id: str
+    sentence_id: str
+    sentence: str
+    location_relations: List[LocationRelation]
+
+
+# ---------------------------------------------------------------------------
 # Phase 5 — Formal Constraint Model
 # ---------------------------------------------------------------------------
 
