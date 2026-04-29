@@ -1,232 +1,243 @@
-# Probabilistic Reconstruction of Literary Geography
+# Gatsby-100: Zero-Shot Spatial Role Labeling on Literary Prose
 
-> **A computational pipeline for inferring the spatial layout of fictional places from literary text — treating geography as a posterior distribution rather than a deterministic map.**
+> **A small-scale benchmark and harness for evaluating open instruction-tuned LLMs as zero-shot extractors of spatial relations from literary text — built on a 100-sentence sample of *The Great Gatsby*.**
 
-This repository operationalises the question: *if we read a novel as a set of noisy spatial assertions, where on Earth do its imagined places live?* Real places named in the text (Manhattan, Long Island, Astoria) are anchored to their gazetteer coordinates; fictional places (East Egg, West Egg, the Valley of Ashes) are treated as **latent variables** whose 2-D positions are sampled by Markov-Chain Monte Carlo from a posterior consistent with directional, topological, and metric constraints extracted from the prose.
+This repository's primary contribution is **`eval/`** — a self-contained
+benchmark comparing three small open LLMs (Mistral-7B, Phi-3-mini, Qwen2.5-7B,
+all served via Ollama) on a 100-sentence Spatial Role Labeling (SpRL) task
+drawn uniformly at random from F. Scott Fitzgerald's *The Great Gatsby* (1925,
+US public domain since 2021).
 
-The reference corpus is F. Scott Fitzgerald's *The Great Gatsby* (1925, public domain in the US since 2021).
+The downstream geographic inference pipeline (Phases 1–8 below) is retained
+as a **demonstration of one downstream use** of the extracted relations: a
+probabilistic reconstruction of the novel's fictional geography by MCMC
+sampling. It is intentionally framed as a demonstration, not a primary
+contribution — the cartographic problem is severely under-determined by
+sparse textual evidence, and the resulting maps quantify uncertainty rather
+than localise it.
 
 ---
 
 ## Table of Contents
 
-1. [Motivation & Research Contribution](#1-motivation--research-contribution)
-2. [System Architecture](#2-system-architecture)
-3. [Probabilistic Model](#3-probabilistic-model)
-4. [Pipeline Phases (Detailed)](#4-pipeline-phases-detailed)
-5. [Visual Outputs](#5-visual-outputs)
-6. [Installation](#6-installation)
-7. [Running the Pipeline](#7-running-the-pipeline)
+1. [The SpRL Benchmark — Quickstart](#1-the-sprl-benchmark--quickstart)
+2. [Task Definition](#2-task-definition)
+3. [Evaluation Methodology](#3-evaluation-methodology)
+4. [Models Compared](#4-models-compared)
+5. [Annotation Schema](#5-annotation-schema)
+6. [Limitations & Honest Scope](#6-limitations--honest-scope)
+7. [Downstream Demonstration: Probabilistic Cartography](#7-downstream-demonstration-probabilistic-cartography)
 8. [Repository Layout](#8-repository-layout)
-9. [Configuration Reference](#9-configuration-reference)
+9. [Installation](#9-installation)
 10. [Testing](#10-testing)
-11. [Reproducibility & Caveats](#11-reproducibility--caveats)
-12. [References](#12-references)
+11. [References](#11-references)
 
 ---
 
-## 1. Motivation & Research Contribution
-
-Literary geography has traditionally been the province of close reading and hand-drawn cartography (e.g., Piper's *Enumerations*, Moretti's *Atlas of the European Novel*). Existing computational approaches — gazetteer matching, GIS overlays — typically project named entities onto a base map and stop there. They cannot say anything principled about *fictional* places, which by definition have no gazetteer entry.
-
-This project advances three contributions:
-
-1. **Joint NER + Spatial Role Labeling.** A Mistral-7B (via Ollama) joint extractor produces (*trajector, spatial-indicator, landmark*) triples in the SpRL annotation tradition (Kordjamshidi et al., 2017), conditioned on entity spans recovered by a CoReNer/spaCy hybrid.
-2. **A formal constraint algebra over a local planar coordinate system.** Each relation is compiled into a differentiable energy term — directional half-planes, soft-distance Gaussians, in-region penalties, and weak co-occurrence priors — over the latent positions of fictional entities.
-3. **Posterior inference, not point estimation.** We sample the joint posterior with `emcee`'s affine-invariant ensemble sampler (Goodman & Weare, 2010; Foreman-Mackey et al., 2013), report Gelman–Rubin R-hat and effective sample size, and visualise full posterior densities, 95 % credible ellipses, and ensemble cartograms — making epistemic uncertainty about literary space first-class.
-
-The result is not a single map of Gatsby's world but a *distribution over possible Gatsby-worlds*.
-
----
-
-## 2. System Architecture
-
-```
-                     ┌────────────────────────────────────────────┐
-                     │              config.yaml                   │
-                     └───────────────────┬────────────────────────┘
-                                         │
-        ┌────────────────────────────────┼─────────────────────────────────┐
-        ▼                                ▼                                 ▼
-┌───────────────┐                ┌───────────────┐                ┌──────────────┐
-│  Phase 1      │                │  Phase 2 / 2b │                │  Phase 3     │
-│ Corpus prep   │ ─ sentences ─▶ │ NER + coref   │ ── entities ─▶ │  Geocoding   │
-│ (Gutenberg)   │                │ (spaCy/CoRe)  │                │ (Nominatim)  │
-└───────────────┘                └───────┬───────┘                └──────┬───────┘
-                                         │                                 │
-                                         ▼                                 │
-                                 ┌───────────────┐                         │
-                                 │  Phase 4      │                         │
-                                 │ SpRL relations│ ◀───── grounded ────────┘
-                                 │ (Mistral-7B)  │        entities
-                                 └───────┬───────┘
-                                         │
-                                         ▼
-                                 ┌───────────────┐         ┌──────────────┐
-                                 │  Phase 5      │ ──────▶ │   Phase 6    │
-                                 │ Constraint    │ model   │ MCMC (emcee) │
-                                 │ compilation   │         │  posterior   │
-                                 └───────────────┘         └──────┬───────┘
-                                                                  │
-                                                                  ▼
-                                                          ┌──────────────┐
-                                                          │  Phase 7     │
-                                                          │ Diagnostics  │
-                                                          │ (R-hat, ESS, │
-                                                          │  modes)      │
-                                                          └──────┬───────┘
-                                                                 │
-                                                                 ▼
-                                                          ┌──────────────┐
-                                                          │  Phase 8     │
-                                                          │ Maps,        │
-                                                          │ heatmaps,    │
-                                                          │ ensembles    │
-                                                          └──────────────┘
-```
-
-Every phase reads and writes typed Pydantic v2 records (see `src/utils/schemas.py`) so that the contract between stages is enforceable and re-runnable in isolation.
-
----
-
-## 3. Probabilistic Model
-
-Let **E_R** denote the set of *real* (geocoded, fixed) entities and **E_L** the *latent* (fictional) entities. Real entities have known positions **p_i** in **R²** (km east/north of a configurable projection origin, default (40.7128°N, 74.0060°W), i.e. lower-Manhattan). For each latent entity i we infer **p_i = (x_i, y_i)**.
-
-A relation r contributes an energy term **U_r(p)**. The negative log-posterior is
-
-```
--log π(p)  =  β · Σ_r  w_r · U_r(p)  +  log Z
-```
-
-with constraint weight **w_r** propagated from extraction confidence and inverse temperature **β** (default 1.0). The energy library:
-
-| Relation | Energy term | Notes |
-|---|---|---|
-| `near(a, b)`        | `(1/2σ²) · (‖p_a − p_b‖ − d_near)²` | Soft Gaussian around `d_near_km`. |
-| `far(a, b)`         | `(1/2σ²) · max(0, d_far − ‖p_a − p_b‖)²` | One-sided hinge. |
-| `north_of(a, b)`    | `(1/2σ²) · max(0, ε − (y_a − y_b))²` | Half-plane with margin ε. |
-| `south_of / east_of / west_of` | analogous half-planes on ±x, ±y | |
-| `across(a, b)`      | weak distance prior + directional half-plane orthogonal to a coastline cue | |
-| `on_coast(a)`       | unary — penalises distance to nearest grounded coastline node | |
-| `in_region(a, R)`   | hinge penalty if **p_a** exits the convex hull of R's mentions | |
-| `distance_approx(a, b, d)` | `(1/2σ²) · (‖p_a − p_b‖ − d)²` with σ scaled by stated unit | Numeric distance from text. |
-| `co_occurrence(a, b)` | low-weight Gaussian pull (default w = 0.1) | Acts as a regulariser; prevents unconstrained dimensions. |
-
-Constraint extraction confidence and the textual ambiguity of the spatial indicator both flow into **w_r**, so an unequivocal "*twenty miles from the city*" outweighs a hedged "*not far from*".
-
-**Sampler.** `emcee` (Goodman–Weare affine-invariant ensemble), 32 walkers by default, with a 300 km bounding-box initialisation around the projection origin to prevent walkers escaping into Europe via stray trans-Atlantic mentions. A pure-Python Metropolis fallback is provided for environments without `emcee`.
-
----
-
-## 4. Pipeline Phases (Detailed)
-
-### Phase 1 — Corpus Preparation (`src/phase1_corpus_prep.py`)
-Streams *The Great Gatsby* from Project Gutenberg (cached locally), strips Gutenberg boilerplate, normalises Unicode/whitespace, and segments into sentences via spaCy. Output: `corpus/cleaned/great_gatsby.jsonl` of `SentenceRecord` objects.
-
-### Phase 2 — Named Entity Recognition (`src/phase2_ner.py`)
-Runs the configured spaCy model (`en_core_web_lg` by default; the transformer model `en_core_web_trf` is supported but not the project default) and retains `GPE`, `LOC`, `FAC` mentions. Mentions are surface-normalised and clustered by canonical name. Each cluster receives a `type ∈ {real, fictional, uncertain}` label via a heuristic plus override list (`fictional_overrides: ["East Egg", "West Egg", "Valley of Ashes"]`). Phase 2b runs CoReNer coreference to merge pronouns and definite references back to their antecedents.
-
-### Phase 3 — Geographic Grounding (`src/phase3_grounding.py`)
-Real entities are geocoded against Nominatim with a 1.1 s rate-limit and a persistent `data/geocode_cache.json` cache. Entities further than 500 km from the projection origin are flagged as off-region (a fix for the *East Egg → Maine* failure mode) and demoted to `uncertain`.
-
-### Phase 4 — Spatial Relation Extraction (`src/phase4_relations.py`, `src/phase_mistral_joint.py`)
-Two backends:
-
-- **`mistral_joint`** *(default)* — Ollama-hosted Mistral-7B reads sliding 6-sentence windows (overlap 2) and emits JSON with location–location triples and a free-text `spatial_indicator`. Outputs follow `SentenceLocationRelations`.
-- **`corener`** *(legacy)* — CoReNer NER followed by a separate Mistral pass for relations.
-
-A pattern-matching layer (regex over hand-curated cue lexicons) and an HuggingFace zero-shot classifier (`facebook/bart-large-mnli`) provide secondary evidence and an extraction-method label (`pattern_match | co_occurrence | hf_zero_shot`).
-
-Phase 4b (`phase4b_geographic_edges.py`) deduplicates relations and builds the typed graph consumed by Phase 5.
-
-### Phase 5 — Constraint Compilation (`src/phase5_constraints.py`)
-Projects real coordinates into the local planar km frame via `latlon_to_km` (equirectangular about the configured origin). Emits `data/constraints.json` containing fixed entities, latent entities, and a flat list of `ConstraintSpec` records — the exchange format the inference engine consumes.
-
-### Phase 6 — MCMC Inference (`src/phase6_inference.py`)
-Constructs the energy callable and runs `emcee` (or Metropolis). Multi-chain runs are supported (default 4 chains × 32 walkers). Output: per-entity sample chains in `data/samples/`.
-
-### Phase 7 — Convergence Diagnostics (`src/phase7_convergence.py`)
-Computes Gelman–Rubin R-hat, effective sample size, posterior mean/std, 95 % credible ellipses (eigendecomposition of the posterior covariance), spatial entropy, and KMeans-detected mode counts. Output: `data/convergence/<entity>.json` of `PosteriorSummary` records.
-
-### Phase 8 — Visualisation (`src/phase8_visualization.py`)
-Renders four artefact families: per-entity heatmaps, an interactive Folium overlay of real + inferred places, an ensemble cartogram drawing N samples from the joint posterior, and a NetworkX/PyVis constraint graph.
-
----
-
-## 5. Visual Outputs
-
-All artefacts below are produced by `python -m src.pipeline --config config.yaml --phase 8` and committed under `visualizations/`.
-
-### 5.1 Posterior heatmaps (`visualizations/heatmaps/*.png`)
-
-Per-latent-entity 2-D kernel-density estimate of the posterior, clipped to its 95 % credible region.
-
-| | | |
-|---|---|---|
-| ![East Egg](visualizations/heatmaps/East_Egg.png) | ![West Egg](visualizations/heatmaps/West_Egg.png) | ![Valley of Ashes](visualizations/heatmaps/Valley_of_Ashes.png) |
-| **East Egg** — posterior peaked over the Manhasset / Sands Point spit. | **West Egg** — unimodal mass over Great Neck. | **Valley of Ashes** — concentrated over Flushing Meadows / Corona, consistent with Fitzgerald's biography. |
-| ![Gatsby's mansion](visualizations/heatmaps/Gatsby's_mansion.png) | ![Carraway house](visualizations/heatmaps/Carraway_house.png) | ![Twenty miles](visualizations/heatmaps/Twenty_miles_from_the_city.png) |
-| **Gatsby's mansion** — anchored by *near West Egg* + *across-bay-from East Egg* constraints. | **Carraway house** — narrow ridge consistent with "*next door to Gatsby*". | **"Twenty miles from the city"** — annular posterior at the stated radius, multimodal in angle. |
-
-The full set (~40 entities) lives in `visualizations/heatmaps/`.
-
-### 5.2 Overlay map (`visualizations/overlay_maps/full_map.html`)
-
-An interactive Folium map placing real geocoded entities (blue markers) alongside posterior-mean positions for fictional entities (red markers, with credible-region ellipses). Open in any browser.
-
-### 5.3 Ensemble cartogram (`visualizations/ensemble_samples/ensemble.png`)
-
-![Ensemble cartogram](visualizations/ensemble_samples/ensemble.png)
-
-Fifty independent draws from the joint posterior, overlaid. Where the ensemble is tight, the constraint set is informative; where it spreads, the text under-determines geography. This visual is the project's signature: it shows that *Gatsby's geography is not a single map but a cloud of consistent maps*.
-
-### 5.4 Constraint graph (`visualizations/constraint_graph.html`)
-
-Force-directed graph of entities (nodes) and extracted relations (typed, weighted edges). Useful for auditing extraction noise and identifying weakly constrained entities (low-degree latent nodes).
-
----
-
-## 6. Installation
+## 1. The SpRL Benchmark — Quickstart
 
 ```bash
-# Python 3.13 recommended (tested on 3.13.6, macOS arm64)
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+# (a) Generate the sentence template (already committed; re-run to refresh).
+python -m eval.sample_sentences --n 100 --seed 42
 
-pip install -r requirements.txt
-python -m spacy download en_core_web_lg
+# (b) Hand-annotate eval/gold/sentences_to_annotate.jsonl per the schema.
 
-# CPU-only PyTorch (skip if you have a working CUDA install)
-pip install torch --index-url https://download.pytorch.org/whl/cpu
+# (c) Pull the three models in Ollama.
+ollama pull mistral
+ollama pull phi3
+ollama pull qwen2.5
 
-# For the default `mistral_joint` backend, install Ollama and pull the model:
-#   curl -fsSL https://ollama.com/install.sh | sh
-#   ollama pull mistral
+# (d) Extract.
+python -m eval.extract --model mistral --tag mistral
+python -m eval.extract --model phi3    --tag phi3
+python -m eval.extract --model qwen2.5 --tag qwen2.5
+
+# (e) Score and produce the comparison table + chart.
+python -m eval.score --pred \
+    eval/predictions/mistral.jsonl \
+    eval/predictions/phi3.jsonl \
+    eval/predictions/qwen2.5.jsonl
 ```
 
-> **Python 3.13 compatibility.** spaCy's `blis` lacks a 3.13 sdist; force binary wheels with `pip install --only-binary :all: spacy` if you hit a build error.
+Outputs land in `eval/results/`: `scores.json`, `scores.md`, `per_relation.md`,
+and `scores.png`. Full benchmark documentation is in [`eval/README.md`](eval/README.md).
 
 ---
 
-## 7. Running the Pipeline
+## 2. Task Definition
 
-```bash
-# Full pipeline
-python -m src.pipeline --config config.yaml
+We adopt the location-restricted form of **Spatial Role Labeling** (Kordjamshidi,
+van Otterlo, & Moens, 2017). For each input sentence the system must emit a
+list of triples
 
-# Single phase (1–8)
-python -m src.pipeline --config config.yaml --phase 6
-
-# Force re-run, ignoring cached outputs
-python -m src.pipeline --config config.yaml --force
-
-# Alternative corpora
-python -m src.pipeline --config config_gatsby.yaml
-python -m src.pipeline --config config_amazon.yaml
+```
+( location_1 ,  spatial_indicator ,  location_2 )
 ```
 
-Per-phase logs are written to `pipeline_phase<N>.log`. A live dashboard for Phase 4 progress is available via `python -m src.dashboard`.
+where:
+
+- **location_1** (the *trajector*) — the entity being located,
+- **location_2** (the *landmark*) — the reference entity it is located relative to,
+- **spatial_indicator** — the verbatim cue word/phrase from the text expressing the relation,
+
+with **both arguments restricted to LOCATION spans** (geographic places,
+regions, buildings, named landmarks). Each triple also carries a
+`semantic_type ⊆ {REGION, DIRECTION, DISTANCE}`.
+
+Sentences with no valid LOCATION-LOCATION relation must produce an empty
+list. A uniform random sample of 100 Gatsby sentences contains many such
+sentences — they exercise model **precision** by punishing hallucinated
+triples.
+
+---
+
+## 3. Evaluation Methodology
+
+The 100 sentences are sampled with `random.Random(42).sample(corpus, 100)`,
+filtered only by a minimum length of 20 characters to drop chapter headers
+and stray punctuation lines. The resulting set is the **Gatsby-100**
+benchmark.
+
+### Matching schemes
+
+A predicted triple matches a gold triple iff all three of `location_1`,
+`location_2`, and `spatial_indicator` agree under one of:
+
+- **strict** — exact match after lowercase + whitespace normalisation.
+- **lenient** — token-set Jaccard ≥ 0.5 on each slot independently.
+
+Per sentence, we greedily pair predictions with gold (each gold relation can
+match at most once). Unmatched predictions are FP; unmatched gold are FN.
+
+### Reported metrics
+
+For every model:
+
+| Metric | Description |
+|---|---|
+| **triple-level P / R / F1** | both *strict* and *lenient* schemes |
+| **per-`semantic_type` P / R / F1** | breakdown over REGION / DIRECTION / DISTANCE |
+| **empty-correct** | sentences where gold = ∅ and prediction = ∅ |
+| **missed-on-non-empty** | gold ≠ ∅, prediction = ∅ (recall failure) |
+| **hallucinated-on-empty** | gold = ∅, prediction ≠ ∅ (precision failure) |
+
+The last two distinguish *conservative* from *hallucinatory* failure modes
+— a useful axis when the underlying corpus has a heavy zero-relation tail
+(common in literary text, where most sentences are about people or feeling
+rather than places).
+
+---
+
+## 4. Models Compared
+
+| Tag | Model (Ollama) | Params | Provider | Notes |
+|---|---|---:|---|---|
+| `mistral`  | `mistral`  | 7.2 B | Mistral AI | v0.3 instruct |
+| `phi3`     | `phi3`     | 3.8 B | Microsoft | small, instruction-tuned |
+| `qwen2.5`  | `qwen2.5`  | 7.6 B | Alibaba | strong on structured output |
+
+All three are queried with the same system + user prompt (see
+`eval/extract.py`, `SYSTEM_PROMPT`), `temperature=0.1`, `format="json"`.
+
+The benchmark is intentionally restricted to **small open models served
+locally** — no API-gated frontier models. The motivating question is
+practical: *can a literary scholar, on commodity hardware, get usable
+spatial-relation extraction without sending the corpus to a hosted API?*
+
+---
+
+## 5. Annotation Schema
+
+Each line of `eval/gold/sentences_to_annotate.jsonl` is a single JSON object
+the annotator edits in place. Empty `location_relations` lists are valid
+and expected for the majority of sentences.
+
+```json
+{
+  "annotation_id": "ann_001",
+  "doc_id": "great_gatsby",
+  "sentence_id": "great_gatsby_sent_498",
+  "sentence": "\"I live at West Egg.",
+  "location_relations": [
+    {
+      "location_1": "I",
+      "location_2": "West Egg",
+      "spatial_indicator": "live at",
+      "semantic_type": ["REGION"]
+    }
+  ],
+  "_notes": ""
+}
+```
+
+The full annotation guidelines, including borderline cases, are in
+[`eval/README.md`](eval/README.md).
+
+---
+
+## 6. Limitations & Honest Scope
+
+This is a **small-scale, single-corpus, single-annotator** benchmark.
+Concrete limits:
+
+- **N = 100** sentences — adequate for qualitative model comparison, too small
+  for statistical claims about either model. Confidence intervals on F1 are
+  wide; differences smaller than ~0.05 should not be over-interpreted.
+- **One author, one period, one register.** Findings will not generalise to
+  e.g. modernist non-narrative prose, contemporary fiction, or non-English text.
+- **Single annotator.** No inter-annotator agreement reported. Submission to
+  any peer-reviewed venue should add a second pass on at least 30 sentences
+  with Cohen's κ.
+- **Zero-shot only.** No fine-tuning, no in-context examples, no chain-of-thought.
+  The numbers are a *floor* on what each model can do, not a ceiling.
+- **No non-LLM baseline.** A spaCy dependency-parse rule system would establish
+  whether the LLMs are providing real value over classical tools; this is the
+  most cost-effective addition to the harness.
+
+This benchmark is best framed as a **resource paper** (LREC) or a **digital
+humanities workshop submission** (CHR, DH). It is not, in its current form,
+appropriate for a main-track NLP conference.
+
+---
+
+## 7. Downstream Demonstration: Probabilistic Cartography
+
+The original project goal — reconstructing the spatial layout of Fitzgerald's
+fictional places — is retained as a *downstream demonstration* of what one
+might do with extracted SpRL triples. Phases 1–8 of `src/` implement:
+
+1. **Phase 1** — Corpus prep (Project Gutenberg → cleaned sentences).
+2. **Phase 2 / 2b** — NER + coreference (spaCy `en_core_web_lg`, CoReNer).
+3. **Phase 3** — Geocoding of real places (Nominatim, cached).
+4. **Phase 4** — SpRL extraction (the same Mistral/Ollama backend the eval harness benchmarks).
+5. **Phase 5** — Compilation of triples into a formal energy model over a local planar coordinate frame.
+6. **Phase 6** — MCMC inference on the latent positions of fictional places (`emcee` ensemble sampler).
+7. **Phase 7** — Convergence diagnostics (R-hat, ESS, credible ellipses).
+8. **Phase 8** — Visualisation (heatmaps, Folium overlays, ensemble cartograms, constraint graph).
+
+### Outputs (committed)
+
+- Per-entity posterior heatmaps in `visualizations/heatmaps/` (~40 PNGs).
+- Joint-posterior ensemble cartogram in `visualizations/ensemble_samples/ensemble.png`.
+- Interactive constraint graph in `visualizations/constraint_graph.html`.
+- Folium overlay map in `visualizations/overlay_maps/full_map.html`.
+
+### Honest framing
+
+The cartographic problem is **severely under-determined**. *East Egg* has only
+a handful of usable textual constraints; no sampler can pin a 2-D position
+from such sparse evidence. The resulting heatmaps therefore *quantify
+uncertainty* rather than *localise* the fictional places — they are honest
+about how much the text actually constrains geography. This is the right
+answer to the wrong question; the right question is the SpRL extraction
+benchmark above.
+
+### Run the cartography pipeline
+
+```bash
+python -m src.pipeline --config config.yaml          # full pipeline
+python -m src.pipeline --config config.yaml --phase 6 --force
+```
 
 ---
 
@@ -234,106 +245,67 @@ Per-phase logs are written to `pipeline_phase<N>.log`. A live dashboard for Phas
 
 ```
 FitzTry1/
-├── config.yaml                  # Primary configuration
-├── config_gatsby.yaml           # Gatsby-only preset
-├── config_amazon.yaml           # Alternative corpus preset
-├── corpus/                      # Raw + cleaned text
-├── data/                        # Phase outputs (entities, relations, samples, …)
-├── output/gatsby/               # Snapshot of a finished Gatsby run
-├── visualizations/              # PNG heatmaps, HTML maps, ensemble plot
-├── src/
-│   ├── pipeline.py              # CLI entrypoint, phase dispatcher
-│   ├── phase1_corpus_prep.py
-│   ├── phase2_ner.py
-│   ├── phase2b_coref.py
-│   ├── phase3_grounding.py
-│   ├── phase4_relations.py
-│   ├── phase4b_geographic_edges.py
-│   ├── phase5_constraints.py
-│   ├── phase6_inference.py      # emcee + Metropolis
-│   ├── phase7_convergence.py    # R-hat, ESS, modes, credible ellipses
-│   ├── phase8_visualization.py
-│   ├── phase_graph_build.py
-│   ├── phase_mistral_joint.py   # Ollama / Mistral-7B SpRL extractor
-│   ├── dashboard.py             # Live Phase-4 progress UI
-│   └── utils/
-│       ├── schemas.py           # Pydantic v2 contracts
-│       ├── geo.py               # latlon ↔ km projection
-│       └── io.py                # JSONL helpers
-├── tests/                       # 66 tests across 5 modules
-├── notebooks/
-├── requirements.txt
-└── README.md
+├── eval/                         # ★ primary contribution
+│   ├── sample_sentences.py       # uniform random 100-sentence sampler
+│   ├── extract.py                # Ollama extractor (model-agnostic)
+│   ├── score.py                  # strict + lenient scoring, charts
+│   ├── README.md                 # benchmark docs
+│   ├── gold/                     # gold annotations (hand-filled)
+│   ├── predictions/              # per-model JSONL predictions
+│   └── results/                  # scores.json, scores.md, scores.png
+├── src/                          # downstream cartography pipeline
+│   ├── pipeline.py
+│   ├── phase1_corpus_prep.py … phase8_visualization.py
+│   ├── phase_mistral_joint.py    # production Ollama / Mistral SpRL extractor
+│   └── utils/{schemas,geo,io}.py
+├── corpus/                       # raw + cleaned text
+├── data/                         # phase outputs (entities, relations, samples)
+├── visualizations/               # heatmaps, overlays, ensemble cartogram
+├── tests/                        # 66 tests across 5 modules
+├── config.yaml                   # primary configuration
+└── requirements.txt
 ```
 
 ---
 
-## 9. Configuration Reference
+## 9. Installation
 
-Selected keys from `config.yaml`:
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python -m spacy download en_core_web_lg
 
-```yaml
-constraints:
-  epsilon_direction_km: 1.0       # half-plane margin
-  d_near_km: 10.0                 # target distance for `near`
-  d_far_km: 50.0                  # threshold for `far`
-  sigma_distance_km: 5.0          # std-dev of distance Gaussians
-  co_occurrence_weight: 0.1       # weak prior weight
-  projection_origin_lat: 40.7128
-  projection_origin_lon: -74.0060
-  min_constraints_per_latent: 1
+# CPU-only PyTorch
+pip install torch --index-url https://download.pytorch.org/whl/cpu
 
-inference:
-  method: "emcee"                 # or "metropolis"
-  num_samples: 5000
-  burn_in: 1000
-  thin: 5
-  beta: 1.0                       # inverse temperature
-  proposal_std_km: 10.0           # Metropolis only
-  init_bbox_radius_km: 300.0      # init-space radius
-  num_walkers: 32
-  num_chains: 4
-  random_seed: 42
+# Ollama (for the eval harness AND Phase 4)
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull mistral phi3 qwen2.5
 ```
+
+Tested on Python 3.13.6 / macOS arm64. If `blis` fails to build on Python 3.13,
+install spaCy with `pip install --only-binary :all: spacy`.
 
 ---
 
 ## 10. Testing
 
 ```bash
-pytest tests/ -v
+pytest tests/ -v   # 66 tests across NER, relations, constraints, inference
 ```
 
-The suite (66 tests) covers:
-
-- `test_ner.py` — entity extraction and real/fictional classification
-- `test_relations.py` — pattern-matching and SpRL parsing
-- `test_location_relations.py` — Mistral joint-extractor schema validation
-- `test_constraints.py` — energy gradients on synthetic configurations
-- `test_inference.py` — sampler convergence on toy posteriors with closed-form means
-
 ---
 
-## 11. Reproducibility & Caveats
+## 11. References
 
-- **Seed.** `random_seed: 42` controls NumPy and the sampler. Mistral generation is also low-temperature (0.1) but not bit-reproducible across Ollama versions.
-- **Geocoder cache.** `data/geocode_cache.json` is checked in; new runs reuse cached coordinates.
-- **MCMC tuning.** Defaults converge for Gatsby-scale graphs in ≈12 s. For research-grade runs, increase `num_samples` to 5×10⁵ and inspect `data/convergence/*.json` for R-hat < 1.05 on every entity.
-- **Coordinate frame.** *All* arithmetic is performed in the local km plane; lat/lon appear only at the I/O boundaries. Do not mix the two — the projection is equirectangular and degrades north of ≈45° latitude.
-- **Sparse-evidence entities.** Latent entities with one or two constraints (e.g. *East Egg*) have wide, sometimes multimodal posteriors; this is feature, not bug.
-- **The corpus is pre-1928 US public-domain.** `Instructions.md` and `Research Proposal.pdf` document the original brief.
-
----
-
-## 12. References
-
+- Kordjamshidi, P., van Otterlo, M., & Moens, M.-F. (2017). *Spatial Role Labeling Annotation Scheme.* In Ide & Pustejovsky (Eds.), *Handbook of Linguistic Annotation*. Springer.
 - Foreman-Mackey, D., Hogg, D. W., Lang, D., & Goodman, J. (2013). *emcee: The MCMC Hammer.* PASP 125(925), 306–312.
 - Goodman, J., & Weare, J. (2010). *Ensemble samplers with affine invariance.* CAMCoS 5(1), 65–80.
-- Kordjamshidi, P., van Otterlo, M., & Moens, M.-F. (2017). *Spatial Role Labeling Annotation Scheme.* In Ide & Pustejovsky (Eds.), *Handbook of Linguistic Annotation*. Springer.
+- Gelman, A., & Rubin, D. B. (1992). *Inference from Iterative Simulation Using Multiple Sequences.* Statistical Science 7(4), 457–472.
 - Moretti, F. (1998). *Atlas of the European Novel, 1800–1900.* Verso.
 - Piper, A. (2018). *Enumerations: Data and Literary Study.* University of Chicago Press.
-- Gelman, A., & Rubin, D. B. (1992). *Inference from Iterative Simulation Using Multiple Sequences.* Statistical Science 7(4), 457–472.
 
 ---
 
-*Built for the Wheel of Fortune Lab at Columbia. Corpus: F. Scott Fitzgerald, *The Great Gatsby* (1925, US public domain since 2021).*
+*Built for the Wheel of Fortune Lab at Columbia. Corpus: F. Scott Fitzgerald,
+*The Great Gatsby* (1925, US public domain since 2021).*
