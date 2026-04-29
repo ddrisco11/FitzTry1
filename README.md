@@ -364,5 +364,5 @@ python -m src.pipeline --config config.yaml   # full Phase 1–8 cartographic ru
 
 ---
 
-*Built for the Wheel of Fortune Lab at Columbia. Corpus: F. Scott Fitzgerald,
+*Built for an Independent Study in the Columbia Narrative Intelligence Lab. Corpus: F. Scott Fitzgerald,
 *The Great Gatsby* (1925, US public domain since 2021).*
