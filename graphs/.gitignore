@@ -4,3 +4,6 @@
 *.html
 *.graphml
 *.dot
+
+# Whitelist the canonical paper figure referenced from the project README.
+!corpus/gatsby.svg
