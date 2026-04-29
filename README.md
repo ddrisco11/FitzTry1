@@ -1,4 +1,4 @@
-# The Gatsby Spatial Graph
+# The Great Gatsby ISO 24617-7 Spatial Graph
 
 > **An automated pipeline that reads a novel and emits an ISO-Space-conformant graph of its spatial relations — extracted by a small open LLM, rewritten into qualitative spatial calculi, and rendered as an interactive diagram.**
 
