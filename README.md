@@ -245,28 +245,38 @@ parallel workers, ~37 minutes wall-clock.
 
 ### 5.2 Top-10 most-connected entities
 
-The headline empirical result of this pipeline is the following table.
-Computed automatically (`<name>.summary.json`) on every run:
+The headline empirical result of this pipeline is the following table —
+the ten entities that appear most often in a trajector or landmark slot of
+an extracted relation. Computed automatically (`<name>.summary.json`) on
+every run; the values below are from the *Gatsby* run on the 241-triple
+corpus described in §5.
 
-| Rank | Entity            | `entity_kind`   |
-|---:  |---                |---              |
-|  1   | I                 | `deictic`       |
-|  2   | New York          | `place`         |
-|  3   | Gatsby's house    | `common_locus`  |
-|  4   | West Egg          | `place`         |
-|  5   | here              | `deictic`       |
-|  6   | Gatsby            | `person_locus`  |
-|  7   | the house         | `common_locus`  |
-|  8   | my house          | `common_locus`  |
-|  9   | East Egg          | `place`         |
-| 10   | Chicago           | `place`         |
+| Rank | Entity            | Total relations | `entity_kind`   |
+|---:  |---                |---:             |---              |
+|  1   | I                 | 15              | `deictic`       |
+|  2   | New York          | 14              | `place`         |
+|  3   | Gatsby's house    | 12              | `person_locus`  |
+|  4   | West Egg          | 11              | `place`         |
+|  5   | here              |  7              | `deictic`       |
+|  6   | Gatsby            |  7              | `person_locus`  |
+|  7   | the house         |  6              | `common_locus`  |
+|  8   | my house          |  5              | `common_locus`  |
+|  9   | East Egg          |  5              | `place`         |
+| 10   | Chicago           |  5              | `place`         |
 
-Four of the ten most-connected `SpatialEntity`s in *The Great Gatsby* are
-not canonical places. *I* is a first-person deictic centre; *here* is a
-locative pro-form bound to whichever speaker is active in the surrounding
-windows; *Gatsby* is metonymically a region (*"at Gatsby's"*, *"to
-Gatsby's"*); *Gatsby's house* and *the house* and *my house* are common-
-noun loci anchored deictically by their possessives. Filtering these out
+(*"Total relations"* is the combined trajector + landmark count: the same
+quantity the graph builder uses as `degree = in_degree + out_degree` on
+the multigraph, before deduplication of parallel edges.)
+
+Six of the ten most-connected `SpatialEntity`s in *The Great Gatsby* are
+not canonical places. *I* (rank 1) is a first-person deictic centre;
+*here* (rank 5) is a locative pro-form bound to whichever speaker is
+active in the surrounding windows; *Gatsby* (rank 6) is metonymically a
+region (*"at Gatsby's"*, *"to Gatsby's"*); *Gatsby's house* (rank 3) is
+person-anchored — `entity_kind = person_locus` because spaCy's NER fires
+on the embedded *Gatsby* — and *the house* / *my house* (ranks 7 and 8)
+are common-noun loci anchored deictically by their (possibly possessive)
+determiners. Filtering these out
 would not improve the graph; it would erase exactly the spatial scaffolding
 that the novel uses to organise the rest of its places.
 
