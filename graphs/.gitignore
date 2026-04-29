@@ -1,0 +1,6 @@
+# Generated graph outputs (regenerable; some are large)
+*.svg
+*.png
+*.html
+*.graphml
+*.dot

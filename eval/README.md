@@ -10,9 +10,10 @@ of *The Great Gatsby*.
 eval/
 ├── sample_sentences.py       # uniform random sampler (seed 42, no filtering)
 ├── extract.py                # Ollama-based extractor (model-agnostic)
-├── score.py                  # strict + lenient triple-level scoring
+├── to_graph.py               # build ISO-Space graphs (GraphML / DOT / HTML)
+├── score.py                  # strict + lenient triple-level scoring [deferred]
 ├── gold/
-│   └── sentences_to_annotate.jsonl   # YOU FILL THIS IN
+│   └── sentences_to_annotate.jsonl   # 100 chunks, annotation deferred
 ├── predictions/
 │   ├── mistral.jsonl
 │   ├── phi3.jsonl
@@ -23,6 +24,13 @@ eval/
     ├── per_relation.md
     └── scores.png
 ```
+
+### Validation set status
+
+The 100-window gold set is in `gold/sentences_to_annotate.jsonl` ready for
+annotation, but the validation pass is **on hold**. Until then the primary
+deliverable is the **spatial graph** built from each model's predictions
+(see `to_graph.py`).
 
 ## End-to-end workflow
 
@@ -43,12 +51,40 @@ python -m eval.extract --model mistral --tag mistral
 python -m eval.extract --model phi3    --tag phi3
 python -m eval.extract --model qwen2.5 --tag qwen2.5
 
-# 5. Score and produce comparison tables + chart.
+# 5. (Deferred) Score against gold once annotation is done.
 python -m eval.score \
     --pred eval/predictions/mistral.jsonl \
            eval/predictions/phi3.jsonl \
            eval/predictions/qwen2.5.jsonl
+
+# 6. Build ISO-Space spatial graphs from each model's output.
+python -m eval.to_graph --in eval/predictions/mistral.jsonl --out-dir graphs/mistral
+python -m eval.to_graph --in eval/predictions/phi3.jsonl    --out-dir graphs/phi3
+python -m eval.to_graph --in eval/predictions/qwen2.5.jsonl --out-dir graphs/qwen2.5
+#   Each call writes graph.graphml (Gephi/yEd), graph.dot (Graphviz),
+#   and graph.html (interactive PyVis).
+#   Render the DOT to SVG with:  dot -Tsvg graph.dot -o graph.svg
 ```
+
+## ISO-Space graph output
+
+`to_graph.py` compiles the extracted (trajector, indicator, landmark)
+triples into a labeled directed multigraph following the ISO 24617-7
+**ISO-Space** annotation tradition. Spatial indicators are rewritten to
+canonical values from two qualitative calculi:
+
+- **RCC-8** — eight topological relations between regions (Randell, Cui &
+  Cohn, 1992): `DC, EC, PO, EQ, TPP, NTPP, TPPi, NTPPi`. Used as the
+  value of `QSLINK` (qualitative spatial link) edges.
+- **Cardinal Direction Calculus** — nine-cell projection model (Frank,
+  1991): `N, NE, E, SE, S, SW, W, NW, EQ`. Used as the value of `OLINK`
+  (orientation link) edges.
+
+A small lexicon in `to_graph.py` maps free-text indicators to RCC-8 / CDC
+values (e.g. *"across from"* → `DC`, *"twenty miles north of"* →
+`OLINK[N]` plus `distance=20mi`). Indicators that don't match any pattern
+are still preserved as edge attributes — the graph never silently drops
+information.
 
 ## Annotation schema
 
