@@ -57,7 +57,11 @@
       "Bash(python3 -c \"import sys,json; print\\('Ollama up:', bool\\(json.load\\(sys.stdin\\).get\\('models'\\)\\)\\)\")",
       "Bash(curl -s http://localhost:11434/api/tags)",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('Ollama up, models:', [m['name'] for m in d.get\\('models',[]\\)]\\)\")",
-      "Bash(OLLAMA_NUM_PARALLEL=4 ollama pull:*)"
+      "Bash(OLLAMA_NUM_PARALLEL=4 ollama pull:*)",
+      "Bash(python *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(git add *)"
     ]
   }
 }

@@ -1,0 +1,51 @@
+# Spatial cue lexicon — maps verbatim spatial indicators (regex, case-insensitive)
+# to qualitative-calculus values.
+#
+# RCC-8 (Randell, Cui & Cohn, 1992) — region-connection topology:
+#   DC      disconnected
+#   EC      externally connected
+#   PO      partial overlap
+#   EQ      equal
+#   TPP     tangential proper part
+#   NTPP    non-tangential proper part
+#   TPPi    inverse TPP
+#   NTPPi   inverse NTPP
+#
+# CDC (Frank, 1991) — cardinal-direction calculus:
+#   N, NE, E, SE, S, SW, W, NW, EQ
+#
+# Patterns are tried top-to-bottom; first match wins. Cues that match nothing
+# here are preserved verbatim on the edge — nothing is silently dropped.
+#
+# Extend this file freely; no code changes required.
+
+rcc8:
+  - { pattern: '\b(inside|within|in the|in a|in)\b',                    label: NTPP  }
+  - { pattern: '\b(contains?|houses?|holds?)\b',                        label: NTPPi }
+  - { pattern: '\b(part of|belongs to|member of)\b',                    label: TPP   }
+  - { pattern: '\b(at|on)\b',                                           label: TPP   }
+  - { pattern: '\b(adjacent to|next to|next door|beside|by|alongside|bordering|borders|on the edge of|on the border of)\b',
+      label: EC }
+  - { pattern: '\b(across from|opposite|facing)\b',                     label: DC    }
+  - { pattern: '\b(near|close to|not far from|nearby)\b',               label: EC    }
+  - { pattern: '\b(far from|away from|distant from|miles? from|kilometers? from)\b',
+      label: DC }
+  - { pattern: '\b(beyond|past|outside)\b',                             label: DC    }
+  - { pattern: '\b(overlapping|crosses|crossing)\b',                    label: PO    }
+  - { pattern: '\b(same as|identical to|equal to)\b',                   label: EQ    }
+
+# CDC patterns are tried with a small post-processor: if the matched text
+# contains "east" or "west", the orthogonal compound (NE/NW/SE/SW) is emitted.
+cdc:
+  - { pattern: '\bnorth(?:east|west)?\s+of\b',  label: N }
+  - { pattern: '\bsouth(?:east|west)?\s+of\b',  label: S }
+  - { pattern: '\beast of\b',                   label: E }
+  - { pattern: '\bwest of\b',                   label: W }
+  - { pattern: '\babove\b',                     label: N }
+  - { pattern: '\bbelow\b',                     label: S }
+  - { pattern: '\bleft of\b',                   label: W }
+  - { pattern: '\bright of\b',                  label: E }
+
+# Distance pattern — capture group 1 = numeric value, group 2 = unit.
+distance:
+  pattern: '(\d+(?:\.\d+)?)\s*(miles?|mi|kilometers?|kms?|km|meters?|m|feet|ft|yards?|yd)\b'

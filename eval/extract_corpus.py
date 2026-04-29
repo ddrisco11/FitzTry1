@@ -63,23 +63,38 @@ def make_windows(sentences: List[Dict[str, Any]], window: int, stride: int) -> L
 
 
 def load_done_window_ids(out_path: Path) -> set[int]:
+    """Read existing output and return the set of completed window_ids.
+
+    Tolerates a truncated final line (interrupted run) by rewriting the
+    file in place with only complete records — so subsequent appends
+    don't produce malformed JSON."""
     if not out_path.exists():
         return set()
-    done = set()
+    good_lines: list[str] = []
+    done: set[int] = set()
     with out_path.open("r", encoding="utf-8") as f:
         for line in f:
             try:
                 rec = json.loads(line)
                 done.add(int(rec["window_id"]))
+                good_lines.append(line if line.endswith("\n") else line + "\n")
             except Exception:
                 continue
+    # Rewrite if any line was dropped (i.e., file had a partial trailing record).
+    expected = sum(1 for _ in out_path.open("r", encoding="utf-8"))
+    if len(good_lines) != expected:
+        tmp = out_path.with_suffix(out_path.suffix + ".tmp")
+        tmp.write_text("".join(good_lines), encoding="utf-8")
+        tmp.replace(out_path)
     return done
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--corpus", default="corpus/cleaned/great_gatsby.jsonl")
-    ap.add_argument("--out", default="data/location_relations.jsonl")
+    ap.add_argument("--corpus", required=True,
+                    help="Path to a cleaned-corpus JSONL produced by `src.ingest`.")
+    ap.add_argument("--out", default=None,
+                    help="Output JSONL. Defaults to data/<doc_id>.relations.jsonl.")
     ap.add_argument("--model", default="mistral",
                     help="Ollama model name (e.g. mistral, mistral:latest, phi3, qwen2.5)")
     ap.add_argument("--host", default="http://localhost:11434")
@@ -96,10 +111,14 @@ def main() -> None:
     args = ap.parse_args()
 
     corpus = Path(args.corpus)
-    out_path = Path(args.out)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
+    if not corpus.exists():
+        raise SystemExit(f"corpus not found: {corpus}")
 
     sentences = load_sentences(corpus, args.min_chars)
+    doc_id = (sentences[0].get("doc_id") if sentences else None) or corpus.stem
+    out_path = Path(args.out) if args.out else Path("data") / f"{doc_id}.relations.jsonl"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
     windows = make_windows(sentences, args.window, args.stride)
     if args.limit:
         windows = windows[: args.limit]

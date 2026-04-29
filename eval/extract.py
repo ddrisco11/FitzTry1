@@ -33,7 +33,7 @@ import requests
 
 SYSTEM_PROMPT = """\
 You are a careful annotator extracting LOCATION-LOCATION spatial relations from
-literary prose, following the Spatial Role Labeling (SpRL) annotation tradition.
+prose, following the Spatial Role Labeling (SpRL) annotation tradition.
 
 A relation is a triple (location_1, spatial_indicator, location_2) where:
   - location_1 (trajector): the entity being located.
@@ -43,16 +43,14 @@ A relation is a triple (location_1, spatial_indicator, location_2) where:
                             (e.g. "across the bay from", "twenty miles from",
                             "north of", "in", "near").
 
-BOTH location_1 and location_2 must be LOCATION spans — geographic places,
-buildings, regions, or named landmarks. Do NOT extract relations where one
-argument is a person, a body part, a piece of furniture, an abstract concept,
-or a temporal phrase.
+Both location_1 and location_2 must be LOCATION spans — geographic places,
+buildings, regions, or named landmarks.
 
 Each relation also carries a semantic_type list, a subset of:
   ["REGION", "DIRECTION", "DISTANCE"]
 
-If the sentence contains no valid LOCATION-LOCATION relation, return an empty
-list. Do NOT invent relations. Precision matters more than recall.
+If the sentence contains no valid spatial relation, return an empty list.
+Do NOT invent relations. Precision matters more than recall.
 
 OUTPUT FORMAT — return a single JSON object exactly like:
 {
@@ -77,7 +75,12 @@ Extract the location-location spatial relations.
 
 
 def call_ollama(host: str, model: str, sentence: str, timeout: int = 90,
-                temperature: float = 0.1) -> str:
+                temperature: float = 0.1, max_retries: int = 2,
+                backoff: float = 1.5) -> str:
+    """POST to Ollama with bounded retries on transient errors.
+
+    Retries on connection errors, timeouts, and 5xx responses. Re-raises
+    on exhaustion so the worker can record an `_error` for the window."""
     payload = {
         "model": model,
         "messages": [
@@ -88,9 +91,22 @@ def call_ollama(host: str, model: str, sentence: str, timeout: int = 90,
         "format": "json",
         "options": {"temperature": temperature, "top_p": 0.9, "num_predict": 512},
     }
-    r = requests.post(f"{host.rstrip('/')}/api/chat", json=payload, timeout=timeout)
-    r.raise_for_status()
-    return r.json()["message"]["content"]
+    url = f"{host.rstrip('/')}/api/chat"
+    last_exc: Exception = RuntimeError("no attempt made")
+    for attempt in range(max_retries + 1):
+        try:
+            r = requests.post(url, json=payload, timeout=timeout)
+            if 500 <= r.status_code < 600:
+                raise requests.HTTPError(f"server {r.status_code}", response=r)
+            r.raise_for_status()
+            return r.json()["message"]["content"]
+        except (requests.ConnectionError, requests.Timeout,
+                requests.HTTPError) as e:
+            last_exc = e
+            if attempt >= max_retries:
+                break
+            time.sleep(backoff ** attempt)
+    raise last_exc
 
 
 def parse_relations(raw: str) -> List[Dict[str, Any]]:
