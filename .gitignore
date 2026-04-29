@@ -1,0 +1,16 @@
+# Large MCMC sample chains (exceed GitHub 100MB limit)
+data/samples/
+output/*/data/samples/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+.venv/
+.pytest_cache/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
