@@ -127,38 +127,37 @@ def map_indicator(cue: str) -> Tuple[Optional[str], Optional[str], Optional[floa
 # ---------------------------------------------------------------------------
 
 def _iter_relations(path: Path) -> Iterable[Dict[str, Any]]:
-    """Yield normalised relation dicts with keys:
+    """Yield normalised relation dicts in the LocationRelation schema:
         location_1, location_2, spatial_indicator, semantic_type, sentence_id, source_text
-    Auto-detects between LocationRelation (eval/) and SpatialRelation (data/) schemas.
+
+    Input file MUST follow the SentenceLocationRelations schema — one JSON
+    object per line with keys `sentence`, `sentence_ids` (or `sentence_id`),
+    and `location_relations: [{location_1, location_2, spatial_indicator,
+    semantic_type}]`. Legacy SpatialRelation files (entity_1/entity_2/type)
+    are no longer accepted; re-run extraction to produce the new schema.
     """
     with path.open("r", encoding="utf-8") as f:
-        for line in f:
+        for lineno, line in enumerate(f, 1):
             if not line.strip():
                 continue
             rec = json.loads(line)
 
-            # Schema A: eval/predictions or eval/gold — has top-level location_relations
-            if "location_relations" in rec:
-                sids = rec.get("sentence_ids") or [rec.get("sentence_id", "")]
-                for r in rec["location_relations"]:
-                    yield {
-                        "location_1": r.get("location_1", ""),
-                        "location_2": r.get("location_2", ""),
-                        "spatial_indicator": r.get("spatial_indicator", ""),
-                        "semantic_type": r.get("semantic_type", []),
-                        "sentence_id": sids[0] if sids else "",
-                        "source_text": rec.get("sentence", ""),
-                    }
-            # Schema B: data/relations.jsonl — flat SpatialRelation
-            elif "entity_1" in rec and "type" in rec:
-                cue = rec.get("type", "").replace("_", " ")
+            if "location_relations" not in rec:
+                raise ValueError(
+                    f"{path}:{lineno} — record is not in the LocationRelation schema "
+                    f"(missing `location_relations`). Re-run `eval/extract_corpus.py` "
+                    f"or `eval/extract.py` to produce the new schema."
+                )
+
+            sids = rec.get("sentence_ids") or [rec.get("sentence_id", "")]
+            for r in rec["location_relations"]:
                 yield {
-                    "location_1": rec.get("entity_1", ""),
-                    "location_2": rec.get("entity_2", "") or "",
-                    "spatial_indicator": cue,
-                    "semantic_type": [],
-                    "sentence_id": rec.get("source_sentence_id", ""),
-                    "source_text": rec.get("source_text", ""),
+                    "location_1": r.get("location_1", ""),
+                    "location_2": r.get("location_2", ""),
+                    "spatial_indicator": r.get("spatial_indicator", ""),
+                    "semantic_type": r.get("semantic_type", []),
+                    "sentence_id": sids[0] if sids else "",
+                    "source_text": rec.get("sentence", ""),
                 }
 
 
