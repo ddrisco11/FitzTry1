@@ -28,7 +28,8 @@ eval/
 
 ```bash
 # 1. (Re)generate the random sample. Already committed at commit time.
-python -m eval.sample_sentences --n 100 --seed 42
+#    Each record is a 3-sentence window so models and annotators see local context.
+python -m eval.sample_sentences --n 100 --window 3 --seed 42
 
 # 2. Hand-annotate eval/gold/sentences_to_annotate.jsonl per the schema below.
 
@@ -57,8 +58,12 @@ Each line of `gold/sentences_to_annotate.jsonl` is a JSON object:
 {
   "annotation_id": "ann_000",
   "doc_id": "great_gatsby",
-  "sentence_id": "great_gatsby_sent_42",
-  "sentence": "I lived at West Egg, the — well, the less fashionable of the two ...",
+  "sentence_ids": [
+    "great_gatsby_sent_42",
+    "great_gatsby_sent_43",
+    "great_gatsby_sent_44"
+  ],
+  "sentence": "I lived at West Egg, the — well, the less fashionable of the two ... My house was at the very tip of the egg, only fifty yards from the Sound, and squeezed between two huge places ... Across the courtesy bay the white palaces of fashionable East Egg glittered along the water.",
   "location_relations": [
     {
       "location_1": "I",
@@ -70,6 +75,11 @@ Each line of `gold/sentences_to_annotate.jsonl` is a JSON object:
   "_notes": "optional free-text"
 }
 ```
+
+Each record is a **3-sentence window**: three consecutive sentences from
+the corpus joined into the `sentence` field. This gives both annotators and
+models local context, so cross-sentence relations (e.g. an antecedent in
+sentence *t* picked up in sentence *t+1*) can be captured.
 
 ### Rules
 

@@ -173,7 +173,7 @@ def main() -> None:
             n_relations += len(rels)
             out.write(json.dumps({
                 "annotation_id": rec["annotation_id"],
-                "sentence_id": rec.get("sentence_id", ""),
+                "sentence_ids": rec.get("sentence_ids", [rec.get("sentence_id", "")]),
                 "sentence": sentence,
                 "model": args.model,
                 "location_relations": rels,
